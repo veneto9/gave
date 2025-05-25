@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dengue - Portal Guia de Vigilância Epidemiológica - GAVE</title>
+    <style>
+        /* Variáveis de cores baseadas no logo do GAVE */
+        :root {
+            --cor-primaria: #1d4d46; /* Verde escuro do logo */
+            --cor-secundaria: #8a9e64; /* Verde oliva do logo */
+            --cor-terciaria: #f5f0e1; /* Bege/creme do fundo */
+            --cor-destaque: #b05c3b; /* Terracota/vermelho do gráfico */
+            --cor-texto: #333333;
+            --cor-texto-claro: #ffffff;
+            --cor-fundo: #f5f0e1; /* Bege/creme do fundo */
+            --cor-borda: #d9d0c3;
+            --sombra-suave: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transicao: all 0.3s ease;
+        }
+
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        a:hover {
+            color: var(--cor-destaque);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--cor-texto-claro);
+            box-shadow: var(--sombra-suave);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--cor-texto);
+        }
+
+        /* Navegação */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--cor-texto);
+            font-weight: 500;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-primaria);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--cor-texto-claro);
+            min-width: 200px;
+            box-shadow: var(--sombra-suave);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--cor-texto);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--cor-terciaria);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Conteúdo principal */
+        .page-header {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: var(--cor-texto-claro);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 40px 0;
+        }
+
+        .content-container {
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 40px;
+        }
+
+        .main-content {
+            background-color: var(--cor-texto-claro);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .main-content h2 {
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .main-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--cor-destaque);
+        }
+
+        .main-content h3 {
+            color: var(--cor-primaria);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .main-content p {
+            margin-bottom: 20px;
+        }
+
+        .main-content ul, .main-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .main-content li {
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background-color: rgba(138, 158, 100, 0.1);
+            border-left: 4px solid var(--cor-secundaria);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .warning-box {
+            background-color: rgba(176, 92, 59, 0.1);
+            border-left: 4px solid var(--cor-destaque);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-box {
+            background-color: var(--cor-texto-claro);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .sidebar-box h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .sidebar-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-destaque);
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+            padding-bottom: 12px;
+        }
+
+        .sidebar-links li:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-links a {
+            display: block;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .sidebar-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            transition: var(--transicao);
+        }
+
+        .sidebar-links a:hover::before {
+            left: 5px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-destaque);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            opacity: 0.8;
+            transition: var(--transicao);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--cor-texto-claro);
+            transition: var(--transicao);
+        }
+
+        .social-links a:hover {
+            background-color: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--cor-texto-claro);
+                box-shadow: var(--sombra-suave);
+                transition: var(--transicao);
+                overflow-y: auto;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 0;
+                margin-bottom: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                padding-left: 20px;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 0;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .main-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .main-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Ícones (usando caracteres Unicode como placeholder) */
+        .icon {
+            font-style: normal;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/novagave.png" alt="Logo GAVE">
+                <div class="logo-text">
+                    GAVE
+                    <span>Grupo de Apoio à Vigilância Epidemiológica</span>
+                </div>
+            </div>
+            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="#">Doenças</a>
+                        <div class="dropdown-content">
+                            <a href="dengue.html">Dengue</a>
+                            <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
+                            <a href="febre-maculosa.html">Febre Maculosa</a>
+                            <a href="candidiase.html">Candidiase</a>
+                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
+                        </div>
+                    </li>
+                    <li><a href="formacao.html">Formação</a></li>
+                    <li class="dropdown">
+                        <a href="#">Publicações</a>
+                        <div class="dropdown-content">
+                            <a href="manuais.html">Manuais</a>
+                            <a href="informes-tecnicos.html">Informes Técnicos</a>
+                            <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
+                        </div>
+                    </li>
+                    <li><a href="glossario.html">Glossário</a></li>
+                    <li><a href="sobre-o-site.html">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cabeçalho da página -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Dengue</h1>
+            <p>Informações sobre a dengue, uma doença febril aguda causada por um vírus e transmitida pelo mosquito Aedes aegypti</p>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <section class="content-section">
+        <div class="container content-container">
+            <div class="main-content">
+                <h2>O que é a Dengue?</h2>
+                <p>A dengue é uma doença febril aguda, causada por um vírus de evolução benigna, na maioria dos casos, e seu principal vetor é o mosquito <em>Aedes aegypti</em>. É hoje uma das doenças mais frequentes no Brasil, atingindo a população em todos os estados, independente da classe social.</p>
+
+                <div class="info-box">
+                    <p><strong>Importante:</strong> A dengue é uma doença de notificação compulsória, ou seja, todo caso suspeito ou confirmado deve ser comunicado ao Serviço de Vigilância Epidemiológica mais próximo.</p>
+                </div>
+
+                <h3>Transmissão</h3>
+                <p>A transmissão se faz pela picada da fêmea do mosquito <em>Aedes aegypti</em> no ciclo: homem - <em>Aedes aegypti</em> - homem. Após um repasto de sangue infectado, o mosquito está apto a transmitir o vírus depois de 8 a 12 dias de incubação extrínseca.</p>
+                
+                <p>A transmissão mecânica também é possível, quando o repasto é interrompido e o mosquito, imediatamente, se alimenta num hospedeiro suscetível próximo. Não há transmissão por contato direto de um doente ou de suas secreções com uma pessoa sadia, nem por intermédio de água ou alimento.</p>
+
+                <h3>Sintomas</h3>
+                <p>Os principais sintomas da dengue são:</p>
+                <ul>
+                    <li>Febre alta (39° a 40°C)</li>
+                    <li>Dores musculares intensas</li>
+                    <li>Dor ao movimentar os olhos</li>
+                    <li>Mal estar</li>
+                    <li>Falta de apetite</li>
+                    <li>Dor de cabeça</li>
+                    <li>Manchas vermelhas no corpo</li>
+                </ul>
+
+                <div class="warning-box">
+                    <p><strong>Atenção aos sinais de alarme:</strong> Dor abdominal intensa e contínua, vômitos persistentes, acúmulo de líquidos, sangramento de mucosas, letargia ou irritabilidade, hipotensão postural. Esses sinais podem indicar evolução para dengue grave.</p>
+                </div>
+
+                <h3>Diagnóstico</h3>
+                <p>O diagnóstico é feito por meio de exames laboratoriais de sangue, que podem detectar anticorpos contra o vírus da dengue ou o próprio vírus. Os principais exames são:</p>
+                <ul>
+                    <li><strong>Isolamento viral:</strong> Identificação do vírus em amostras de sangue</li>
+                    <li><strong>Sorologia:</strong> Detecção de anticorpos específicos (IgM e IgG)</li>
+                    <li><strong>NS1:</strong> Detecção do antígeno NS1 do vírus da dengue</li>
+                    <li><strong>PCR:</strong> Detecção do material genético do vírus</li>
+                </ul>
+
+                <h3>Tratamento</h3>
+                <p>Não existe tratamento específico para a dengue. O tratamento é sintomático e de suporte, com ênfase na reposição de líquidos. É importante procurar atendimento médico ao primeiro sinal da doença.</p>
+                
+                <p>Recomendações gerais:</p>
+                <ul>
+                    <li>Repouso</li>
+                    <li>Ingestão de líquidos</li>
+                    <li>Não tomar medicamentos por conta própria</li>
+                    <li>Procurar o serviço de saúde mais próximo em caso de piora</li>
+                </ul>
+
+                <h3>Prevenção</h3>
+                <p>A melhor forma de prevenção da dengue é evitar a proliferação do mosquito <em>Aedes aegypti</em>, eliminando os criadouros. Para isso, é importante:</p>
+                <ul>
+                    <li>Manter caixas d'água bem fechadas</li>
+                    <li>Colocar o lixo em sacos plásticos e manter a lixeira bem fechada</li>
+                    <li>Não deixar água acumulada em pratos de plantas</li>
+                    <li>Não deixar água acumulada em pneus, garrafas, potes, latas e outros recipientes</li>
+                    <li>Limpar as calhas com frequência</li>
+                    <li>Tratar adequadamente a piscina com cloro</li>
+                    <li>Guardar garrafas vazias de cabeça para baixo</li>
+                </ul>
+
+                <h3>Epidemiologia</h3>
+                <p>A dengue é uma arbovirose que afeta mais de 100 países no mundo. No Brasil, a doença tem caráter sazonal, com maior incidência nos meses mais quentes e úmidos (dezembro a maio). Existem quatro sorotipos do vírus da dengue (DENV-1, DENV-2, DENV-3 e DENV-4), e a infecção por um sorotipo gera imunidade permanente para este, mas não para os demais.</p>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-box">
+                    <h3>Doenças Relacionadas</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="zika.html">Zika</a></li>
+                        <li><a href="chikungunya.html">Chikungunya</a></li>
+                        <li><a href="febre-amarela.html">Febre Amarela</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Materiais para Download</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="#">Ficha de Notificação de Dengue</a></li>
+                        <li><a href="#">Manual de Diagnóstico e Manejo Clínico</a></li>
+                        <li><a href="#">Guia de Vigilância Epidemiológica</a></li>
+                        <li><a href="#">Cartilha de Prevenção</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Links Úteis</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue" target="_blank">Ministério da Saúde - Dengue</a></li>
+                        <li><a href="https://www.paho.org/pt/topicos/dengue" target="_blank">OPAS/OMS - Dengue</a></li>
+                        <li><a href="https://www.who.int/health-topics/dengue-and-severe-dengue" target="_blank">OMS - Dengue</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Sobre o GAVE</h3>
+                    <p>O Grupo de Apoio à Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
+                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
+                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
+                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças</a></li>
+                        <li><a href="formacao.html">Formação</a></li>
+                        <li><a href="manuais.html">Publicações</a></li>
+                        <li><a href="glossario.html">Glossário</a></li>
+                        <li><a href="sobre-o-site.html">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Fichas de Notificação</a></li>
+                        <li><a href="#">Manuais Técnicos</a></li>
+                        <li><a href="#">Informes Epidemiológicos</a></li>
+                        <li><a href="#">Glossário</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p>Entre em contato conosco para mais informações ou sugestões.</p>
+                    <ul class="footer-links">
+                        <li><span class="icon">✉</span> contato@gave.org.br</li>
+                        <li><span class="icon">☎</span> (00) 0000-0000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GAVE - Grupo de Apoio à Vigilância Epidemiológica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu mobile toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Dropdown mobile
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        if (window.innerWidth < 992) {
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', () => {
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && !e.target.closest('.nav-toggle') && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

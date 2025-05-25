@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre o Site - Portal Guia de Vigilância Epidemiológica - GAVE</title>
+    <style>
+        /* Variáveis de cores baseadas no logo do GAVE */
+        :root {
+            --cor-primaria: #1d4d46; /* Verde escuro do logo */
+            --cor-secundaria: #8a9e64; /* Verde oliva do logo */
+            --cor-terciaria: #f5f0e1; /* Bege/creme do fundo */
+            --cor-destaque: #b05c3b; /* Terracota/vermelho do gráfico */
+            --cor-texto: #333333;
+            --cor-texto-claro: #ffffff;
+            --cor-fundo: #f5f0e1; /* Bege/creme do fundo */
+            --cor-borda: #d9d0c3;
+            --sombra-suave: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transicao: all 0.3s ease;
+        }
+
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        a:hover {
+            color: var(--cor-destaque);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--cor-texto-claro);
+            box-shadow: var(--sombra-suave);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--cor-texto);
+        }
+
+        /* Navegação */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--cor-texto);
+            font-weight: 500;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-primaria);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--cor-texto-claro);
+            min-width: 200px;
+            box-shadow: var(--sombra-suave);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--cor-texto);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--cor-terciaria);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Conteúdo principal */
+        .page-header {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: var(--cor-texto-claro);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 40px 0;
+        }
+
+        .content-container {
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 40px;
+        }
+
+        .main-content {
+            background-color: var(--cor-texto-claro);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .main-content h2 {
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .main-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--cor-destaque);
+        }
+
+        .main-content h3 {
+            color: var(--cor-primaria);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+        }
+
+        .main-content p {
+            margin-bottom: 20px;
+        }
+
+        .main-content ul, .main-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .main-content li {
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background-color: rgba(138, 158, 100, 0.1);
+            border-left: 4px solid var(--cor-secundaria);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background-color: var(--cor-terciaria);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--sombra-suave);
+            transition: var(--transicao);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-photo {
+            height: 200px;
+            background-color: var(--cor-secundaria);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cor-texto-claro);
+            font-size: 3rem;
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            font-size: 0.9rem;
+            color: var(--cor-destaque);
+            margin-bottom: 10px;
+        }
+
+        .team-bio {
+            font-size: 0.9rem;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-box {
+            background-color: var(--cor-texto-claro);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .sidebar-box h3 {
+            color: var(--cor-primaria);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .sidebar-box h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-destaque);
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+            padding-bottom: 12px;
+        }
+
+        .sidebar-links li:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-links a {
+            display: block;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .sidebar-links a::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            transition: var(--transicao);
+        }
+
+        .sidebar-links a:hover::before {
+            left: 5px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-destaque);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            opacity: 0.8;
+            transition: var(--transicao);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--cor-texto-claro);
+            transition: var(--transicao);
+        }
+
+        .social-links a:hover {
+            background-color: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--cor-texto-claro);
+                box-shadow: var(--sombra-suave);
+                transition: var(--transicao);
+                overflow-y: auto;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 0;
+                margin-bottom: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                padding-left: 20px;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .content-container {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 0;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .main-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .main-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Ícones (usando caracteres Unicode como placeholder) */
+        .icon {
+            font-style: normal;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/novagave.png" alt="Logo GAVE">
+                <div class="logo-text">
+                    GAVE
+                    <span>Grupo de Apoio à Vigilância Epidemiológica</span>
+                </div>
+            </div>
+            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="#">Doenças</a>
+                        <div class="dropdown-content">
+                            <a href="dengue.html">Dengue</a>
+                            <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
+                            <a href="febre-maculosa.html">Febre Maculosa</a>
+                            <a href="candidiase.html">Candidiase</a>
+                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
+                        </div>
+                    </li>
+                    <li><a href="formacao.html">Formação</a></li>
+                    <li class="dropdown">
+                        <a href="#">Publicações</a>
+                        <div class="dropdown-content">
+                            <a href="manuais.html">Manuais</a>
+                            <a href="informes-tecnicos.html">Informes Técnicos</a>
+                            <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
+                        </div>
+                    </li>
+                    <li><a href="glossario.html">Glossário</a></li>
+                    <li><a href="sobre-o-site.html">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cabeçalho da página -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Sobre o GAVE</h1>
+            <p>Conheça nossa missão, visão e equipe dedicada à vigilância epidemiológica</p>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <section class="content-section">
+        <div class="container content-container">
+            <div class="main-content">
+                <h2>Nossa Missão</h2>
+                <p>O Grupo de Apoio à Vigilância Epidemiológica (GAVE) tem como missão fornecer informações atualizadas, confiáveis e acessíveis sobre doenças de notificação compulsória e vigilância epidemiológica, contribuindo para a capacitação de profissionais de saúde e para a conscientização da população em geral.</p>
+                
+                <p>Buscamos ser uma referência nacional em informações epidemiológicas, promovendo a disseminação do conhecimento científico de forma clara e objetiva, auxiliando na prevenção e controle de doenças e agravos à saúde pública.</p>
+
+                <div class="info-box">
+                    <p>O GAVE é uma iniciativa independente, formada por profissionais de saúde, pesquisadores e especialistas em vigilância epidemiológica, comprometidos com a saúde pública e a disseminação de informações baseadas em evidências científicas.</p>
+                </div>
+
+                <h3>Visão</h3>
+                <p>Ser reconhecido como um portal de referência em vigilância epidemiológica no Brasil, contribuindo para a formação e atualização de profissionais de saúde e para a educação em saúde da população, promovendo a prevenção e o controle de doenças de notificação compulsória.</p>
+
+                <h3>Valores</h3>
+                <ul>
+                    <li><strong>Compromisso com a ciência:</strong> Todas as informações disponibilizadas são baseadas em evidências científicas e fontes confiáveis.</li>
+                    <li><strong>Acessibilidade:</strong> Buscamos tornar o conhecimento técnico acessível a diferentes públicos, utilizando linguagem clara e recursos visuais.</li>
+                    <li><strong>Atualização constante:</strong> Mantemos nosso conteúdo atualizado conforme as mais recentes diretrizes e descobertas científicas.</li>
+                    <li><strong>Responsabilidade social:</strong> Contribuímos para a saúde pública através da disseminação de informações que podem salvar vidas.</li>
+                    <li><strong>Transparência:</strong> Citamos nossas fontes e reconhecemos as limitações do conhecimento atual.</li>
+                </ul>
+
+                <h3>Objetivos</h3>
+                <ol>
+                    <li>Disponibilizar informações atualizadas sobre doenças de notificação compulsória e vigilância epidemiológica.</li>
+                    <li>Oferecer recursos educacionais para profissionais de saúde e estudantes da área.</li>
+                    <li>Promover a conscientização da população sobre a importância da vigilância epidemiológica e da notificação de doenças.</li>
+                    <li>Contribuir para a formação e capacitação de profissionais de saúde em vigilância epidemiológica.</li>
+                    <li>Facilitar o acesso a documentos técnicos, manuais e fichas de notificação.</li>
+                </ol>
+
+                <h3>Nossa Equipe</h3>
+                <p>O GAVE é composto por uma equipe multidisciplinar de profissionais de saúde, pesquisadores e especialistas em vigilância epidemiológica, comprometidos com a disseminação de informações baseadas em evidências científicas.</p>
+
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="team-photo">👩‍⚕️</div>
+                        <div class="team-info">
+                            <div class="team-name">Dra. Ana Silva</div>
+                            <div class="team-role">Médica Epidemiologista</div>
+                            <div class="team-bio">Especialista em vigilância epidemiológica com mais de 15 anos de experiência em saúde pública.</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-photo">👨‍⚕️</div>
+                        <div class="team-info">
+                            <div class="team-name">Dr. Carlos Oliveira</div>
+                            <div class="team-role">Infectologista</div>
+                            <div class="team-bio">Doutor em doenças infecciosas e parasitárias, com atuação em hospitais de referência.</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-photo">👩‍🔬</div>
+                        <div class="team-info">
+                            <div class="team-name">Profa. Márcia Santos</div>
+                            <div class="team-role">Pesquisadora</div>
+                            <div class="team-bio">Professora universitária com pesquisas na área de epidemiologia de doenças transmissíveis.</div>
+                        </div>
+                    </div>
+
+                    <div class="team-member">
+                        <div class="team-photo">👨‍💻</div>
+                        <div class="team-info">
+                            <div class="team-name">Paulo Mendes</div>
+                            <div class="team-role">Analista de Sistemas</div>
+                            <div class="team-bio">Especialista em sistemas de informação em saúde e desenvolvimento web.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Parcerias e Colaborações</h3>
+                <p>O GAVE trabalha em colaboração com instituições de ensino, secretarias de saúde e organizações não-governamentais para promover a vigilância epidemiológica e a saúde pública no Brasil.</p>
+                
+                <p>Se você é um profissional de saúde, pesquisador ou estudante interessado em colaborar com o GAVE, entre em contato conosco através do formulário disponível em nossa página de contato.</p>
+
+                <h3>Fontes de Informação</h3>
+                <p>As informações disponibilizadas no portal GAVE são baseadas em fontes oficiais e publicações científicas, incluindo:</p>
+                <ul>
+                    <li>Ministério da Saúde do Brasil</li>
+                    <li>Organização Mundial da Saúde (OMS)</li>
+                    <li>Organização Pan-Americana da Saúde (OPAS)</li>
+                    <li>Centers for Disease Control and Prevention (CDC)</li>
+                    <li>Artigos científicos publicados em periódicos indexados</li>
+                    <li>Manuais e guias técnicos de vigilância epidemiológica</li>
+                </ul>
+            </div>
+
+            <div class="sidebar">
+                <div class="sidebar-box">
+                    <h3>Contato</h3>
+                    <p>Entre em contato conosco para mais informações, sugestões ou colaborações.</p>
+                    <ul class="sidebar-links">
+                        <li><span class="icon">✉</span> contato@gave.org.br</li>
+                        <li><span class="icon">☎</span> (00) 0000-0000</li>
+                        <li><a href="contato.html">Formulário de Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Redes Sociais</h3>
+                    <p>Siga-nos nas redes sociais para receber atualizações e novidades.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
+                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
+                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
+                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
+                    </div>
+                </div>
+
+                <div class="sidebar-box">
+                    <h3>Recursos</h3>
+                    <ul class="sidebar-links">
+                        <li><a href="glossario.html">Glossário</a></li>
+                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a></li>
+                        <li><a href="formacao.html">Formação</a></li>
+                        <li><a href="manuais.html">Manuais e Publicações</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Sobre o GAVE</h3>
+                    <p>O Grupo de Apoio à Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
+                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
+                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
+                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças</a></li>
+                        <li><a href="formacao.html">Formação</a></li>
+                        <li><a href="manuais.html">Publicações</a></li>
+                        <li><a href="glossario.html">Glossário</a></li>
+                        <li><a href="sobre-o-site.html">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Fichas de Notificação</a></li>
+                        <li><a href="#">Manuais Técnicos</a></li>
+                        <li><a href="#">Informes Epidemiológicos</a></li>
+                        <li><a href="#">Glossário</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p>Entre em contato conosco para mais informações ou sugestões.</p>
+                    <ul class="footer-links">
+                        <li><span class="icon">✉</span> contato@gave.org.br</li>
+                        <li><span class="icon">☎</span> (00) 0000-0000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GAVE - Grupo de Apoio à Vigilância Epidemiológica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu mobile toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Dropdown mobile
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        if (window.innerWidth < 992) {
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', () => {
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && !e.target.closest('.nav-toggle') && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

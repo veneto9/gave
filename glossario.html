@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glossário - Portal Guia de Vigilância Epidemiológica - GAVE</title>
+    <style>
+        /* Variáveis de cores baseadas no logo do GAVE */
+        :root {
+            --cor-primaria: #1d4d46; /* Verde escuro do logo */
+            --cor-secundaria: #8a9e64; /* Verde oliva do logo */
+            --cor-terciaria: #f5f0e1; /* Bege/creme do fundo */
+            --cor-destaque: #b05c3b; /* Terracota/vermelho do gráfico */
+            --cor-texto: #333333;
+            --cor-texto-claro: #ffffff;
+            --cor-fundo: #f5f0e1; /* Bege/creme do fundo */
+            --cor-borda: #d9d0c3;
+            --sombra-suave: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transicao: all 0.3s ease;
+        }
+
+        /* Reset e estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        a:hover {
+            color: var(--cor-destaque);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--cor-texto-claro);
+            box-shadow: var(--sombra-suave);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--cor-texto);
+        }
+
+        /* Navegação */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: var(--cor-texto);
+            font-weight: 500;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-primaria);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--cor-texto-claro);
+            min-width: 200px;
+            box-shadow: var(--sombra-suave);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--cor-texto);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--cor-terciaria);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Conteúdo principal */
+        .page-header {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: var(--cor-texto-claro);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            padding: 40px 0;
+        }
+
+        .main-content {
+            background-color: var(--cor-texto-claro);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .main-content h2 {
+            color: var(--cor-primaria);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .main-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--cor-destaque);
+        }
+
+        /* Estilos específicos para o glossário */
+        .glossary-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+
+        .glossary-nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transicao);
+        }
+
+        .glossary-nav a:hover {
+            background-color: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+
+        .glossary-section {
+            margin-bottom: 40px;
+        }
+
+        .glossary-section h2 {
+            background-color: var(--cor-secundaria);
+            color: var(--cor-texto-claro);
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .glossary-section h2::after {
+            display: none;
+        }
+
+        .glossary-item {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .glossary-item:last-child {
+            border-bottom: none;
+        }
+
+        .glossary-term {
+            color: var(--cor-primaria);
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .glossary-definition {
+            margin-bottom: 10px;
+        }
+
+        .glossary-source {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--sombra-suave);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transicao);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--cor-destaque);
+            transform: translateY(-5px);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--cor-primaria);
+            color: var(--cor-texto-claro);
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-destaque);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            opacity: 0.8;
+            transition: var(--transicao);
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--cor-texto-claro);
+            transition: var(--transicao);
+        }
+
+        .social-links a:hover {
+            background-color: var(--cor-destaque);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 80px);
+                background-color: var(--cor-texto-claro);
+                box-shadow: var(--sombra-suave);
+                transition: var(--transicao);
+                overflow-y: auto;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 0;
+                margin-bottom: 15px;
+            }
+
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                padding-left: 20px;
+            }
+
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 10px 0;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .page-header {
+                padding: 40px 0;
+            }
+
+            .main-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .glossary-term {
+                font-size: 1.2rem;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Ícones (usando caracteres Unicode como placeholder) */
+        .icon {
+            font-style: normal;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/novagave.png" alt="Logo GAVE">
+                <div class="logo-text">
+                    GAVE
+                    <span>Grupo de Apoio à Vigilância Epidemiológica</span>
+                </div>
+            </div>
+            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li class="dropdown">
+                        <a href="#">Doenças</a>
+                        <div class="dropdown-content">
+                            <a href="dengue.html">Dengue</a>
+                            <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
+                            <a href="febre-maculosa.html">Febre Maculosa</a>
+                            <a href="candidiase.html">Candidiase</a>
+                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
+                        </div>
+                    </li>
+                    <li><a href="formacao.html">Formação</a></li>
+                    <li class="dropdown">
+                        <a href="#">Publicações</a>
+                        <div class="dropdown-content">
+                            <a href="manuais.html">Manuais</a>
+                            <a href="informes-tecnicos.html">Informes Técnicos</a>
+                            <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
+                        </div>
+                    </li>
+                    <li><a href="glossario.html">Glossário</a></li>
+                    <li><a href="sobre-o-site.html">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cabeçalho da página -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Glossário</h1>
+            <p>Termos técnicos e definições relacionados à vigilância epidemiológica e doenças de notificação compulsória</p>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <section class="content-section">
+        <div class="container">
+            <div class="main-content">
+                <div class="glossary-nav" id="glossary-nav">
+                    <a href="#A">A</a>
+                    <a href="#B">B</a>
+                    <a href="#C">C</a>
+                    <a href="#D">D</a>
+                    <a href="#E">E</a>
+                    <a href="#F">F</a>
+                    <a href="#G">G</a>
+                    <a href="#H">H</a>
+                    <a href="#I">I</a>
+                    <a href="#J">J</a>
+                    <a href="#K">K</a>
+                    <a href="#L">L</a>
+                    <a href="#M">M</a>
+                    <a href="#N">N</a>
+                    <a href="#O">O</a>
+                    <a href="#P">P</a>
+                    <a href="#Q">Q</a>
+                    <a href="#R">R</a>
+                    <a href="#S">S</a>
+                    <a href="#T">T</a>
+                    <a href="#U">U</a>
+                    <a href="#V">V</a>
+                    <a href="#W">W</a>
+                    <a href="#X">X</a>
+                    <a href="#Y">Y</a>
+                    <a href="#Z">Z</a>
+                </div>
+
+                <div class="glossary-section" id="A">
+                    <h2>A</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Agente etiológico</div>
+                        <div class="glossary-definition">Entidade biológica, física ou química capaz de causar doença.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Agravo</div>
+                        <div class="glossary-definition">Qualquer dano à saúde do indivíduo, podendo ser uma doença, lesão, incapacidade, ou morte.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Anticorpo</div>
+                        <div class="glossary-definition">Proteína (imunoglobulina) produzida pelo sistema imunológico em resposta a um antígeno específico.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Antígeno</div>
+                        <div class="glossary-definition">Substância capaz de induzir a formação de anticorpos específicos e reagir com os mesmos.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="B">
+                    <h2>B</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Bacteremia</div>
+                        <div class="glossary-definition">Presença de bactérias viáveis na corrente sanguínea.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Bioterrorismo</div>
+                        <div class="glossary-definition">Uso deliberado de agentes biológicos para causar doença ou morte em pessoas, animais ou plantas.</div>
+                        <div class="glossary-source">Fonte: Centers for Disease Control and Prevention (CDC).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Busca ativa</div>
+                        <div class="glossary-definition">Procura sistemática de casos suspeitos ou confirmados de doenças, por meio de visitas a serviços de saúde, domicílios, locais de trabalho, escolas e outros locais.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="C">
+                    <h2>C</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Caso autóctone</div>
+                        <div class="glossary-definition">Caso de doença que teve origem dentro dos limites geográficos de referência ou sob investigação.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Caso confirmado</div>
+                        <div class="glossary-definition">Pessoa cuja doença foi confirmada por critérios estabelecidos (clínico, laboratorial ou clínico-epidemiológico).</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Caso índice</div>
+                        <div class="glossary-definition">Primeiro caso de uma doença ou agravo identificado em uma investigação epidemiológica.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Caso suspeito</div>
+                        <div class="glossary-definition">Pessoa que apresenta sinais e sintomas sugestivos de uma doença específica, mas que ainda não teve confirmação diagnóstica.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Coorte</div>
+                        <div class="glossary-definition">Grupo de pessoas que compartilham uma característica comum e são acompanhadas ao longo do tempo em estudos epidemiológicos.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="D">
+                    <h2>D</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Doença de notificação compulsória</div>
+                        <div class="glossary-definition">Doença cuja ocorrência deve ser comunicada obrigatoriamente à autoridade sanitária, por profissionais de saúde ou qualquer cidadão, para fins de controle e adoção de medidas de intervenção.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Portaria de Consolidação nº 4, de 28 de setembro de 2017.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Doença emergente</div>
+                        <div class="glossary-definition">Doença infecciosa cuja incidência aumentou nas últimas duas décadas ou tende a aumentar no futuro próximo.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Doença reemergente</div>
+                        <div class="glossary-definition">Doença previamente conhecida e controlada, que ressurge como problema de saúde pública.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="E">
+                    <h2>E</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Endemia</div>
+                        <div class="glossary-definition">Ocorrência habitual de uma doença ou agente infeccioso em determinada área geográfica, podendo variar em sua incidência, mas mantendo-se presente ao longo do tempo.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Epidemia</div>
+                        <div class="glossary-definition">Ocorrência de um número de casos de uma doença ou agravo que excede claramente a incidência esperada em uma comunidade ou região, durante um período específico.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Epidemiologia</div>
+                        <div class="glossary-definition">Ciência que estuda a distribuição e os determinantes dos eventos relacionados à saúde em populações específicas e sua aplicação na prevenção e controle dos problemas de saúde.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="F">
+                    <h2>F</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Fator de risco</div>
+                        <div class="glossary-definition">Atributo, característica ou exposição de um indivíduo que aumenta a probabilidade de desenvolver uma doença ou agravo à saúde.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Fômite</div>
+                        <div class="glossary-definition">Objeto ou material inanimado que, quando contaminado por um agente infeccioso, pode servir como veículo de transmissão.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="H">
+                    <h2>H</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Hospedeiro</div>
+                        <div class="glossary-definition">Organismo que oferece, em condições naturais, subsistência ou alojamento a um agente infeccioso.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="I">
+                    <h2>I</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Imunidade</div>
+                        <div class="glossary-definition">Resistência de um organismo a um agente infeccioso específico, geralmente associada à presença de anticorpos ou células com ação específica contra o microrganismo.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Incidência</div>
+                        <div class="glossary-definition">Número de casos novos de uma doença que ocorrem em uma população específica, durante um período definido.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Infecção</div>
+                        <div class="glossary-definition">Penetração, desenvolvimento ou multiplicação de um agente infeccioso no organismo humano ou animal.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="P">
+                    <h2>P</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Pandemia</div>
+                        <div class="glossary-definition">Epidemia que se espalha por vários países ou continentes, afetando um grande número de pessoas.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Período de incubação</div>
+                        <div class="glossary-definition">Intervalo de tempo entre a exposição a um agente infeccioso e o aparecimento dos primeiros sinais ou sintomas da doença.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Prevalência</div>
+                        <div class="glossary-definition">Número total de casos de uma doença existentes em um determinado momento, em uma população específica.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="Q">
+                    <h2>Q</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Quarentena</div>
+                        <div class="glossary-definition">Restrição de atividades ou separação de pessoas que não estão doentes, mas que foram expostas a um agente infeccioso, com o objetivo de monitorar sintomas e detectar precocemente casos.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="S">
+                    <h2>S</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Surto</div>
+                        <div class="glossary-definition">Ocorrência de dois ou mais casos epidemiologicamente relacionados, limitados no tempo e espaço, sendo considerado também como um tipo de epidemia, porém com menor número de casos.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="T">
+                    <h2>T</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Taxa de ataque</div>
+                        <div class="glossary-definition">Proporção de pessoas expostas que desenvolvem a doença durante um surto ou epidemia.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Taxa de letalidade</div>
+                        <div class="glossary-definition">Proporção de óbitos entre os casos de uma doença específica, em um determinado período de tempo.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Transmissão</div>
+                        <div class="glossary-definition">Transferência de um agente etiológico de uma fonte de infecção para um novo hospedeiro.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="V">
+                    <h2>V</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Vetor</div>
+                        <div class="glossary-definition">Artrópode ou outro invertebrado que transfere um agente infeccioso de uma fonte para um hospedeiro suscetível.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Vigilância epidemiológica</div>
+                        <div class="glossary-definition">Conjunto de ações que proporciona o conhecimento, a detecção ou prevenção de qualquer mudança nos fatores determinantes e condicionantes de saúde individual ou coletiva, com a finalidade de recomendar e adotar as medidas de prevenção e controle das doenças ou agravos.</div>
+                        <div class="glossary-source">Fonte: Lei nº 8.080, de 19 de setembro de 1990.</div>
+                    </div>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Virulência</div>
+                        <div class="glossary-definition">Capacidade de um agente infeccioso de produzir doença grave quando infecta um hospedeiro.</div>
+                        <div class="glossary-source">Fonte: Ministério da Saúde, Guia de Vigilância Epidemiológica, 2019.</div>
+                    </div>
+                </div>
+
+                <div class="glossary-section" id="Z">
+                    <h2>Z</h2>
+                    
+                    <div class="glossary-item">
+                        <div class="glossary-term">Zoonose</div>
+                        <div class="glossary-definition">Infecção ou doença infecciosa transmissível, sob condições naturais, de animais vertebrados para humanos.</div>
+                        <div class="glossary-source">Fonte: Organização Mundial da Saúde (OMS).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botão voltar ao topo -->
+    <div class="back-to-top" id="back-to-top">↑</div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Sobre o GAVE</h3>
+                    <p>O Grupo de Apoio à Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
+                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
+                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
+                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças</a></li>
+                        <li><a href="formacao.html">Formação</a></li>
+                        <li><a href="manuais.html">Publicações</a></li>
+                        <li><a href="glossario.html">Glossário</a></li>
+                        <li><a href="sobre-o-site.html">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Fichas de Notificação</a></li>
+                        <li><a href="#">Manuais Técnicos</a></li>
+                        <li><a href="#">Informes Epidemiológicos</a></li>
+                        <li><a href="#">Glossário</a></li>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p>Entre em contato conosco para mais informações ou sugestões.</p>
+                    <ul class="footer-links">
+                        <li><span class="icon">✉</span> contato@gave.org.br</li>
+                        <li><span class="icon">☎</span> (00) 0000-0000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 GAVE - Grupo de Apoio à Vigilância Epidemiológica. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu mobile toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const nav = document.querySelector('nav');
+
+        navToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Dropdown mobile
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        if (window.innerWidth < 992) {
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', () => {
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav') && !e.target.closest('.nav-toggle') && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+
+        // Botão voltar ao topo
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
