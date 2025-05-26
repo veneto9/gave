@@ -334,149 +334,146 @@
     });
     </script>
 
-    <script>
-    // Função auxiliar para formatar a data (Exemplo: "15 de Maio, 2025")
-    function formatDate(dateString) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR', options);
-    }
+    <script>
+    // Função auxiliar para formatar a data (Exemplo: "15 de Maio, 2025")
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', options);
+    }
 
-    // Função auxiliar para extrair a primeira imagem do HTML
-    function extractFirstImage(htmlString) {
-        const div = document.createElement('div');
-        div.innerHTML = htmlString;
-        const img = div.querySelector('img');
-        return img ? img.src : null;
-    }
+    // Função auxiliar para extrair a primeira imagem do HTML
+    function extractFirstImage(htmlString) {
+        const div = document.createElement('div');
+        div.innerHTML = htmlString;
+        const img = div.querySelector('img');
+        return img ? img.src : null;
+    }
 
-    // Função auxiliar para limitar o texto
-    function truncateText(text, maxLength) {
-        if (!text) return '';
-        // Remover tags HTML e quebras de linha antes de truncar
-        let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
-        if (cleanText.length <= maxLength) return cleanText;
-        return cleanText.substring(0, maxLength) + '...';
-    }
+    // Função auxiliar para limitar o texto
+    function truncateText(text, maxLength) {
+        if (!text) return '';
+        // Remover tags HTML e quebras de linha antes de truncar
+        let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
+        if (cleanText.length <= maxLength) return cleanText;
+        return cleanText.substring(0, maxLength) + '...';
+    }
 
-    // !!! INCLUA AQUI AS URLs DE FEED RSS DAS FONTES DE NOTÍCIAS DE SAÚDE/EPIDEMIOLOGIA !!!
-    // Exemplo: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml'
-    // Você precisará encontrar feeds RSS de sites como Ministério da Saúde, Fiocruz, OPAS/OMS, etc.
-    const clippingRSSUrls = [
-        'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+saude+publica+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt', // Exemplo: Google Notícias (Vigilância Epidemiológica)
-        'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/', // Exemplo: G1 Saúde
-        'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml', // Exemplo: WHO News
-        'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/en/rss/news', // Exemplo: PAHO News (precisa testar a URL exata do RSS)
-        // Adicione mais URLs de RSS (processadas pelo rss2json.com) aqui:
-        // 'https://api.rss2json.com/v1/api.json?rss_url=SUA_OUTRA_URL_DE_RSS_AQUI',
-    ];
+    // !!! INCLUA AQUI AS URLs DE FEED RSS DAS FONTES DE NOTÍCIAS DE SAÚDE/EPIDEMIOLOGIA !!!
+    // Exemplo: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml'
+    // Você precisará encontrar feeds RSS de sites como Ministério da Saúde, Fiocruz, OPAS/OMS, etc.
+    const clippingRSSUrls = [
+        'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+saude+publica+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt', // Exemplo: Google Notícias (Vigilância Epidemiológica)
+        'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/', // Exemplo: G1 Saúde
+        'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml', // Exemplo: WHO News
+        'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/en/rss/news', // Exemplo: PAHO News (precisa testar a URL exata do RSS)
+        // Adicione mais URLs de RSS (processadas pelo rss2json.com) aqui:
+        // 'https://api.rss2json.com/v1/api.json?rss_url=SUA_OUTRA_URL_DE_RSS_AQUI',
+    ];
 
-    document.addEventListener('DOMContentLoaded', async () => {
-        const clippingContainer = document.getElementById('clipping-posts-container');
+    document.addEventListener('DOMContentLoaded', async () => {
+        const clippingContainer = document.getElementById('clipping-posts-container');
 
-        if (!clippingContainer) {
-            console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
-            return;
-        }
+        if (!clippingContainer) {
+            console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
+            return;
+        }
 
-        clippingContainer.innerHTML = '<p class="text-center w-100">Carregando clipping...</p>';
+        clippingContainer.innerHTML = '<p class="text-center w-100">Carregando clipping...</p>';
 
-        if (clippingRSSUrls.length === 0) {
-            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma fonte de clipping configurada. Adicione URLs RSS no JavaScript.</p>';
-            return;
-        }
+        if (clippingRSSUrls.length === 0) {
+            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma fonte de clipping configurada. Adicione URLs RSS no JavaScript.</p>';
+            return;
+        }
 
-        let allClippingPosts = [];
+        let allClippingPosts = [];
 
-        try {
-            const fetchPromises = clippingRSSUrls.map(url => 
-                fetch(url).then(response => {
-                    if (!response.ok) {
-                        console.warn(`Erro ao carregar feed RSS do clipping da URL: ${url}. Status: ${response.status}`);
-                        return { items: [] }; // Retorna array vazio para não quebrar tudo
-                    }
-                    return response.json();
-                }).catch(error => {
-                    console.error(`Erro na requisição para o clipping URL: ${url}`, error);
-                    return { items: [] };
-                })
-            );
+        try {
+            const fetchPromises = clippingRSSUrls.map(url => 
+                fetch(url).then(response => {
+                    if (!response.ok) {
+                        console.warn(`Erro ao carregar feed RSS do clipping da URL: ${url}. Status: ${response.status}`);
+                        return { items: [] }; // Retorna array vazio para não quebrar tudo
+                    }
+                    return response.json();
+                }).catch(error => {
+                    console.error(`Erro na requisição para o clipping URL: ${url}`, error);
+                    return { items: [] };
+                })
+            );
 
-            const results = await Promise.all(fetchPromises);
+            const results = await Promise.all(fetchPromises);
 
-            results.forEach(feedData => {
-                if (feedData.items) {
-                    allClippingPosts = allClippingPosts.concat(feedData.items);
-                }
-            });
+            results.forEach(feedData => {
+                if (feedData.items) {
+                    allClippingPosts = allClippingPosts.concat(feedData.items);
+                }
+            });
 
-            // Ordenar notícias por data (mais recentes primeiro)
-            allClippingPosts.sort((a, b) => {
-                const dateA = new Date(a.pubDate || a.published);
-                const dateB = new Date(b.pubDate || b.published);
-                return dateB - dateA;
-            });
+            // Ordenar notícias por data (mais recentes primeiro)
+            allClippingPosts.sort((a, b) => {
+                const dateA = new Date(a.pubDate || a.published);
+                const dateB = new Date(b.pubDate || b.published);
+                return dateB - dateA;
+            });
 
-            clippingContainer.innerHTML = '';
+            clippingContainer.innerHTML = '';
 
-            if (allClippingPosts.length === 0) {
-                clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento das fontes configuradas.</p>';
-                return;
-            }
+            if (allClippingPosts.length === 0) {
+                clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento das fontes configuradas.</p>';
+                return;
+            }
 
-            // Limita o número de posts exibidos (por exemplo, os primeiros 8)
-            const postsToDisplay = allClippingPosts.slice(0, 8); 
+            // Limita o número de posts exibidos (por exemplo, os primeiros 8)
+            const postsToDisplay = allClippingPosts.slice(0, 8); 
 
-            postsToDisplay.forEach(post => {
-                const title = post.title || 'Sem Título';
-                const link = post.link || '#';
-                const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); 
-                const source = post.source && post.source.title ? post.source.title : 'Fonte Desconhecida';
-                const sourceDate = `Fonte: ${source} - ${date}`;
-                
-                // Extração da imagem
-                let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia'; // Placeholder padrão com altura ajustada
-                if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
-                    imageUrl = post.enclosure.link;
-                } else if (post.thumbnail) { // Alguns feeds usam 'thumbnail' direto
-                    imageUrl = post.thumbnail;
-                } else if (post['media:thumbnail'] && post['media:thumbnail'].$.url) { // Para feeds com media:thumbnail (exige adaptação se o feed usar namespace)
-                    imageUrl = post['media:thumbnail'].$.url;
-                } else if (post.image) { // Se o feed tiver um campo 'image' direto
-                    imageUrl = post.image;
-                } else {
-                    // Tenta extrair a primeira imagem do conteúdo HTML da descrição/content
-                    const contentHtml = post.description || post.content || '';
-                    const extractedImg = extractFirstImage(contentHtml);
-                    if (extractedImg) {
-                        imageUrl = extractedImg;
-                    }
-                }
+            postsToDisplay.forEach(post => {
+                const title = post.title || 'Sem Título';
+                const link = post.link || '#';
+                const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); 
+                const source = post.source && post.source.title ? post.source.title : 'Fonte Desconhecida';
+                const sourceDate = `Fonte: ${source} - ${date}`;
+                
+                let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia'; // Placeholder padrão com altura ajustada
+                if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
+                    imageUrl = post.enclosure.link;
+                } else if (post.thumbnail) { 
+                    imageUrl = post.thumbnail;
+                } else if (post['media:thumbnail'] && post['media:thumbnail'].$) { 
+                    imageUrl = post['media:thumbnail'].$.url;
+                } else if (post.image) { 
+                    imageUrl = post.image;
+                } else {
+                    const contentHtml = post.description || post.content || '';
+                    const extractedImg = extractFirstImage(contentHtml);
+                    if (extractedImg) {
+                        imageUrl = extractedImg;
+                    }
+                }
 
-                // Extração e limitação do texto (description ou content)
-                let descriptionText = post.description || post.content || '';
-                const truncatedDescription = truncateText(descriptionText, 120); // Limita a 120 caracteres
+                let descriptionText = post.description || post.content || '';
+                const truncatedDescription = truncateText(descriptionText, 120); 
 
-                const cardHtml = `
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="<span class="math-inline">\{imageUrl\}" class\="card\-img\-top" alt\="</span>{title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Sem+Imagem';">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title"><span class="math-inline">\{title\}</h5\>
+                const cardHtml = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<span class="math-inline">\{imageUrl\}" class\="card\-img\-top" alt\="</span>{title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Sem+Imagem';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title"><span class="math-inline">\{title\}</h5\>
 <p class\="card\-text small text\-muted"\></span>{sourceDate}</p>
-                                <p class="card-text"><span class="math-inline">\{truncatedDescription\}</p\> <a href\="</span>{link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                clippingContainer.innerHTML += cardHtml;
-            });
+                                <p class="card-text"><span class="math-inline">\{truncatedDescription\}</p\> <a href\="</span>{link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                clippingContainer.innerHTML += cardHtml;
+            });
 
-        } catch (error) {
-            console.error("Erro ao carregar feeds RSS do clipping:", error);
-            clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Verifique as URLs dos feeds e a conexão.</p>';
-        }
-    });
-    </script>
+        } catch (error) {
+            console.error("Erro ao carregar feeds RSS do clipping:", error);
+            clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Verifique as URLs dos feeds e a conexão.</p>';
+        }
+    });
+    </script>
 </body>
 </html>
