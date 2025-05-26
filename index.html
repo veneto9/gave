@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAVE - Guia de Ações em Vigilância Epidemiológica</title>
-   <!-- Bootstrap (framework CSS externo) -->
+    <title>GAVE - Vigilância Epidemiológica no Cotidiano</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Seu CSS personalizado -->
     <link rel="stylesheet" href="style.css"> 
     <style>
         /* Variáveis de cores baseadas no logo do GAVE */
@@ -413,6 +411,76 @@
             color: var(--cor-primaria);
         }
 
+        /* Estilo para a nova seção CURSOS GAVE */
+        .cursos-gave {
+            background-color: var(--cor-fundo); /* Ou outra cor se desejar destaque diferente */
+        }
+        .cursos-gave .section-title h2 {
+            /* Pode adicionar estilos específicos para o título da seção de cursos */
+            color: var(--cor-primaria);
+        }
+        .cursos-gave .recurso-icon { /* Usando a mesma classe de ícones dos recursos, mas pode ser ajustado */
+            color: var(--cor-destaque); /* Destaque para os ícones dos cursos */
+        }
+        
+        /* Estilos específicos para os cards de Notícias em Destaque (blog) */
+        #noticias-destaque .card {
+            max-height: 400px; /* Ajustado para um pouco mais de espaço para descrição */
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+        #noticias-destaque .card-title {
+            font-size: 1.1rem; /* Um pouco maior que o clipping, mas menor que o padrão */
+            line-height: 1.4em;
+            max-height: 4.2em; /* Limita a 3 linhas */
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        #noticias-destaque .card-text { /* Para a descrição curta */
+            font-size: 0.85rem;
+            line-height: 1.4em;
+            max-height: 4.2em; /* Limita a 3 linhas de descrição */
+            overflow: hidden;
+            color: var(--cor-texto);
+            margin-bottom: 0.5rem;
+        }
+        #noticias-destaque .card-img-top {
+            height: 160px; /* Um pouco mais alto para o blog */
+            object-fit: cover;
+        }
+
+
+        /* NOVOS ESTILOS PARA CARDS DE CLIPPING (CONFORME SOLICITADO) */
+        #clipping-noticias .card {
+            max-height: 360px; /* Altura máxima para uniformidade */
+            overflow: hidden; /* Garante que o conteúdo que exceder seja cortado */
+            font-size: 0.9rem;
+        }
+
+        #clipping-noticias .card-title {
+            font-size: 1rem; /* Reduz o tamanho da fonte do título */
+            line-height: 1.3em;
+            max-height: 3.9em; /* Limita a 3 linhas (1.3em * 3 = 3.9em) */
+            overflow: hidden; /* Corta o texto que exceder */
+            margin-bottom: 0.5rem; /* Ajuste para margem menor */
+        }
+
+        #clipping-noticias .card-text { /* Para a descrição curta e data/fonte */
+            font-size: 0.8rem; /* Reduz a fonte do texto do corpo */
+            line-height: 1.3em; /* Ajuste para espaçamento de linha */
+            max-height: 3.9em; /* Limita a 3 linhas de descrição */
+            overflow: hidden;
+            color: var(--cor-texto);
+            margin-bottom: 0.5rem; /* Margem menor */
+        }
+
+        #clipping-noticias .card-img-top {
+            height: 120px; /* Altura da imagem do card */
+            object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+        }
+        /* FIM DOS NOVOS ESTILOS PARA CARDS DE CLIPPING */
+
+
         /* Rodapé */
         footer {
             background-color: var(--cor-primaria);
@@ -633,23 +701,55 @@
                             <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
                         </div>
                     </li>
-                    <li><a href="https://substack.com/@gavesaude">Blog</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="sobre-o-site.html">Sobre</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="banner-destaque">
-        <div class="container">
-            <h1>Epidemiologia no seu cotidiano</h1>
-            <p>Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória e vigilância epidemiológica para quem atua com saúde pública.</p>
-            <a href="#noticias-destaque" class="btn">Conheça o projeto</a>
+<section class="banner-destaque">
+    <div class="container">
+        <h1 style="font-size: 2rem; margin-bottom: 10px;">GAVE: Vigilância Epidemiológica</h1>
+        <p style="font-size: 1rem; margin-bottom: 20px;">
+            Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória, vigilância em saúde e concursos públicos.
+        </p>
+       <a href="#noticias-destaque" class="btn" style="margin-top: 20px;">Conheça o projeto</a>
+    </div>
+</section>
+
+    <section id="recursos-disponiveis" class="container my-5 recursos-disponiveis">
+        <h2 class="text-center mb-4 section-title"><span>Recursos Disponíveis</span></h2>
+        <p class="text-center text-muted mb-5" style="font-size: 0.9rem;">
+    Ferramentas e conteúdos essenciais contribuir para seus conhecimentos na área.
+</p>
+        <div class="recursos-grid">
+            <div class="recurso-item">
+                <div class="recurso-icon">📈</div>
+<h3>Epidemiologia na prática</h3>
+            <p>Acesse informações e estatísticas sobre a situação epidemiológica atual.</p>
+            </div>
+            <div class="recurso-item">
+                <div class="recurso-icon">⭐</div>
+<h3>Guia GAVE</h3>
+            <p>Agravos de notificação compulsória. Acesse e baixe as fichas de notificação para diferentes doenças e agravos.</p>
+            </div>
+            <div class="recurso-item">
+                <div class="recurso-icon">📋</div>
+                <h3>Documentos Técnicos Importantes</h3>
+            <p>Consulte manuais e guias técnicos para profissionais de saúde.</p>
+            </div>
+            <div class="recurso-item">
+                <div class="recurso-icon">🎓</div>
+                 <h3>Aprenda com o GAVE</h3>
+            <p>Materiais educativos e cursos para capacitação em vigilância epidemiológica.</p>
+            </div>
         </div>
     </section>
-
     <section id="noticias-destaque" class="container my-5">
-        <h2 class="text-center mb-4 section-title"><span>Notícias em Destaque</span></h2> 
+        <h2 class="text-center mb-4 section-title"><span>Notícias em Destaque</span></h2> <p class="text-center text-muted mb-5" style="font-size: 0.9rem;">
+    As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.
+</p>
         <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <p class="text-center w-100">Carregando últimas notícias...</p>
         </div>
@@ -657,44 +757,25 @@
 
 
 
+
     <section id="clipping-noticias" class="container my-5">
         <h2 class="text-center mb-4 section-title"><span>Clipping de Notícias</span></h2>
-<div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+        <p class="text-center text-muted mb-5" style="font-size: 0.9rem;">
+    O que está rolando por aí? Acompanhe notícias e destaques em saúde e vigilância.
+</p>
+
+        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
     </section>
 
-<section class="container my-5" style="text-align: center;">
-    <h2 style="color: var(--cor-primaria); font-weight: bold; font-size: 2rem;">CURSOS GAVE</h2>
-    <p style="max-width: 800px; margin: 0 auto 30px; font-size: 1.1rem; color: var(--cor-texto);">
-        Cursos rápidos, conteúdos introdutórios e apoio para quem quer entender a vigilância em saúde, se preparar para concursos ou iniciar no EpiSUS — de forma acessível e prática.
-    </p>
-    
-    <div class="row justify-content-center mb-4">
-        <div class="col-6 col-md-4 col-lg-3 mb-3">
-            <div style="font-size: 2rem;">💡</div>
-            <p style="margin-top: 10px; font-weight: 500;">Conteúdo introdutório</p>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 mb-3">
-            <div style="font-size: 2rem;">📘</div>
-            <p style="margin-top: 10px; font-weight: 500;">Cursos rápidos</p>
-        </div>
-        <div class="col-6 col-md-4 col-lg-3 mb-3">
-            <div style="font-size: 2rem;">💻</div>
-            <p style="margin-top: 10px; font-weight: 500;">Materiais de apoio</p>
-        </div>
-    </div>
 
-    <a href="formacao.html" class="btn" style="background-color: var(--cor-destaque); color: white; font-weight: bold; padding: 12px 30px; border-radius: 5px; text-decoration: none;">
-        Ver cursos
-    </a>
-</section>
     <footer>
         <div class="container">
             <div class="footer-container">
                 <div class="footer-col">
                     <h3>Sobre o GAVE</h3>
-                    <p>O Guia de Ações em Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
+                    <p>O Guia de Ações em Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em general.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
                         <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
@@ -784,7 +865,7 @@
 
         setupDropdowns(); 
         window.addEventListener('resize', setupDropdowns); 
-        
+
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
             if (nav && nav.classList.contains('active')) { 
@@ -803,6 +884,24 @@
         const date = new Date(dateString);
         return date.toLocaleDateString('pt-BR', options);
     }
+
+    // Função auxiliar para extrair a primeira imagem do HTML
+    function extractFirstImage(htmlString) {
+        const div = document.createElement('div');
+        div.innerHTML = htmlString;
+        const img = div.querySelector('img');
+        return img ? img.src : null;
+    }
+
+    // Função auxiliar para limitar o texto
+    function truncateText(text, maxLength) {
+        if (!text) return '';
+        // Remover tags HTML e quebras de linha antes de truncar
+        let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
+        if (cleanText.length <= maxLength) return cleanText;
+        return cleanText.substring(0, maxLength) + '...';
+    }
+
 
     document.addEventListener('DOMContentLoaded', async () => {
         const newsContainer = document.getElementById('blog-posts-container'); 
@@ -838,14 +937,14 @@
                 return;
             }
 
-            const postsToDisplay = posts.slice(0, 3); 
+            const postsToDisplay = posts.slice(0, 3); // Exibe os primeiros 3 posts do blog
 
             postsToDisplay.forEach(post => {
                 const title = post.title || 'Sem Título';
                 const link = post.link || '#';
                 const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); 
                 
-                let imageUrl = 'https://via.placeholder.com/400x200?text=GAVE+Noticia'; 
+                let imageUrl = 'https://via.placeholder.com/400x160?text=GAVE+Noticia'; // Placeholder padrão com altura ajustada
                 if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
                     imageUrl = post.enclosure.link;
                 } else if (post.thumbnail) {
@@ -854,16 +953,28 @@
                     imageUrl = post['media:thumbnail'].$.url;
                 } else if (post.image) { 
                     imageUrl = post.image;
+                } else {
+                    // Tenta extrair a primeira imagem do conteúdo HTML da descrição/content
+                    const contentHtml = post.description || post.content || '';
+                    const extractedImg = extractFirstImage(contentHtml);
+                    if (extractedImg) {
+                        imageUrl = extractedImg;
+                    }
                 }
+
+                // Extração e limitação do texto (description ou content)
+                let descriptionText = post.description || post.content || '';
+                const truncatedDescription = truncateText(descriptionText, 120); // Limita a 120 caracteres
+
 
                 const cardHtml = `
                     <div class="col">
                         <div class="card h-100">
-                            <img src="${imageUrl}" class="card-img-top" alt="${title.substring(0,50)}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x200?text=Erro+Imagem';">
+                            <img src="${imageUrl}" class="card-img-top" alt="${title.substring(0,50)}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x160?text=Erro+Imagem';">
                             <div class="card-body d-flex flex-column">
                                 <p class="card-text small text-muted">${date}</p>
                                 <h5 class="card-title">${title}</h5>
-                                <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler mais</a>
+                                <p class="card-text">${truncatedDescription}</p> <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler mais</a>
                             </div>
                         </div>
                     </div>
@@ -879,70 +990,146 @@
     </script>
 
     <script>
-    const clippingData = [
-        {
-            title: "Brasil enfrenta desafio no combate à Febre Amarela",
-            link: "https://www.exemplo.com.br/noticia-febre-amarela", 
-            sourceDate: "Fonte: G1 - 20/05/2024" 
-        },
-        {
-            title: "Pesquisa aponta aumento de casos de Tuberculose",
-            link: "https://www.exemplo.com.br/noticia-tuberculose", 
-            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" 
-        },
-        {
-            title: "Novos casos de Sarampo acendem alerta em capitais",
-            link: "https://www.exemplo.com.br/noticia-sarampo", 
-            sourceDate: "Fonte: Estado de Minas - 15/05/2024" 
-        },
-        {
-            title: "Ministério da Saúde lança guia sobre Chikungunya",
-            link: "https://www.exemplo.com.br/noticia-chikungunya", 
-            sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" 
-        },
-        {
-            title: "Pesquisa aponta aumento de casos de Tuberculose",
-            link: "https://www.exemplo.com.br/noticia-tuberculose", 
-            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" 
-        },
-        {
-            title: "Novos casos de Sarampo acendem alerta em capitais",
-            link: "https://www.exemplo.com.br/noticia-sarampo", 
-            sourceDate: "Fonte: Estado de Minas - 15/05/2024" 
-        },        {
-            title: "Ministério da Saúde lança guia sobre Chikungunya",
-            link: "https://www.exemplo.com.br/noticia-chikungunya", 
-            sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" 
-        },
+    // Função auxiliar para formatar a data (Exemplo: "15 de Maio, 2025")
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString('pt-BR', options);
+    }
+
+    // Função auxiliar para extrair a primeira imagem do HTML
+    function extractFirstImage(htmlString) {
+        const div = document.createElement('div');
+        div.innerHTML = htmlString;
+        const img = div.querySelector('img');
+        return img ? img.src : null;
+    }
+
+    // Função auxiliar para limitar o texto
+    function truncateText(text, maxLength) {
+        if (!text) return '';
+        // Remover tags HTML e quebras de linha antes de truncar
+        let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
+        if (cleanText.length <= maxLength) return cleanText;
+        return cleanText.substring(0, maxLength) + '...';
+    }
+
+    // !!! INCLUA AQUI AS URLs DE FEED RSS DAS FONTES DE NOTÍCIAS DE SAÚDE/EPIDEMIOLOGIA !!!
+    // Exemplo: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml'
+    // Você precisará encontrar feeds RSS de sites como Ministério da Saúde, Fiocruz, OPAS/OMS, etc.
+    const clippingRSSUrls = [
+        'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+saude+publica+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt', // Exemplo: Google Notícias (Vigilância Epidemiológica)
+        'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/', // Exemplo: G1 Saúde
+        'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml', // Exemplo: WHO News
+        'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/en/rss/news', // Exemplo: PAHO News (precisa testar a URL exata do RSS)
+        // Adicione mais URLs de RSS (processadas pelo rss2json.com) aqui:
+        // 'https://api.rss2json.com/v1/api.json?rss_url=SUA_OUTRA_URL_DE_RSS_AQUI',
     ];
 
-    document.addEventListener('DOMContentLoaded', (event) => {
+    document.addEventListener('DOMContentLoaded', async () => {
         const clippingContainer = document.getElementById('clipping-posts-container');
 
-        if (clippingContainer) {
+        if (!clippingContainer) {
+            console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
+            return;
+        }
+
+        clippingContainer.innerHTML = '<p class="text-center w-100">Carregando clipping...</p>';
+
+        if (clippingRSSUrls.length === 0) {
+            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma fonte de clipping configurada. Adicione URLs RSS no JavaScript.</p>';
+            return;
+        }
+
+        let allClippingPosts = [];
+
+        try {
+            const fetchPromises = clippingRSSUrls.map(url => 
+                fetch(url).then(response => {
+                    if (!response.ok) {
+                        console.warn(`Erro ao carregar feed RSS do clipping da URL: ${url}. Status: ${response.status}`);
+                        return { items: [] }; // Retorna array vazio para não quebrar tudo
+                    }
+                    return response.json();
+                }).catch(error => {
+                    console.error(`Erro na requisição para o clipping URL: ${url}`, error);
+                    return { items: [] };
+                })
+            );
+
+            const results = await Promise.all(fetchPromises);
+
+            results.forEach(feedData => {
+                if (feedData.items) {
+                    allClippingPosts = allClippingPosts.concat(feedData.items);
+                }
+            });
+
+            // Ordenar notícias por data (mais recentes primeiro)
+            allClippingPosts.sort((a, b) => {
+                const dateA = new Date(a.pubDate || a.published);
+                const dateB = new Date(b.pubDate || b.published);
+                return dateB - dateA;
+            });
+
             clippingContainer.innerHTML = '';
 
-            if (clippingData.length === 0) {
-                clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento.</p>';
-            } else {
-clippingData.slice(0, 6).forEach(item => {
-    const cardHtml = `
-        <div class="col">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">${item.title}</h5>
-                    <p class="card-text small text-muted">${item.sourceDate}</p>
-                    <a href="${item.link}" class="btn btn-primary mt-2" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
-                </div>
-            </div>
-        </div>
-    `;
-    clippingContainer.innerHTML += cardHtml;
-});
-
+            if (allClippingPosts.length === 0) {
+                clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento das fontes configuradas.</p>';
+                return;
             }
-        } else {
-            console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
+
+            // Limita o número de posts exibidos (por exemplo, os primeiros 8)
+            const postsToDisplay = allClippingPosts.slice(0, 8); 
+
+            postsToDisplay.forEach(post => {
+                const title = post.title || 'Sem Título';
+                const link = post.link || '#';
+                const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); 
+                const source = post.source && post.source.title ? post.source.title : 'Fonte Desconhecida';
+                const sourceDate = `Fonte: ${source} - ${date}`;
+                
+                // Extração da imagem
+                let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia'; // Placeholder padrão com altura ajustada
+                if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
+                    imageUrl = post.enclosure.link;
+                } else if (post.thumbnail) { // Alguns feeds usam 'thumbnail' direto
+                    imageUrl = post.thumbnail;
+                } else if (post['media:thumbnail'] && post['media:thumbnail'].$.url) { // Para feeds com media:thumbnail (exige adaptação se o feed usar namespace)
+                    imageUrl = post['media:thumbnail'].$.url;
+                } else if (post.image) { // Se o feed tiver um campo 'image' direto
+                    imageUrl = post.image;
+                } else {
+                    // Tenta extrair a primeira imagem do conteúdo HTML da descrição/content
+                    const contentHtml = post.description || post.content || '';
+                    const extractedImg = extractFirstImage(contentHtml);
+                    if (extractedImg) {
+                        imageUrl = extractedImg;
+                    }
+                }
+
+                // Extração e limitação do texto (description ou content)
+                let descriptionText = post.description || post.content || '';
+                const truncatedDescription = truncateText(descriptionText, 120); // Limita a 120 caracteres
+
+                const cardHtml = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="${imageUrl}" class="card-img-top" alt="${title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Sem+Imagem';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text small text-muted">${sourceDate}</p>
+                                <p class="card-text">${truncatedDescription}</p> <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                clippingContainer.innerHTML += cardHtml;
+            });
+
+        } catch (error) {
+            console.error("Erro ao carregar feeds RSS do clipping:", error);
+            clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Verifique as URLs dos feeds e a conexão.</p>';
         }
     });
     </script>
