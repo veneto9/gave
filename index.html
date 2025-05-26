@@ -221,8 +221,8 @@
             color: var(--cor-texto-claro);
         }
         .card .btn-primary:hover {
-            background-color: #9a4e32;
-            border-color: #9a4e32;
+             background-color: #9a4e32;
+             border-color: #9a4e32;
         }
 
 
@@ -231,8 +231,8 @@
             padding: 60px 0;
         }
         /* As classes my-5, mb-4, text-center, w-100, etc., usadas nos blocos HTML
-            são do Bootstrap. Se não usar Bootstrap CSS, elas não terão efeito
-            ou você precisará defini-las aqui ou adaptar o HTML. */
+           são do Bootstrap. Se não usar Bootstrap CSS, elas não terão efeito
+           ou você precisará defini-las aqui ou adaptar o HTML. */
         .my-5 { margin-top: 3rem !important; margin-bottom: 3rem !important; }
         .mb-4 { margin-bottom: 1.5rem !important; }
         .mt-2 { margin-top: 0.5rem !important; }
@@ -244,7 +244,7 @@
         .text-muted { color: #6c757d !important; } /* Cor para texto 'muted' */
 
         /* Para o grid (row, col) funcionar como esperado, Bootstrap CSS é recomendado.
-            Alternativamente, você pode criar seus próprios estilos de grid. */
+           Alternativamente, você pode criar seus próprios estilos de grid. */
         .row {
             display: flex;
             flex-wrap: wrap;
@@ -269,8 +269,8 @@
             gap: 1.5rem; /* Para flex/grid com gap. Para margin/padding em cols, seria mais complexo */
         }
         /* Se usar display:grid no container, o g-4 funcionaria direto.
-            Se usar flexbox como acima, o 'gap' pode ser usado se o navegador suportar
-            ou você precisaria de margens/paddings nos .col */
+           Se usar flexbox como acima, o 'gap' pode ser usado se o navegador suportar
+           ou você precisaria de margens/paddings nos .col */
         #blog-posts-container.g-4, #clipping-posts-container.g-4 {
             gap: 1.5rem; /* Para que o g-4 funcione com display:flex nos .row */
         }
@@ -318,7 +318,7 @@
         }
         /* Para que o h-100 dos cards dinâmicos funcione como esperado */
         .h-100 {
-            height: 100% !important;
+             height: 100% !important;
         }
 
 
@@ -418,7 +418,7 @@
         }
 
         /* Seção de notícias/blog (seus estilos antigos para .blog-posts, .post, etc.
-            serão substituídos pela nova estrutura com #blog-section e #blog-posts-container) */
+           serão substituídos pela nova estrutura com #blog-section e #blog-posts-container) */
         
         /* Rodapé */
         footer {
@@ -561,10 +561,10 @@
             .header-container {
                 padding: 10px 0; /* Ajuste para header menor */
             }
-            nav { /* Ajuste para top se header for menor */
+             nav { /* Ajuste para top se header for menor */
                 top: 60px; /* Exemplo se o header reduzir para 60px de altura */
                 height: calc(100vh - 60px);
-            }
+             }
 
 
             .logo img {
@@ -592,8 +592,8 @@
             .row-cols-lg-4 > * { flex: 0 0 100%; max-width: 100%; }
 
             @media (min-width: 768px) { /* md - redefinindo para os novos grids */
-                #blog-posts-container.row-cols-md-2 > *, 
-                #clipping-posts-container.row-cols-md-2 > * { flex: 0 0 50%; max-width: 50%; }
+                 #blog-posts-container.row-cols-md-2 > *, 
+                 #clipping-posts-container.row-cols-md-2 > * { flex: 0 0 50%; max-width: 50%; }
             }
             @media (min-width: 992px) { /* lg - redefinindo para os novos grids */
                 #blog-posts-container.row-cols-lg-3 > * { flex: 0 0 33.333333%; max-width: 33.333333%; }
@@ -629,7 +629,7 @@
                             <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
                             <a href="febre-maculosa.html">Febre Maculosa</a>
                             <a href="candidiase.html">Candidiase</a>
-                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsoria</a>
+                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
                         </div>
                     </li>
                     <li><a href="formacao.html">Formação</a></li>
@@ -649,28 +649,65 @@
     </header>
 
     <section class="hero">
-  <div class="container">
-    <h1>A Epidemiologia perto de você</h1>
-    <p>O GAVE disponibiliza este guia como um recurso de apoio às atividades de vigilância epidemiológica, com foco em doenças de notificação compulsória. A proposta é oferecer orientações práticas e acessíveis que possam auxiliar na rotina de profissionais de saúde e demais interessados no tema.</p>
-
-    <p>Este conteúdo foi estruturado com base em referências técnicas reconhecidas, e aborda pontos fundamentais para a identificação, notificação, investigação e controle de agravos prioritários para a saúde pública.</p>
-
-    <ul>
-      <li>Conceitos básicos da vigilância epidemiológica;</li>
-      <li>Fluxos e responsabilidades no processo de notificação;</li>
-      <li>Etapas iniciais para a investigação de casos e surtos;</li>
-      <li>Links e trechos selecionados de normativas oficiais do Ministério da Saúde.</li>
-    </ul>
-
-    <p><strong>Importante:</strong> Este guia não substitui documentos normativos, protocolos oficiais ou manuais técnicos. Sua função é complementar, servindo como instrumento de consulta rápida e orientação no cotidiano dos serviços de saúde.</p>
-  </div>
-</section>
 
     <section id="blog-section" class="container my-5">
-        <h2 class="text-center mb-4 section-title"><span>Notícias em Destaque</span></h2> <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <p class="text-center w-100">Carregando últimas notícias...</p>
+        <h2 class="text-center mb-4 section-title"><span>Últimas Notícias do Blog</span></h2>     <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <p class="text-center w-100">Carregando últimas notícias...</p>
         </div>
     </section>
+    <section id="clipping-section" class="container my-5">
+        <h2 class="text-center mb-4 section-title"><span>Clipping de Notícias</span></h2>     <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                    <p class="text-center w-100">Carregando clipping...</p>
+        </div>
+    </section>
+
+        <div class="container">
+            <h1>Vigilância Epidemiológica ao seu alcance</h1>
+            <p>Informações atualizadas, recursos educacionais e suporte para profissionais de saúde e população em geral sobre doenças de notificação compulsória e vigilância epidemiológica.</p>
+            <a href="#doencas" class="btn">Conheça as doenças</a>
+        </div>
+    </section>
+
+    <section id="doencas">
+        <div class="container">
+            <div class="section-title">
+                <h2>Doenças em Destaque</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x300" alt="Dengue">
+                    </div>
+                    <div class="card-content">
+                        <h3>Dengue</h3>
+                        <p>A dengue é uma doença febril aguda, causada por um vírus de evolução benigna, na maioria dos casos, e seu principal vetor é o mosquito Aedes aegypti.</p>
+                        <a href="dengue.html" class="card-link">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x300" alt="Sífilis Adquirida">
+                    </div>
+                    <div class="card-content">
+                        <h3>Sífilis Adquirida</h3>
+                        <p>A sífilis é uma infecção bacteriana de caráter sistêmico, curável e exclusiva do ser humano, causada pelo Treponema pallidum.</p>
+                        <a href="sifilis-adquirida.html" class="card-link">Saiba mais</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x300" alt="Febre Maculosa">
+                    </div>
+                    <div class="card-content">
+                        <h3>Febre Maculosa</h3>
+                        <p>A Febre Maculosa Brasileira é uma doença infecciosa, febril aguda e de gravidade variável, causada pela bactéria Rickettsia rickettsii.</p>
+                        <a href="febre-maculosa.html" class="card-link">Saiba mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="recursos">
         <div class="container">
             <div class="section-title">
@@ -701,11 +738,6 @@
         </div>
     </section>
 
-    <section id="clipping-section" class="container my-5">
-        <h2 class="text-center mb-4 section-title"><span>Clipping de Notícias</span></h2>      <div class="clipping-scroll d-flex overflow-auto gap-3 py-2">
-  <!-- seus cards aqui dentro -->
-</div>
-    </section>
     <footer>
         <div class="container">
             <div class="footer-container">
@@ -783,7 +815,7 @@
                     link.addEventListener('click', function(event) {
                         // Previne o comportamento padrão do link se ele tiver href="#" ou for apenas para abrir o submenu
                         if (link.getAttribute('href') === '#' || !link.getAttribute('href') || link.parentElement.classList.contains('dropdown')) {
-                               event.preventDefault();
+                             event.preventDefault();
                         }
                         // Fecha outros dropdowns abertos
                         dropdowns.forEach(otherDropdown => {
@@ -795,8 +827,8 @@
                     });
                 });
             } else {
-                // Remove event listeners de clique se não estiver no mobile para restaurar comportamento hover do CSS
-                dropdowns.forEach(dropdown => {
+                 // Remove event listeners de clique se não estiver no mobile para restaurar comportamento hover do CSS
+                 dropdowns.forEach(dropdown => {
                     const link = dropdown.querySelector('a');
                     // Seria ideal clonar e substituir para remover listeners específicos,
                     // mas para este caso, como o comportamento de hover é CSS, apenas não adicionar o de clique já ajuda.
@@ -813,7 +845,7 @@
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
             if (nav && nav.classList.contains('active')) { // Verifica se nav existe
-                if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
+                 if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
                     nav.classList.remove('active');
                 }
             }
@@ -921,7 +953,7 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
                             <div class="card-body d-flex flex-column">
                                 <p class="card-text small text-muted">${date}</p>
                                 <h5 class="card-title">${title}</h5>
-                                <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler mais</a>
+                                                            <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler mais</a>
                             </div>
                         </div>
                     </div>
@@ -1002,4 +1034,4 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
     });
     </script>
 </body>
-</html>
+</html>fetch
