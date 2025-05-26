@@ -1,7 +1,7 @@
 👋 Olá, bem-vindos ao GitHub do GAVE
 Eu sou Amaro Neto (@veneto9), sanitarista e doutorando em Saúde Pública pelo IESC/UFRJ.
 
-O GAVE – Guia de Acesso à Vigilância Epidemiológica é um projeto independente que busca ampliar o acesso à informação de qualidade em saúde pública, especialmente no campo da vigilância epidemiológica.
+O GAVE – Guia de Ações em Vigilância Epidemiológica é um projeto independente que busca ampliar o acesso à informação de qualidade em saúde pública, especialmente no campo da vigilância epidemiológica.
 
 🎯 O que é o GAVE?
 
