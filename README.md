@@ -1,18 +1,18 @@
-👋 Olá, bem-vindos ao Github do Gave.
+👋 Olá, bem-vindos ao GitHub do GAVE
+Eu sou Amaro Neto (@veneto9), sanitarista e doutorando em Saúde Pública pelo IESC/UFRJ.
 
-Eu sou Amaro Neto,  @veneto9
+O GAVE – Guia de Acesso à Vigilância Epidemiológica é um projeto independente que busca ampliar o acesso à informação de qualidade em saúde pública, especialmente no campo da vigilância epidemiológica.
 
-Como eu gostaria de aprimorar meus conhecimentos em R e aplicar na Área de Vigilância em Saúde Pública.
+🎯 O que é o GAVE?
 
-Acesse o Gave e conheça o intuito da proposta https://epidemio.wixsite.com/gave
+Uma proposta que combina educação, ciência e saúde coletiva, com o objetivo de:
+Organizar conteúdos confiáveis sobre doenças de notificação compulsória
+Apoiar profissionais de saúde, estudantes e educadores
+Fortalecer a cidadania e o controle social em saúde
+A ideia central é democratizar o conhecimento epidemiológico, valorizando a linguagem acessível, a curadoria de fontes seguras e o olhar crítico sobre os dados de saúde.
 
-Sou sanitarista, com Vigilância Epidemiológica, doutorando em Saúde Coletiva, gostaria apoio no desenvolvimento dessa proposta de site automatizado para informações de Vigilância em Saúde. 
-
-Cursando doutorado em Saúde Pública pela UFRJ.
-
-🐥 @amaroveneto no Twitter
-
-📸 @amarovneto no Instagram
-📫 E-mail: amaroneto@ufrj.br
-🌐 VR - Rio de Janeiro - Brasil.
-
+📫 Contato e redes
+Twitter: @amaroveneto
+Instagram: @amarovneto
+E-mail: amaroneto@ufrj.br
+Localização: Rio de Janeiro, Brasil
