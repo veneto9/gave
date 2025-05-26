@@ -648,13 +648,13 @@
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-               <h1>Vigilância Epidemiológica ao seu alcance</h1>
-    <p>Informações atualizadas, recursos educacionais e suporte para profissionais de saúde e população em geral sobre doenças de notificação compulsória e vigilância epidemiológica.</p>
+<section class="hero">
+  <div class="container">
+    <h1>Epidemiologia no seu cotidiano</h1>
+    <p>Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória e vigilância epidemiológica para quem atua com saúde pública.</p>
+    <a href="#blog-section" class="btn">Conheça o projeto</a>
   </div>
 </section>
-
     <section id="blog-section" class="container my-5">
         <h2 class="text-center mb-4 section-title"><span>Doenças em Destaque</span></h2> <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <p class="text-center w-100">Carregando últimas notícias...</p>
@@ -692,7 +692,7 @@
 
     <section id="clipping-section" class="container my-5">
         <h2 class="text-center mb-4 section-title"><span>Clipping de Notícias</span></h2>
-        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
     </section>
@@ -745,6 +745,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Menu mobile toggle
         const navToggle = document.querySelector('.nav-toggle');
@@ -761,7 +762,6 @@
             });
         }
         
-
         // Dropdown mobile
         const dropdowns = document.querySelectorAll('.dropdown');
         
@@ -798,7 +798,6 @@
 
         setupDropdowns(); // Executa ao carregar
         window.addEventListener('resize', setupDropdowns); // Re-executa ao redimensionar
-
 
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
@@ -946,7 +945,16 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
             link: "https://www.exemplo.com.br/noticia-sarampo", // Substitua pelo link real
             sourceDate: "Fonte: Estado de Minas - 15/05/2024" // Adapte conforme necessário
         },
+       {
+            title: "Pesquisa aponta aumento de casos de Tuberculose",
+            link: "https://www.exemplo.com.br/noticia-tuberculose", // Substitua pelo link real
+            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" // Adapte conforme necessário
+        },
         {
+            title: "Novos casos de Sarampo acendem alerta em capitais",
+            link: "https://www.exemplo.com.br/noticia-sarampo", // Substitua pelo link real
+            sourceDate: "Fonte: Estado de Minas - 15/05/2024" // Adapte conforme necessário
+        },        {
             title: "Ministério da Saúde lança guia sobre Chikungunya",
             link: "https://www.exemplo.com.br/noticia-chikungunya", // Substitua pelo link real
             sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" // Adapte conforme necessário
