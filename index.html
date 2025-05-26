@@ -1,942 +1,559 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GAVE - Guia de Ações em Vigilância Epidemiológica. Informações, recursos e suporte para profissionais de saúde e população em geral.">
-    <title>GAVE - Vigilância Epidemiológica no Cotidiano</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <style>
-        /* Variáveis de cores baseadas no logo do GAVE */
-        :root {
-            --cor-primaria: #1d4d46; /* Verde escuro do logo */
-            --cor-secundaria: #8a9e64; /* Verde oliva do logo */
-            --cor-terciaria: #f5f0e1; /* Bege/creme do fundo */
-            --cor-destaque: #b05c3b; /* Terracota/vermelho do gráfico */
-            --cor-texto: #333333;
-            --cor-texto-claro: #ffffff;
-            --cor-fundo: #f5f0e1; /* Bege/creme do fundo */
-            --cor-borda: #d9d0c3;
-            --sombra-suave: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --transicao: all 0.3s ease;
-        }
-
-        /* Reset e estilos gerais */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--cor-texto);
-            background-color: var(--cor-fundo);
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--cor-primaria);
-            transition: var(--transicao);
-        }
-
-        a:hover {
-            color: var(--cor-destaque);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Cabeçalho */
-        header {
-            background-color: var(--cor-texto-claro);
-            box-shadow: var(--sombra-suave);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--cor-primaria);
-        }
-
-        .logo-text span {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--cor-texto);
-        }
-
-        /* Navegação */
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--cor-primaria);
-            cursor: pointer;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-            position: relative;
-        }
-
-        nav ul li a {
-            color: var(--cor-texto);
-            font-weight: 500;
-            padding: 10px 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--cor-primaria);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--cor-primaria);
-            transition: var(--transicao);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--cor-texto-claro);
-            min-width: 200px;
-            box-shadow: var(--sombra-suave);
-            z-index: 1;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 12px 15px;
-            color: var(--cor-texto);
-            border-bottom: 1px solid var(--cor-borda);
-        }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--cor-terciaria);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Banner principal / Hero Section */
-        .banner-destaque {
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
-            color: var(--cor-texto-claro);
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .banner-destaque h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .banner-destaque p {
-            font-size: 1rem;
-            max-width: 800px;
-            margin: 0 auto 20px;
-        }
-
-        .btn { 
-            display: inline-block;
-            background-color: var(--cor-destaque);
-            color: var(--cor-texto-claro);
-            padding: 12px 25px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: var(--transicao);
-        }
-
-        .btn:hover { 
-            background-color: #9a4e32;  
-            color: var(--cor-texto-claro);
-            transform: translateY(-2px);
-        }
-        
-        /* Sobrescrever estilos do Bootstrap para botões */
-        .card .btn-primary { 
-            background-color: var(--cor-destaque);
-            border-color: var(--cor-destaque);
-            color: var(--cor-texto-claro);
-        }
-        
-        .card .btn-primary:hover {
-            background-color: #9a4e32;
-            border-color: #9a4e32;
-        }
-
-        /* Seções de conteúdo */
-        section {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--cor-primaria);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--cor-destaque);
-        }
-
-        /* Cards de doenças / notícias */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .card { 
-            background-color: var(--cor-texto-claro);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--sombra-suave);
-            transition: var(--transicao);
-            display: flex; 
-            flex-direction: column; 
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img-top { 
-            height: 200px;
-            overflow: hidden;
-            object-fit: cover;
-        }
-
-        .card-body { 
-            padding: 20px;
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-
-        .card-title { 
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--cor-primaria);
-        }
-
-        .card-text { 
-            margin-bottom: 15px;
-            color: var(--cor-texto);
-        }
-
-        /* Seção de recursos */
-        .recursos-disponiveis {
-            background-color: var(--cor-terciaria);
-        }
-
-        .recursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .recurso-item {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: var(--cor-texto-claro);
-            border-radius: 8px;
-            box-shadow: var(--sombra-suave);
-            transition: var(--transicao);
-        }
-
-        .recurso-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .recurso-icon {
-            font-size: 2.5rem;
-            color: var(--cor-primaria);
-            margin-bottom: 15px;
-        }
-
-        .recurso-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--cor-primaria);
-        }
-        
-        /* Estilos específicos para os cards de Notícias em Destaque (blog) */
-        #noticias-destaque .card-title {
-            font-size: 1.1rem;
-            line-height: 1.4em;
-            max-height: 4.2em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        #noticias-destaque .card-text {
-            font-size: 0.85rem;
-            line-height: 1.4em;
-            max-height: 4.2em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        #noticias-destaque .card-img-top {
-            height: 160px;
-        }
-
-        /* Estilos para cards de Clipping */
-        #clipping-noticias .card {
-            max-height: 360px;
-            overflow: hidden;
-        }
-
-        #clipping-noticias .card-title {
-            font-size: 1rem;
-            line-height: 1.3em;
-            max-height: 3.9em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        #clipping-noticias .card-text {
-            font-size: 0.8rem;
-            line-height: 1.3em;
-            max-height: 3.9em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-
-        #clipping-noticias .card-img-top {
-            height: 120px;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: var(--cor-primaria);
-            color: var(--cor-texto-claro);
-            padding: 60px 0 20px;
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--cor-destaque);
-        }
-
-        .footer-col p {
-            margin-bottom: 15px;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--cor-texto-claro);
-            opacity: 0.8;
-            transition: var(--transicao);
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--cor-texto-claro);
-            transition: var(--transicao);
-        }
-
-        .social-links a:hover {
-            background-color: var(--cor-destaque);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Responsividade */
-        @media (max-width: 992px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 80px);
-                background-color: var(--cor-texto-claro);
-                box-shadow: var(--sombra-suave);
-                transition: var(--transicao);
-                overflow-y: auto;
-            }
-
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            nav ul li {
-                margin: 0;
-                margin-bottom: 15px;
-            }
-
-            .dropdown-content {
-                position: static;
-                display: none;
-                box-shadow: none;
-                padding-left: 20px;
-            }
-
-            .dropdown.active .dropdown-content { 
-                display: block;
-            }
-
-            .banner-destaque h1 {
-                font-size: 2rem;
-            }
-
-            .banner-destaque p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 10px 0; 
-            }
-            
-            nav { 
-                top: 60px; 
-                height: calc(100vh - 60px);
-            }
-
-            .logo img {
-                height: 40px;
-            }
-
-            .logo-text {
-                font-size: 1.2rem;
-            }
-
-            .banner-destaque {
-                padding: 60px 0;
-            }
-
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            .cards-grid, .recursos-grid { 
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal de Vigilância Epidemiológica - Monitoramento, análise e comunicação de dados sobre doenças de notificação compulsória e eventos de saúde pública." />
+  <meta name="keywords" content="vigilância epidemiológica, saúde coletiva, epidemiologia, doenças negligenciadas, boletins epidemiológicos" />
+  <meta name="author" content="Prof. Amaro Viana Neto" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://vigilancia-epidemiologica.com.br/" />
+  <meta property="og:title" content="Portal de Vigilância Epidemiológica | Prof. Amaro Viana Neto" />
+  <meta property="og:description" content="Monitoramento, análise e comunicação de dados sobre doenças de notificação compulsória e eventos de saúde pública." />
+  <meta property="og:image" content="https://vigilancia-epidemiologica.com.br/img/og-image.jpg" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://vigilancia-epidemiologica.com.br/" />
+  <meta name="twitter:title" content="Portal de Vigilância Epidemiológica | Prof. Amaro Viana Neto" />
+  <meta name="twitter:description" content="Monitoramento, análise e comunicação de dados sobre doenças de notificação compulsória e eventos de saúde pública." />
+  <meta name="twitter:image" content="https://vigilancia-epidemiologica.com.br/img/twitter-image.jpg" />
+  
+  <title>Portal de Vigilância Epidemiológica | Prof. Amaro Viana Neto</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+  <!-- Chart.js para visualizações de dados -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="images/novagave.png" alt="Logo GAVE">
-                <div class="logo-text">
-                    GAVE
-                    <span>Guia de Ações em Vigilância Epidemiológica</span>
-                </div>
+  <header>
+    <h1>Portal de Vigilância Epidemiológica</h1>
+    <p>Monitoramento · Análise · Comunicação · Ação</p>
+    <p class="header-author">Coordenação: Prof. Amaro Viana Neto</p>
+  </header>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">VE Monitor</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Início</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dashboardDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dashboard
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dashboardDropdown">
+              <li><a class="dropdown-item" href="#dashboard-section">Visão Geral</a></li>
+              <li><a class="dropdown-item" href="#doencas-section">Doenças Notificáveis</a></li>
+              <li><a class="dropdown-item" href="#geo-section">Análise Geoespacial</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#alertas-section">Alertas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#boletins-section">Boletins</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#documentos-section">Documentos Técnicos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#blog-section">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#clipping-section">Clipping</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a href="curriculo.html" class="btn btn-outline-light me-2" aria-label="Currículo do Prof. Amaro Neto">📄 Currículo</a>
+          <a href="https://github.com/veneto9" target="_blank" rel="noopener noreferrer" class="btn btn-outline-light" aria-label="Perfil no GitHub">
+            <i class="bi bi-github"></i> GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-4">
+    <!-- Introdução e filtros -->
+    <section class="secao mb-5">
+      <div class="row">
+        <div class="col-md-8">
+          <h2>🧬 Portal de Vigilância Epidemiológica</h2>
+          <p class="lead">Bem-vindo ao portal de monitoramento e análise de dados epidemiológicos, focado em doenças de notificação compulsória e eventos de saúde pública no Brasil.</p>
+          <p>Este portal integra dados do SINAN, SIM, SINASC e outras fontes oficiais, oferecendo visualizações atualizadas, alertas epidemiológicos e análises espaciais para apoiar a tomada de decisão em saúde pública.</p>
+          <p><strong>Coordenação:</strong> Prof. Amaro Neto, doutorando em Saúde Coletiva (IESC/UFRJ), Sanitarista e Geógrafo, com atuação na Vigilância Epidemiológica em Barra do Piraí/RJ.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h3 class="h5 mb-0">Filtros de Dados</h3>
             </div>
-            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li class="dropdown">
-                        <a href="#">Doenças</a>
-                        <div class="dropdown-content">
-                            <a href="dengue.html">Dengue</a>
-                            <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
-                            <a href="febre-maculosa.html">Febre Maculosa</a>
-                            <a href="candidiase.html">Candidiase</a>
-                            <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
+            <div class="card-body">
+              <form id="filters-form">
+                <div class="mb-3">
+                  <label for="disease-select" class="form-label">Doença/Agravo</label>
+                  <select class="form-select" id="disease-select" aria-label="Selecione a doença ou agravo">
+                    <option value="all" selected>Todas</option>
+                    <option value="leptospirose">Leptospirose</option>
+                    <option value="dengue">Dengue</option>
+                    <option value="tuberculose">Tuberculose</option>
+                    <option value="covid19">COVID-19</option>
+                    <option value="malaria">Malária</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="region-select" class="form-label">Região</label>
+                  <select class="form-select" id="region-select" aria-label="Selecione a região">
+                    <option value="all" selected>Brasil</option>
+                    <option value="norte">Norte</option>
+                    <option value="nordeste">Nordeste</option>
+                    <option value="centro-oeste">Centro-Oeste</option>
+                    <option value="sudeste">Sudeste</option>
+                    <option value="sul">Sul</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="period-select" class="form-label">Período</label>
+                  <select class="form-select" id="period-select" aria-label="Selecione o período">
+                    <option value="2025" selected>2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Aplicar Filtros</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard e Indicadores -->
+    <section id="dashboard-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">📊 Dashboard Epidemiológico</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-3">
+          <div class="card text-white bg-primary mb-3">
+            <div class="card-body text-center">
+              <h3 class="card-title h4">Casos Notificados</h3>
+              <p class="display-4 mb-0" id="total-cases">23.487</p>
+              <p class="small mt-2">Últimos 30 dias</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-white bg-success mb-3">
+            <div class="card-body text-center">
+              <h3 class="card-title h4">Taxa de Incidência</h3>
+              <p class="display-4 mb-0" id="incidence-rate">12,5</p>
+              <p class="small mt-2">por 100.000 hab.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-white bg-warning mb-3">
+            <div class="card-body text-center">
+              <h3 class="card-title h4">Óbitos</h3>
+              <p class="display-4 mb-0" id="deaths">342</p>
+              <p class="small mt-2">Confirmados</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-white bg-danger mb-3">
+            <div class="card-body text-center">
+              <h3 class="card-title h4">Letalidade</h3>
+              <p class="display-4 mb-0" id="lethality">1,4%</p>
+              <p class="small mt-2">% de casos fatais</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h3 class="h5 mb-0">Tendência Temporal</h3>
+            </div>
+            <div class="card-body">
+              <canvas id="trend-chart" height="300" aria-label="Gráfico de tendência temporal de casos" role="img"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h3 class="h5 mb-0">Distribuição por Faixa Etária</h3>
+            </div>
+            <div class="card-body">
+              <canvas id="age-chart" height="300" aria-label="Gráfico de distribuição por faixa etária" role="img"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Mapa Geoespacial -->
+    <section id="geo-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">🗺️ Análise Geoespacial</h2>
+      <div class="card">
+        <div class="card-body">
+          <div class="ratio ratio-16x9">
+            <div id="map-container">
+              <!-- Aqui será inserido o mapa interativo -->
+              <img src="https://via.placeholder.com/800x400?text=Mapa+de+Distribuição+de+Casos" class="img-fluid" alt="Mapa de distribuição geográfica de casos">
+            </div>
+          </div>
+          <div class="mt-3">
+            <p class="text-muted">Visualização da distribuição espacial de casos por município. Utilize os controles para zoom e filtros adicionais.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alertas Epidemiológicos -->
+    <section id="alertas-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">🚨 Alertas Epidemiológicos</h2>
+      
+      <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>Surto de Dengue</h4>
+        <p>Aumento significativo de casos de Dengue nas regiões metropolitanas de São Paulo e Rio de Janeiro. Verificou-se crescimento de 37% nas notificações nas últimas duas semanas.</p>
+        <hr>
+        <p class="mb-0">Medidas de controle intensificadas e campanhas de eliminação de criadouros do mosquito Aedes aegypti em andamento.</p>
+        <small class="text-muted">Atualizado em: 25/05/2025</small>
+      </div>
+      
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-exclamation-circle-fill me-2"></i>Monitoramento de Malária</h4>
+        <p>Elevação dos casos de Malária em municípios da região amazônica. Aumento de 15% em relação ao mesmo período do ano anterior.</p>
+        <hr>
+        <p class="mb-0">Recomenda-se intensificação das ações de diagnóstico precoce e tratamento oportuno.</p>
+        <small class="text-muted">Atualizado em: 20/05/2025</small>
+      </div>
+      
+      <div class="alert alert-info" role="alert">
+        <h4 class="alert-heading"><i class="bi bi-info-circle-fill me-2"></i>Investigação em Andamento</h4>
+        <p>Surto de doença diarreica aguda em investigação no município de Petrópolis/RJ. Hipótese de contaminação da água está sendo avaliada.</p>
+        <hr>
+        <p class="mb-0">Mais informações serão divulgadas conforme resultados laboratoriais sejam disponibilizados.</p>
+        <small class="text-muted">Atualizado em: 22/05/2025</small>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#" class="btn btn-outline-secondary">Ver alertas anteriores</a>
+      </div>
+    </section>
+    
+    <!-- Boletins Epidemiológicos -->
+    <section id="boletins-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">📋 Boletins Epidemiológicos</h2>
+      
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Boletim Epidemiológico: Arboviroses</h3>
+              <p class="card-text">Situação epidemiológica da Dengue, Zika e Chikungunya no Brasil, semanas epidemiológicas 1 a 20 de 2025.</p>
+              <p class="text-muted mb-2"><small>Publicado em: 15/05/2025</small></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+              <a href="#" class="btn btn-sm btn-primary">Download PDF</a>
+              <a href="#" class="btn btn-sm btn-outline-secondary">Visualizar Online</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Boletim Epidemiológico: Leptospirose</h3>
+              <p class="card-text">Análise dos casos de Leptospirose no Estado do Rio de Janeiro, com detalhamento por município e fatores de risco.</p>
+              <p class="text-muted mb-2"><small>Publicado em: 10/05/2025</small></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+              <a href="#" class="btn btn-sm btn-primary">Download PDF</a>
+              <a href="#" class="btn btn-sm btn-outline-secondary">Visualizar Online</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title h5">Boletim Epidemiológico: Tuberculose</h3>
+              <p class="card-text">Panorama da situação epidemiológica da Tuberculose no Brasil, com dados de incidência e desfechos de tratamento.</p>
+              <p class="text-muted mb-2"><small>Publicado em: 28/04/2025</small></p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0">
+              <a href="#" class="btn btn-sm btn-primary">Download PDF</a>
+              <a href="#" class="btn btn-sm btn-outline-secondary">Visualizar Online</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-4">
+        <a href="#" class="btn btn-outline-primary">Ver todos os boletins</a>
+      </div>
+    </section>
+    
+    <!-- Documentos Técnicos -->
+    <section id="documentos-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">📑 Documentos Técnicos</h2>
+      
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h3 class="h5 mb-0">Guias e Protocolos</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Guia de Vigilância em Saúde</h4>
+                  <p class="mb-0 small text-muted">Ministério da Saúde, 2025</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Protocolo de Manejo Clínico da Dengue</h4>
+                  <p class="mb-0 small text-muted">Atualizado em Março/2025</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Manual de Controle da Leptospirose</h4>
+                  <p class="mb-0 small text-muted">SVS/MS, 2024</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <div class="card-header bg-light">
+              <h3 class="h5 mb-0">Fichas e Formulários</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Ficha de Notificação/Investigação - SINAN</h4>
+                  <p class="mb-0 small text-muted">Doenças de Notificação Compulsória</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Formulário de Investigação de Surtos</h4>
+                  <p class="mb-0 small text-muted">Versão 2024</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <h4 class="h6 mb-1">Planilha de Monitoramento de Casos</h4>
+                  <p class="mb-0 small text-muted">Modelo para Municípios</p>
+                </div>
+                <a href="#" class="btn btn-sm btn-outline-primary">Download</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog - Mantendo a seção existente mas adaptando o estilo -->
+    <section id="blog-section" class="secao mb-5">
+      <h2 class="border-bottom pb-2 mb-4">✍️ Blog: Artigos e Análises</h2>
+      <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <p class="text-center w-100">Carregando últimas publicações...</p>
+      </div>
+    </section>
+    
+    <!-- Clipping - Mantendo a seção existente mas adaptando o estilo -->
+    <section id="clipping-section" class="secao mb-5">
+      <h2 class="border-bottom pb
+
+  <footer>
+    <div>
+      <p>Amaro Neto | <a href="curriculo.html">Ver currículo</a></p>
+    </div>
+    <section class="secao-contato">
+      <h2>🌐 Contato</h2>
+      <p>🐦 <a href="https://twitter.com/amaroveneto" target="_blank">@amaroveneto</a></p>
+      <p>📸 <a href="https://instagram.com/amarovneto" target="_blank">@amarovneto</a></p>
+      <p>📫 <a href="mailto:amaroneto@ufrj.br">amaroneto@ufrj.br</a></p>
+      <p>📍 Rio de Janeiro, Brasil</p>
+    </section>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script>
+    // Bloco 3: Código JavaScript para popular as Últimas Notícias do Blog (via RSS/Proxy)
+
+    // IMPORTANTE: Substitua esta URL pela URL real do seu feed RSS ou do serviço proxy (ex: RSS2JSON).
+    // Exemplo com um feed de teste (PODE NÃO FUNCIONAR DEVIDO A CORS SEM PROXY):
+    const rssFeedUrl = 'https://rss.blog.gov.bc.ca/districts/prince-george/'; // SUBSTITUA!
+    // Para usar com Substack, você precisará do feed RSS do seu Substack (ex: https://seunome.substack.com/feed)
+    // e provavelmente de um proxy como RSS2JSON (https://rss2json.com/) para converter para JSON e evitar CORS.
+    // Exemplo com RSS2JSON: `https://api.rss2json.com/v1/api.json?rss_url=https://seunome.substack.com/feed`
+
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date)) return 'Data inválida';
+            return date.toLocaleDateString('pt-BR', options);
+        } catch (e) {
+            return 'Data indisponível';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const blogContainer = document.getElementById('blog-posts-container');
+
+        if (!blogContainer) {
+            console.error("Contêiner de notícias do blog com ID 'blog-posts-container' não encontrado.");
+            return;
+        }
+
+        blogContainer.innerHTML = '<p class="text-center w-100">Carregando últimas notícias...</p>';
+
+        try {
+            const response = await fetch(rssFeedUrl);
+            if (!response.ok) {
+                throw new Error(`Erro na requisição HTTP! Status: ${response.status} ao buscar ${rssFeedUrl}`);
+            }
+            const feedData = await response.json(); // Assumindo que o proxy retorna JSON
+
+            // Adapte 'feedData.items' conforme a estrutura do JSON retornado pelo seu proxy/feed
+            const posts = feedData.items || [];
+
+            if (posts.length === 0) {
+                blogContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>';
+                return;
+            }
+
+            blogContainer.innerHTML = ''; // Limpa a mensagem de carregamento
+
+            // Limita o número de posts exibidos (ex: os 3 mais recentes)
+            const postsToDisplay = posts.slice(0, 3);
+
+            postsToDisplay.forEach(post => {
+                const title = post.title || 'Sem Título';
+                const link = post.link || '#';
+                const pubDate = post.pubDate || post.isoDate; // Tentar pubDate ou isoDate
+                const date = pubDate ? formatDate(pubDate) : 'Data Desconhecida';
+                // Tentar extrair uma imagem. Muitos feeds RSS usam 'enclosure', 'media:thumbnail', ou a primeira <img> no 'content'
+                const imageUrl = post.thumbnail || (post.enclosure && post.enclosure.link) || 'https://via.placeholder.com/400x200/2C3E50/FFFFFF?text=Blog+GAVE'; // Placeholder
+
+                const cardHtml = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="${imageUrl}" class="card-img-top" alt="${title}" style="object-fit: cover; height: 200px;">
+                            <div class="card-body d-flex flex-column">
+                                <p class="card-text small text-muted mb-1">${date}</p>
+                                <h5 class="card-title mt-0">${title}</h5>
+                                <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler mais</a>
+                            </div>
                         </div>
-                    </li>
-                    <li><a href="formacao.html">Formação</a></li>
-                    <li class="dropdown">
-                        <a href="#">Publicações</a>
-                        <div class="dropdown-content">
-                            <a href="manuais.html">Manuais</a>
-                            <a href="informes-tecnicos.html">Informes Técnicos</a>
-                            <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
+                    </div>
+                `;
+                blogContainer.innerHTML += cardHtml;
+            });
+
+        } catch (error) {
+            console.error("Erro ao carregar feed RSS:", error);
+            blogContainer.innerHTML = `<p class="text-center w-100 text-danger">Erro ao carregar notícias do blog. Verifique o console para detalhes (F12).</p><p class="text-center w-100 small text-muted">Certifique-se de que a URL do feed ('${rssFeedUrl}') está correta e acessível, possivelmente via um proxy RSS-to-JSON.</p>`;
+        }
+    });
+  </script>
+
+  <script>
+    // Bloco 4: Código JavaScript para popular o Clipping de Notícias
+
+    // IMPORTANTE: Edite estes dados com suas notícias de clipping reais.
+    const clippingData = [
+        {
+            title: "Brasil enfrenta desafio no combate à Febre Amarela",
+            link: "https://www.example.com/noticia-febre-amarela", // Substitua pelo link real
+            sourceDate: "Fonte: G1 - 20/MAI/2024", // Adapte
+            imageUrl: "https://via.placeholder.com/400x200/34495E/FFFFFF?text=Clipping+1" // Opcional: imagem placeholder
+        },
+        {
+            title: "Pesquisa aponta aumento de casos de Tuberculose",
+            link: "https://www.example.com/noticia-tuberculose", // Substitua
+            sourceDate: "Fonte: Folha de S. Paulo - 18/MAI/2024", // Adapte
+            imageUrl: "https://via.placeholder.com/400x200/34495E/FFFFFF?text=Clipping+2" // Opcional
+        },
+        {
+            title: "Novos casos de Sarampo acendem alerta em capitais",
+            link: "https://www.example.com/noticia-sarampo", // Substitua
+            sourceDate: "Fonte: Estado de Minas - 15/MAI/2024", // Adapte
+            imageUrl: "https://via.placeholder.com/400x200/34495E/FFFFFF?text=Clipping+3" // Opcional
+        },
+        {
+            title: "Ministério da Saúde lança guia sobre Chikungunya",
+            link: "https://www.example.com/noticia-chikungunya", // Substitua
+            sourceDate: "Fonte: Ministério da Saúde - 10/MAI/2024", // Adapte
+            imageUrl: "https://via.placeholder.com/400x200/34495E/FFFFFF?text=Clipping+4" // Opcional
+        },
+        // Adicione mais itens de clipping aqui
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const clippingContainer = document.getElementById('clipping-posts-container');
+
+        if (!clippingContainer) {
+            console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
+            return;
+        }
+
+        if (clippingData.length === 0) {
+            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento.</p>';
+            return;
+        }
+
+        clippingContainer.innerHTML = ''; // Limpa a mensagem de carregamento
+
+        clippingData.forEach(item => {
+            const cardHtml = `
+                <div class="col">
+                    <div class="card h-100">
+                        ${item.imageUrl ? `<img src="${item.imageUrl}" class="card-img-top" alt="${item.title}" style="object-fit: cover; height: 150px;">` : ''}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${item.title}</h5>
+                            <p class="card-text small text-muted">${item.sourceDate}</p>
+                            <a href="${item.link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
                         </div>
-                    </li>
-                    <li><a href="https://substack.com/@gavesaude" target="_blank" rel="noopener">Blog</a></li>
-                    <li><a href="sobre-o-site.html">Sobre</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section class="banner-destaque">
-        <div class="container">
-            <h1>GAVE: Vigilância Epidemiológica</h1>
-            <p>Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória, vigilância em saúde e concursos públicos.</p>
-            <a href="#noticias-destaque" class="btn">Conheça o projeto</a>
-        </div>
-    </section>
-
-    <section id="recursos-disponiveis" class="recursos-disponiveis">
-        <div class="container">
-            <div class="section-title">
-                <h2>Recursos Disponíveis</h2>
-            </div>
-            <p class="text-center text-muted mb-5">Ferramentas e conteúdos essenciais para contribuir com seus conhecimentos na área.</p>
-            <div class="recursos-grid">
-                <div class="recurso-item">
-                    <div class="recurso-icon">📈</div>
-                    <h3>Epidemiologia na prática</h3>
-                    <p>Acesse informações e estatísticas sobre a situação epidemiológica atual.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">⭐</div>
-                    <h3>Guia GAVE</h3>
-                    <p>Agravos de notificação compulsória. Acesse e baixe as fichas de notificação para diferentes doenças e agravos.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">📋</div>
-                    <h3>Documentos Técnicos Importantes</h3>
-                    <p>Consulte manuais e guias técnicos para profissionais de saúde.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">🎓</div>
-                    <h3>Aprenda com o GAVE</h3>
-                    <p>Materiais educativos e cursos para capacitação em vigilância epidemiológica.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="noticias-destaque" class="container my-5">
-        <div class="section-title">
-            <h2>Notícias em Destaque</h2>
-        </div>
-        <p class="text-center text-muted mb-5">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p>
-        <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <p class="text-center w-100">Carregando últimas notícias...</p>
-        </div>
-    </section>
-
-    <section id="clipping-noticias" class="container my-5">
-        <div class="section-title">
-            <h2>Clipping de Notícias</h2>
-        </div>
-        <p class="text-center text-muted mb-5">O que está rolando por aí? Acompanhe notícias e destaques em saúde e vigilância.</p>
-        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
-            <p class="text-center w-100">Carregando clipping...</p>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h3>Sobre o GAVE</h3>
-                    <p>O Guia de Ações em Vigilância Epidemiológica (GAVE) é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
-                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
-                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
-                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
                     </div>
                 </div>
-                <div class="footer-col">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças</a></li>
-                        <li><a href="formacao.html">Formação</a></li>
-                        <li><a href="manuais.html">Publicações</a></li>
-                        <li><a href="https://substack.com/@gavesaude" target="_blank" rel="noopener">Blog</a></li>
-                        <li><a href="sobre-o-site.html">Sobre</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a href="fichas-de-notificacao.html">Fichas de Notificação</a></li>
-                        <li><a href="manuais.html">Manuais Técnicos</a></li>
-                        <li><a href="informes-tecnicos.html">Informes Epidemiológicos</a></li>
-                        <li><a href="glossario.html">Glossário</a></li>
-                        <li><a href="perguntas-frequentes.html">Perguntas Frequentes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contato</h3>
-                    <p>Entre em contato conosco para mais informações ou sugestões.</p>
-                    <ul class="footer-links">
-                        <li><span class="icon">✉</span> gavesaude@gmail.com</li>
-                        <li><span class="icon">☎</span> (21) 99889-8984</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 GAVE - Guia de Ações em Vigilância Epidemiológica. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
-    <script>
-        // Menu mobile toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const nav = document.querySelector('nav');
-        const header = document.querySelector('header');
-
-        if (navToggle && nav && header) {
-            navToggle.addEventListener('click', () => {
-                nav.classList.toggle('active');
-                // Ajusta o 'top' do menu nav caso a altura do header mude
-                const headerHeight = header.offsetHeight;
-                nav.style.top = headerHeight + 'px';
-                nav.style.height = `calc(100vh - ${headerHeight}px)`;
-            });
-        }
-        
-        // Dropdown mobile
-        const dropdowns = document.querySelectorAll('.dropdown');
-        
-        function setupDropdowns() {
-            if (window.innerWidth < 992) {
-                dropdowns.forEach(dropdown => {
-                    const link = dropdown.querySelector('a'); 
-                    if (link) {
-                        link.addEventListener('click', function(event) {
-                            if (link.getAttribute('href') === '#' || !link.getAttribute('href') || link.parentElement.classList.contains('dropdown')) {
-                                event.preventDefault();
-                            }
-                            dropdowns.forEach(otherDropdown => {
-                                if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
-                                    otherDropdown.classList.remove('active');
-                                }
-                            });
-                            dropdown.classList.toggle('active');
-                        });
-                    }
-                });
-            } else {
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active'); 
-                });
-            }
-        }
-
-        setupDropdowns(); 
-        window.addEventListener('resize', setupDropdowns); 
-
-        // Fechar menu ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (nav && nav.classList.contains('active')) { 
-                if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
-                    nav.classList.remove('active');
-                }
-            }
+            `;
+            clippingContainer.innerHTML += cardHtml;
         });
+    });
+  </script>
 
-        // Funções para carregar feeds RSS
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const date = new Date(dateString);
-            return date.toLocaleDateString('pt-BR', options);
-        }
-
-        function extractFirstImage(htmlString) {
-            const div = document.createElement('div');
-            div.innerHTML = htmlString;
-            const img = div.querySelector('img');
-            return img ? img.src : null;
-        }
-
-        function truncateText(text, maxLength) {
-            if (!text) return '';
-            let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
-            if (cleanText.length <= maxLength) return cleanText;
-            return cleanText.substring(0, maxLength) + '...';
-        }
-
-        // Carregar feed do blog
-        document.addEventListener('DOMContentLoaded', async () => {
-            const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesaude.substack.com/feed';
-            const newsContainer = document.getElementById('blog-posts-container');
-
-            if (!newsContainer) {
-                console.error("Contêiner de notícias não encontrado");
-                return;
-            }
-
-            try {
-                const response = await fetch(rssFeedUrl);
-                if (!response.ok) {
-                    throw new Error(`Erro ao carregar feed: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (!data.items || data.items.length === 0) {
-                    newsContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>';
-                    return;
-                }
-                
-                newsContainer.innerHTML = '';
-                
-                // Exibir os 3 posts mais recentes
-                data.items.slice(0, 3).forEach(post => {
-                    const title = post.title;
-                    const link = post.link;
-                    const pubDate = formatDate(post.pubDate);
-                    
-                    // Extrair imagem ou usar placeholder
-                    let imageUrl = post.thumbnail || extractFirstImage(post.content) || 'https://via.placeholder.com/400x200?text=GAVE';
-                    
-                    // Extrair e limitar descrição
-                    const description = truncateText(post.description, 140);
-                    
-                    const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="${imageUrl}" class="card-img-top" alt="${title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x200?text=GAVE';">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text small text-muted">${pubDate}</p>
-                                    <p class="card-text">${description}</p>
-                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler mais</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    newsContainer.innerHTML += cardHtml;
-                });
-                
-            } catch (error) {
-                console.error("Erro ao carregar feed do blog:", error);
-                newsContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar notícias. Por favor, tente novamente mais tarde.</p>';
-            }
-        });
-
-        // Carregar clipping de notícias
-        document.addEventListener('DOMContentLoaded', async () => {
-            const clippingRSSUrls = [
-                'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+saude+publica+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/en/rss/news'
-            ];
-            
-            const clippingContainer = document.getElementById('clipping-posts-container');
-
-            if (!clippingContainer) {
-                console.error("Contêiner de clipping não encontrado");
-                return;
-            }
-
-            try {
-                let allClippingPosts = [];
-                
-                const fetchPromises = clippingRSSUrls.map(url => 
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) {
-                                console.warn(`Erro ao carregar feed: ${url}`);
-                                return { items: [] };
-                            }
-                            return response.json();
-                        })
-                        .catch(error => {
-                            console.error(`Erro na requisição: ${url}`, error);
-                            return { items: [] };
-                        })
-                );
-
-                const results = await Promise.all(fetchPromises);
-                
-                results.forEach(feedData => {
-                    if (feedData.items) {
-                        allClippingPosts = allClippingPosts.concat(feedData.items);
-                    }
-                });
-
-                // Ordenar por data (mais recentes primeiro)
-                allClippingPosts.sort((a, b) => {
-                    const dateA = new Date(a.pubDate || a.published);
-                    const dateB = new Date(b.pubDate || b.published);
-                    return dateB - dateA;
-                });
-
-                clippingContainer.innerHTML = '';
-
-                if (allClippingPosts.length === 0) {
-                    clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>';
-                    return;
-                }
-
-                // Exibir os 8 posts mais recentes
-                allClippingPosts.slice(0, 8).forEach(post => {
-                    const title = post.title || 'Sem Título';
-                    const link = post.link || '#';
-                    const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
-                    const source = post.source && post.source.title ? post.source.title : 'Fonte Desconhecida';
-                    const sourceDate = `Fonte: ${source} - ${date}`;
-                    
-                    // Extrair imagem ou usar placeholder
-                    let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia';
-                    
-                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
-                        imageUrl = post.enclosure.link;
-                    } else if (post.thumbnail) {
-                        imageUrl = post.thumbnail;
-                    } else if (post.image) {
-                        imageUrl = post.image;
-                    } else {
-                        const extractedImg = extractFirstImage(post.description || post.content || '');
-                        if (extractedImg) {
-                            imageUrl = extractedImg;
-                        }
-                    }
-
-                    // Extrair e limitar descrição
-                    const truncatedDescription = truncateText(post.description || post.content || '', 120);
-
-                    const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="${imageUrl}" class="card-img-top" alt="${title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text small text-muted">${sourceDate}</p>
-                                    <p class="card-text">${truncatedDescription}</p>
-                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    clippingContainer.innerHTML += cardHtml;
-                });
-
-            } catch (error) {
-                console.error("Erro ao carregar clipping:", error);
-                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
-            }
-        });
-    </script>
 </body>
 </html>
