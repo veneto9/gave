@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia de Ações em Vigilância Epidemiológica - GAVE</title>
+    <title>GAVE - Vigilância Epidemiológica no Cotidiano</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
     <style>
         /* Variáveis de cores baseadas no logo do GAVE */
         :root {
@@ -178,27 +179,27 @@
             display: block;
         }
 
-        /* Banner principal */
-        .hero {
+        /* Banner principal / Hero Section */
+        .banner-destaque {
             background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
             color: var(--cor-texto-claro);
             padding: 80px 0;
             text-align: center;
         }
 
-        .hero h1 {
+        .banner-destaque h1 {
             font-size: 2.5rem;
             margin-bottom: 20px;
             font-weight: 700;
         }
 
-        .hero p {
+        .banner-destaque p {
             font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto 30px;
         }
 
-        .btn { /* Seu estilo .btn existente */
+        .btn { 
             display: inline-block;
             background-color: var(--cor-destaque);
             color: var(--cor-texto-claro);
@@ -208,14 +209,14 @@
             transition: var(--transicao);
         }
 
-        .btn:hover { /* Seu estilo :hover existente */
+        .btn:hover { 
             background-color: #9a4e32;  
             color: var(--cor-texto-claro);
             transform: translateY(-2px);
         }
         
         /* Estilo para os botões dos cards, caso não use Bootstrap ou queira sobrescrever */
-        .card .btn-primary { /* Adapte se necessário */
+        .card .btn-primary { 
             background-color: var(--cor-destaque);
             border-color: var(--cor-destaque);
             color: var(--cor-texto-claro);
@@ -225,37 +226,32 @@
             border-color: #9a4e32;
         }
 
-
         /* Seções de conteúdo */
         section {
             padding: 60px 0;
         }
-        /* As classes my-5, mb-4, text-center, w-100, etc., usadas nos blocos HTML
-            são do Bootstrap. Se não usar Bootstrap CSS, elas não terão efeito
-            ou você precisará defini-las aqui ou adaptar o HTML. */
+        
         .my-5 { margin-top: 3rem !important; margin-bottom: 3rem !important; }
         .mb-4 { margin-bottom: 1.5rem !important; }
         .mt-2 { margin-top: 0.5rem !important; }
         .mt-auto { margin-top: auto !important; }
         .text-center { text-align: center !important; }
         .w-100 { width: 100% !important; }
-        .text-danger { color: #dc3545 !important; } /* Exemplo de cor de perigo */
+        .text-danger { color: #dc3545 !important; } 
         .small { font-size: .875em; }
-        .text-muted { color: #6c757d !important; } /* Cor para texto 'muted' */
+        .text-muted { color: #6c757d !important; } 
 
-        /* Para o grid (row, col) funcionar como esperado, Bootstrap CSS é recomendado.
-            Alternativamente, você pode criar seus próprios estilos de grid. */
         .row {
             display: flex;
             flex-wrap: wrap;
-            margin-right: -15px; /* Adapte ou remova se não usar espaçamento Bootstrap */
-            margin-left: -15px;  /* Adapte ou remova se não usar espaçamento Bootstrap */
+            margin-right: -15px; 
+            margin-left: -15px;  
         }
         .col, .row-cols-1 > *, .row-cols-md-2 > *, .row-cols-lg-3 > *, .row-cols-lg-4 > * {
             position: relative;
             width: 100%;
-            padding-right: 15px; /* Adapte ou remova se não usar espaçamento Bootstrap */
-            padding-left: 15px;  /* Adapte ou remova se não usar espaçamento Bootstrap */
+            padding-right: 15px; 
+            padding-left: 15px;  
         }
         /* Adaptações simples para colunas. Bootstrap é mais complexo. */
         @media (min-width: 768px) { /* md */
@@ -266,13 +262,11 @@
             .row-cols-lg-4 > * { flex: 0 0 25%; max-width: 25%; }
         }
         .g-4 { /* gutter/espaçamento */
-            gap: 1.5rem; /* Para flex/grid com gap. Para margin/padding em cols, seria mais complexo */
+            gap: 1.5rem; 
         }
-        /* Se usar display:grid no container, o g-4 funcionaria direto.
-            Se usar flexbox como acima, o 'gap' pode ser usado se o navegador suportar
-            ou você precisaria de margens/paddings nos .col */
+        
         #blog-posts-container.g-4, #clipping-posts-container.g-4 {
-            gap: 1.5rem; /* Para que o g-4 funcione com display:flex nos .row */
+            gap: 1.5rem; 
         }
 
 
@@ -300,23 +294,23 @@
             background-color: var(--cor-destaque);
         }
 
-        /* Cards de doenças (seu estilo existente) */
+        /* Cards de doenças / notícias */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .card { /* Seu estilo .card existente - será aplicado aos novos cards */
+        .card { 
             background-color: var(--cor-texto-claro);
             border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--sombra-suave);
             transition: var(--transicao);
-            display: flex; /* Adicionado para h-100 funcionar bem com card-body */
-            flex-direction: column; /* Adicionado para h-100 funcionar bem com card-body */
+            display: flex; 
+            flex-direction: column; 
         }
-        /* Para que o h-100 dos cards dinâmicos funcione como esperado */
+        
         .h-100 {
             height: 100% !important;
         }
@@ -327,7 +321,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .card-img, .card-img-top { /* Combinando com card-img-top do Bootstrap */
+        .card-img, .card-img-top { 
             height: 200px;
             overflow: hidden;
         }
@@ -343,23 +337,23 @@
             transform: scale(1.05);
         }
 
-        .card-content, .card-body { /* Combinando com card-body do Bootstrap */
+        .card-content, .card-body { 
             padding: 20px;
-            flex-grow: 1; /* Para que o card-body ocupe espaço e o botão vá para baixo */
-            display: flex; /* Para usar flex-column e mt-auto no botão */
-            flex-direction: column; /* Para usar flex-column e mt-auto no botão */
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
         }
-        .card-body.d-flex { display: flex !important; } /* Se quiser forçar do Bootstrap */
-        .card-body.flex-column { flex-direction: column !important; } /* Se quiser forçar do Bootstrap */
+        .card-body.d-flex { display: flex !important; } 
+        .card-body.flex-column { flex-direction: column !important; } 
 
 
-        .card-content h3, .card-body .card-title { /* Combinando com card-title do Bootstrap */
+        .card-content h3, .card-body .card-title { 
             font-size: 1.3rem;
             margin-bottom: 10px;
             color: var(--cor-primaria);
         }
 
-        .card-content p, .card-body .card-text { /* Combinando com card-text do Bootstrap */
+        .card-content p, .card-body .card-text { 
             margin-bottom: 15px;
             color: var(--cor-texto);
         }
@@ -382,7 +376,7 @@
         }
 
         /* Seção de recursos */
-        .recursos {
+        .recursos-disponiveis {
             background-color: var(--cor-terciaria);
         }
 
@@ -417,9 +411,6 @@
             color: var(--cor-primaria);
         }
 
-        /* Seção de notícias/blog (seus estilos antigos para .blog-posts, .post, etc.
-            serão substituídos pela nova estrutura com #blog-section e #blog-posts-container) */
-        
         /* Rodapé */
         footer {
             background-color: var(--cor-primaria);
@@ -544,28 +535,27 @@
                 padding-left: 20px;
             }
 
-            .dropdown.active .dropdown-content { /* Para dropdowns no mobile */
+            .dropdown.active .dropdown-content { 
                 display: block;
             }
 
-            .hero h1 {
+            .banner-destaque h1 {
                 font-size: 2rem;
             }
 
-            .hero p {
+            .banner-destaque p {
                 font-size: 1rem;
             }
         }
 
         @media (max-width: 768px) {
             .header-container {
-                padding: 10px 0; /* Ajuste para header menor */
+                padding: 10px 0; 
             }
-            nav { /* Ajuste para top se header for menor */
-                top: 60px; /* Exemplo se o header reduzir para 60px de altura */
+            nav { 
+                top: 60px; 
                 height: calc(100vh - 60px);
             }
-
 
             .logo img {
                 height: 40px;
@@ -575,7 +565,7 @@
                 font-size: 1.2rem;
             }
 
-            .hero {
+            .banner-destaque {
                 padding: 60px 0;
             }
 
@@ -583,19 +573,19 @@
                 font-size: 1.8rem;
             }
 
-            .cards-grid, .recursos-grid { /* Antigo .blog-posts removido daqui */
+            .cards-grid, .recursos-grid { 
                 grid-template-columns: 1fr;
             }
-            /* Para os novos grids de blog e clipping se adaptarem */
-            .row-cols-md-2 > * { flex: 0 0 100%; max-width: 100%; } /* Em telas menores que md, já é 100% */
+            
+            .row-cols-md-2 > * { flex: 0 0 100%; max-width: 100%; } 
             .row-cols-lg-3 > * { flex: 0 0 100%; max-width: 100%; }
             .row-cols-lg-4 > * { flex: 0 0 100%; max-width: 100%; }
 
-            @media (min-width: 768px) { /* md - redefinindo para os novos grids */
+            @media (min-width: 768px) { 
                 #blog-posts-container.row-cols-md-2 > *,  
                 #clipping-posts-container.row-cols-md-2 > * { flex: 0 0 50%; max-width: 50%; }
             }
-            @media (min-width: 992px) { /* lg - redefinindo para os novos grids */
+            @media (min-width: 992px) { 
                 #blog-posts-container.row-cols-lg-3 > * { flex: 0 0 33.333333%; max-width: 33.333333%; }
                 #clipping-posts-container.row-cols-lg-4 > * { flex: 0 0 25%; max-width: 25%; }
             }
@@ -648,54 +638,55 @@
         </div>
     </header>
 
-<section class="hero">
-  <div class="container">
-    <h1>Epidemiologia no seu cotidiano</h1>
-    <p>Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória e vigilância epidemiológica para quem atua com saúde pública.</p>
-    <a href="#blog-section" class="btn">Conheça o projeto</a>
-  </div>
-</section>
-    <section id="blog-section" class="container my-5">
-        <h2 class="text-center mb-4 section-title"><span>Notícias em Destaque</span></h2> <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <p class="text-center w-100">Carregando últimas notícias...</p>
-        </div>
-    </section>
-    <section class="recursos">
+    <section class="banner-destaque">
         <div class="container">
-            <div class="section-title">
-                <h2>Recursos Disponíveis</h2>
-            </div>
-            <div class="recursos-grid">
-                <div class="recurso-item">
-                    <div class="recurso-icon">📋</div>
-                    <h3>Fichas de Notificação</h3>
-                    <p>Acesse e baixe as fichas de notificação para diferentes doenças e agravos.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">📚</div>
-                    <h3>Manuais Técnicos</h3>
-                    <p>Consulte manuais e guias técnicos para profissionais de saúde.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">🎓</div>
-                    <h3>Formação</h3>
-                    <p>Materiais educativos e cursos para capacitação em vigilância epidemiológica.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">📊</div>
-                    <h3>Dados Epidemiológicos</h3>
-                    <p>Acesse informações e estatísticas sobre a situação epidemiológica atual.</p>
-                </div>
-            </div>
+            <h1>Epidemiologia no seu cotidiano</h1>
+            <p>Conteúdo direto, apoio técnico e material educativo sobre doenças de notificação compulsória e vigilância epidemiológica para quem atua com saúde pública.</p>
+            <a href="#noticias-destaque" class="btn">Conheça o projeto</a>
         </div>
     </section>
 
-    <section id="clipping-section" class="container my-5">
+    <section id="noticias-destaque" class="container my-5">
+        <h2 class="text-center mb-4 section-title"><span>Notícias em Destaque</span></h2> 
+        <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <p class="text-center w-100">Carregando últimas notícias...</p>
+        </div>
+    </section>
+
+
+
+    <section id="clipping-noticias" class="container my-5">
         <h2 class="text-center mb-4 section-title"><span>Clipping de Notícias</span></h2>
-        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+<div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
     </section>
+
+<section class="container my-5" style="text-align: center;">
+    <h2 style="color: var(--cor-primaria); font-weight: bold; font-size: 2rem;">CURSOS GAVE</h2>
+    <p style="max-width: 800px; margin: 0 auto 30px; font-size: 1.1rem; color: var(--cor-texto);">
+        Cursos rápidos, conteúdos introdutórios e apoio para quem quer entender a vigilância em saúde, se preparar para concursos ou iniciar no EpiSUS — de forma acessível e prática.
+    </p>
+    
+    <div class="row justify-content-center mb-4">
+        <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div style="font-size: 2rem;">💡</div>
+            <p style="margin-top: 10px; font-weight: 500;">Conteúdo introdutório</p>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div style="font-size: 2rem;">📘</div>
+            <p style="margin-top: 10px; font-weight: 500;">Cursos rápidos</p>
+        </div>
+        <div class="col-6 col-md-4 col-lg-3 mb-3">
+            <div style="font-size: 2rem;">💻</div>
+            <p style="margin-top: 10px; font-weight: 500;">Materiais de apoio</p>
+        </div>
+    </div>
+
+    <a href="formacao.html" class="btn" style="background-color: var(--cor-destaque); color: white; font-weight: bold; padding: 12px 30px; border-radius: 5px; text-decoration: none;">
+        Ver cursos
+    </a>
+</section>
     <footer>
         <div class="container">
             <div class="footer-container">
@@ -746,6 +737,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         // Menu mobile toggle
         const navToggle = document.querySelector('.nav-toggle');
@@ -765,17 +757,14 @@
         // Dropdown mobile
         const dropdowns = document.querySelectorAll('.dropdown');
         
-        // Verifica se estamos em uma tela mobile antes de adicionar os event listeners para o clique no dropdown
         function setupDropdowns() {
             if (window.innerWidth < 992) {
                 dropdowns.forEach(dropdown => {
-                    const link = dropdown.querySelector('a'); // Pega o link principal do dropdown
+                    const link = dropdown.querySelector('a'); 
                     link.addEventListener('click', function(event) {
-                        // Previne o comportamento padrão do link se ele tiver href="#" ou for apenas para abrir o submenu
                         if (link.getAttribute('href') === '#' || !link.getAttribute('href') || link.parentElement.classList.contains('dropdown')) {
                                event.preventDefault();
                         }
-                        // Fecha outros dropdowns abertos
                         dropdowns.forEach(otherDropdown => {
                             if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
                                 otherDropdown.classList.remove('active');
@@ -785,23 +774,18 @@
                     });
                 });
             } else {
-                // Remove event listeners de clique se não estiver no mobile para restaurar comportamento hover do CSS
                 dropdowns.forEach(dropdown => {
-                    const link = dropdown.querySelector('a');
-                    // Seria ideal clonar e substituir para remover listeners específicos,
-                    // mas para este caso, como o comportamento de hover é CSS, apenas não adicionar o de clique já ajuda.
-                    // E garantir que a classe 'active' seja removida se a tela for redimensionada.
                     dropdown.classList.remove('active'); 
                 });
             }
         }
 
-        setupDropdowns(); // Executa ao carregar
-        window.addEventListener('resize', setupDropdowns); // Re-executa ao redimensionar
-
+        setupDropdowns(); 
+        window.addEventListener('resize', setupDropdowns); 
+        
         // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
-            if (nav && nav.classList.contains('active')) { // Verifica se nav existe
+            if (nav && nav.classList.contains('active')) { 
                 if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
                     nav.classList.remove('active');
                 }
@@ -810,40 +794,25 @@
     </script>
 
     <script>
-    // Bloco 3: Código JavaScript para popular as Últimas Notícias do Blog (via RSS/Proxy)
+    const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesaude.substack.com/feed';
 
-    // URL do seu feed RSS ou de um serviço proxy (ex: RSS2JSON)
-    // !!! SUBSTITUA ESTA URL PELA URL REAL DO SEU FEED RSS OU PROXY !!!
-    
-const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesaude.substack.com/feed';
-
-    // Função para formatar a data (Exemplo: "15 de Maio, 2025")
     function formatDate(dateString) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date(dateString);
         return date.toLocaleDateString('pt-BR', options);
     }
 
-    // Aguarda o DOM ser completamente carregado antes de executar o script
     document.addEventListener('DOMContentLoaded', async () => {
-        const newsContainer = document.getElementById('blog-posts-container'); // ID CORRIGIDO
+        const newsContainer = document.getElementById('blog-posts-container'); 
 
         if (!newsContainer) {
             console.error("Contêiner de notícias com ID 'blog-posts-container' não encontrado.");
-            return; // Sai da função se o contêiner não for encontrado
+            return; 
         }
 
-        // Mensagem inicial enquanto carrega
-        newsContainer.innerHTML = '<p class="text-center w-100">Carregando notícias...</p>';
+        newsContainer.innerHTML = '<p class="text-center w-100">Carregando últimas notícias...</p>';
 
         try {
-            // IMPORTANTE: Buscar feeds RSS diretamente no navegador via fetch pode ter problemas de CORS.
-            // Uma solução comum é usar um serviço proxy (como RSS2JSON, rssapi.net, etc.)
-            // que converte o RSS para JSON e permite a busca via fetch sem problemas de CORS.
-            // A estrutura dos dados esperada no JSON dependerá do serviço proxy ou do seu backend.
-            // O código abaixo assume uma estrutura JSON simples similar à de um proxy RSS2JSON.
-
-            // Verifica se a URL do feed foi substituída
             if (rssFeedUrl === 'SUA_URL_DO_FEED_RSS_OU_PROXY_AQUI' || rssFeedUrl === '') {
                 newsContainer.innerHTML = '<p class="text-center w-100 text-danger">URL do feed RSS não configurada. Edite o arquivo JavaScript.</p>';
                 console.warn("URL do feed RSS não configurada em rssFeedUrl.");
@@ -856,13 +825,10 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
                 throw new Error(`Erro na requisição HTTP! Status: ${response.status}`);
             }
 
-            // Adapte a leitura da resposta JSON conforme a estrutura do seu feed/proxy
             const feedData = await response.json();
 
-            // Supondo que feedData.items seja um array de posts
-            const posts = feedData.items; // Adapte conforme a estrutura do seu feed/proxy
+            const posts = feedData.items; 
 
-            // Limpa o conteúdo inicial
             newsContainer.innerHTML = '';
 
             if (!posts || posts.length === 0) {
@@ -870,38 +836,23 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
                 return;
             }
 
-            // Limita o número de posts exibidos (opcional, por exemplo, apenas 3 ou 4)
-            const postsToDisplay = posts.slice(0, 3); // Exemplo: exibe os primeiros 3 posts
+            const postsToDisplay = posts.slice(0, 3); 
 
-            // Gera os cards para cada postagem
             postsToDisplay.forEach(post => {
-                // Adapte o acesso às propriedades (title, link, pubDate) conforme a estrutura do seu feed/proxy
                 const title = post.title || 'Sem Título';
                 const link = post.link || '#';
-                // Assume que a data está em post.pubDate e formata
-                const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); // Tenta pubDate e depois published
+                const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida'); 
                 
-                // Tenta encontrar uma imagem:
-                // 1. Da tag 'enclosure' (comum em RSS2JSON para a primeira imagem)
-                // 2. Da tag 'thumbnail' (comum em alguns feeds)
-                // 3. De uma tag 'media:thumbnail' (comum em feeds com namespace de mídia)
-                // 4. Extraindo a primeira tag <img> do 'description' ou 'content' (mais complexo e frágil)
-                let imageUrl = 'https://via.placeholder.com/400x200?text=GAVE+Noticia'; // Placeholder padrão
+                let imageUrl = 'https://via.placeholder.com/400x200?text=GAVE+Noticia'; 
                 if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
                     imageUrl = post.enclosure.link;
                 } else if (post.thumbnail) {
                     imageUrl = post.thumbnail;
-                } else if (post['media:thumbnail'] && post['media:thumbnail'].$) { // Exemplo para media:thumbnail com $ como atributo
+                } else if (post['media:thumbnail'] && post['media:thumbnail'].$) { 
                     imageUrl = post['media:thumbnail'].$.url;
-                } else if (post.image) { // Se o feed tiver um campo 'image' direto
+                } else if (post.image) { 
                     imageUrl = post.image;
                 }
-                // Adicionar aqui uma lógica para extrair imagem do post.description ou post.content se necessário.
-                // Exemplo simples (pode precisar de melhorias):
-                // const contentHtml = post.description || post.content || '';
-                // const match = contentHtml.match(/<img[^>]+src="([^">]+)"/);
-                // if (match && match[1]) { imageUrl = match[1]; }
-
 
                 const cardHtml = `
                     <div class="col">
@@ -926,73 +877,67 @@ const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://gavesau
     </script>
 
     <script>
-    // Bloco 4: Código JavaScript para popular o Clipping de Notícias
-
-    // !!! EDITE ESTES DADOS COM SUAS NOTÍCIAS DE CLIPPING REAIS !!!
     const clippingData = [
         {
             title: "Brasil enfrenta desafio no combate à Febre Amarela",
-            link: "https://www.exemplo.com.br/noticia-febre-amarela", // Substitua pelo link real
-            sourceDate: "Fonte: G1 - 20/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-febre-amarela", 
+            sourceDate: "Fonte: G1 - 20/05/2024" 
         },
         {
             title: "Pesquisa aponta aumento de casos de Tuberculose",
-            link: "https://www.exemplo.com.br/noticia-tuberculose", // Substitua pelo link real
-            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-tuberculose", 
+            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" 
         },
         {
             title: "Novos casos de Sarampo acendem alerta em capitais",
-            link: "https://www.exemplo.com.br/noticia-sarampo", // Substitua pelo link real
-            sourceDate: "Fonte: Estado de Minas - 15/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-sarampo", 
+            sourceDate: "Fonte: Estado de Minas - 15/05/2024" 
         },
-       {
+        {
+            title: "Ministério da Saúde lança guia sobre Chikungunya",
+            link: "https://www.exemplo.com.br/noticia-chikungunya", 
+            sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" 
+        },
+        {
             title: "Pesquisa aponta aumento de casos de Tuberculose",
-            link: "https://www.exemplo.com.br/noticia-tuberculose", // Substitua pelo link real
-            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-tuberculose", 
+            sourceDate: "Fonte: Folha de S. Paulo - 18/05/2024" 
         },
         {
             title: "Novos casos de Sarampo acendem alerta em capitais",
-            link: "https://www.exemplo.com.br/noticia-sarampo", // Substitua pelo link real
-            sourceDate: "Fonte: Estado de Minas - 15/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-sarampo", 
+            sourceDate: "Fonte: Estado de Minas - 15/05/2024" 
         },        {
             title: "Ministério da Saúde lança guia sobre Chikungunya",
-            link: "https://www.exemplo.com.br/noticia-chikungunya", // Substitua pelo link real
-            sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" // Adapte conforme necessário
+            link: "https://www.exemplo.com.br/noticia-chikungunya", 
+            sourceDate: "Fonte: Ministério da Saúde - 10/05/2024" 
         },
-        // Adicione mais itens de clipping aqui, seguindo o mesmo formato
-        // {
-        //     title: "Título da Notícia de Clipping",
-        //     link: "URL completa da notícia",
-        //     sourceDate: "Fonte e Data da Notícia"
-        // },
     ];
 
-    // Aguarda o DOM ser completamente carregado antes de executar o script
     document.addEventListener('DOMContentLoaded', (event) => {
         const clippingContainer = document.getElementById('clipping-posts-container');
 
         if (clippingContainer) {
-            // Limpa o conteúdo inicial (o parágrafo "Carregando clipping...")
             clippingContainer.innerHTML = '';
 
             if (clippingData.length === 0) {
                 clippingContainer.innerHTML = '<p class="text-center w-100">Nenhum item de clipping disponível no momento.</p>';
             } else {
-                // Gera os cards de clipping
-                clippingData.forEach(item => {
-                    const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h5 class="card-title">${item.title}</h5>
-                                    <p class="card-text small text-muted">${item.sourceDate}</p>
-                                    <a href="${item.link}" class="btn btn-primary mt-2" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    clippingContainer.innerHTML += cardHtml;
-                });
+clippingData.slice(0, 6).forEach(item => {
+    const cardHtml = `
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">${item.title}</h5>
+                    <p class="card-text small text-muted">${item.sourceDate}</p>
+                    <a href="${item.link}" class="btn btn-primary mt-2" target="_blank" rel="noopener noreferrer">Ler Notícia</a>
+                </div>
+            </div>
+        </div>
+    `;
+    clippingContainer.innerHTML += cardHtml;
+});
+
             }
         } else {
             console.error("Contêiner de clipping com ID 'clipping-posts-container' não encontrado.");
