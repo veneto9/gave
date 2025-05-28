@@ -3,545 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <title></title>
+    <meta name="description" content="InfoEpi: Vigilância Epidemiológica, cursos, conteúdos técnicos e apoio.">
+    <title>InfoEpi - Vigilância Epidemiológica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-        /* Variáveis de cores baseadas no logo do INFOEPI */
         :root {
-            --cor-primaria: #1d4d46; /* Verde escuro do logo */
-            --cor-secundaria: #8a9e64; /* Verde oliva do logo */
-            --cor-terciaria: #f5f0e1; /* Bege/creme do fundo */
-            --cor-destaque: #b05c3b; /* Terracota/vermelho do gráfico */
+            --cor-primaria: #1d4d46;
+            --cor-secundaria: #8a9e64;
+            --cor-terciaria: #f5f0e1;
+            --cor-destaque: #b05c3b;
             --cor-texto: #333333;
             --cor-texto-claro: #ffffff;
-            --cor-fundo: #f5f0e1; /* Bege/creme do fundo */
+            --cor-fundo: #f5f0e1;
             --cor-borda: #d9d0c3;
-            --sombra-suave: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.08); 
             --transicao: all 0.3s ease;
         }
 
-        /* Reset e estilos gerais */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            line-height: 1.55; 
             color: var(--cor-texto);
             background-color: var(--cor-fundo);
+            font-size: 16px; 
         }
 
-        a {
-            text-decoration: none;
-            color: var(--cor-primaria);
-            transition: var(--transicao);
-        }
+        a { text-decoration: none; color: var(--cor-primaria); transition: var(--transicao); }
+        a:hover { color: var(--cor-destaque); }
+        img { max-width: 100%; height: auto; }
 
-        a:hover {
-            color: var(--cor-destaque);
-        }
+        header { background-color: var(--cor-texto-claro); box-shadow: var(--sombra-suave); position: sticky; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; } 
+        .logo { display: flex; align-items: center; }
+        .logo img { height: 45px; margin-right: 8px; } 
+        .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--cor-primaria); line-height: 1.2; }
+        .logo-text span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--cor-texto); }
 
-        img {
-            max-width: 100%;
-            height: auto;
-        }
+        .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--cor-primaria); cursor: pointer; }
+        nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
+        nav ul li { margin-left: 20px; position: relative; } 
+        nav ul li a { color: var(--cor-texto); font-weight: 500; padding: 8px 0; font-size: 0.9rem; position: relative; } 
+        nav ul li a:hover { color: var(--cor-primaria); }
+        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--cor-primaria); transition: var(--transicao); }
+        nav ul li a:hover::after { width: 100%; }
 
-        /* Cabeçalho */
-        header {
-            background-color: var(--cor-texto-claro);
-            box-shadow: var(--sombra-suave);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background-color: var(--cor-texto-claro); min-width: 210px; box-shadow: var(--sombra-suave); z-index: 1; border-radius: 4px; overflow: hidden; }
+        .dropdown-content a { display: block; padding: 10px 15px; color: var(--cor-texto); border-bottom: 1px solid var(--cor-borda); font-size: 0.85rem; } 
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background-color: var(--cor-terciaria); }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-            margin-right: 10px;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--cor-primaria);
-        }
-
-        .logo-text span {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--cor-texto);
-        }
-
-        /* Navegação */
-        .nav-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--cor-primaria);
-            cursor: pointer;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-            position: relative;
-        }
-
-        nav ul li a {
-            color: var(--cor-texto);
-            font-weight: 500;
-            padding: 10px 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--cor-primaria);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--cor-primaria);
-            transition: var(--transicao);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* Dropdown */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--cor-texto-claro);
-            min-width: 200px;
-            box-shadow: var(--sombra-suave);
-            z-index: 1;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 12px 15px;
-            color: var(--cor-texto);
-            border-bottom: 1px solid var(--cor-borda);
-        }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--cor-terciaria);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Banner principal / Hero Section */
-        .banner-destaque {
-            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
-            color: var(--cor-texto-claro);
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .banner-destaque h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .banner-destaque p {
-            font-size: 1rem;
-            max-width: 800px;
-            margin: 0 auto 20px;
-        }
-
-        .btn { 
-            display: inline-block;
-            background-color: var(--cor-destaque);
-            color: var(--cor-texto-claro);
-            padding: 12px 25px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: var(--transicao);
-        }
-
-        .btn:hover { 
-            background-color: #9a4e32;  
-            color: var(--cor-texto-claro);
-            transform: translateY(-2px);
-        }
+        .banner-destaque { background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); color: var(--cor-texto-claro); padding: 70px 0; text-align: center; }
+        .banner-destaque h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; } 
+        .banner-destaque p { font-size: 1.05rem; max-width: 750px; margin: 0 auto 25px; } 
+        .btn { display: inline-block; background-color: var(--cor-destaque); color: var(--cor-texto-claro); padding: 10px 25px; border-radius: 4px; font-weight: 600; transition: var(--transicao); font-size: 0.95rem; }
+        .btn:hover { background-color: #9a4e32; color: var(--cor-texto-claro); transform: translateY(-2px); }
         
-        /* Sobrescrever estilos do Bootstrap para botões */
-        .card .btn-primary { 
-            background-color: var(--cor-destaque);
-            border-color: var(--cor-destaque);
-            color: var(--cor-texto-claro);
-        }
-        
-        .card .btn-primary:hover {
-            background-color: #9a4e32;
-            border-color: #9a4e32;
-        }
+        .card .btn-primary { background-color: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--cor-texto-claro); padding: 8px 18px; font-size: 0.85rem; } 
+        .card .btn-primary:hover { background-color: #9a4e32; border-color: #9a4e32; }
 
-        /* Seções de conteúdo */
-        section {
-            padding: 60px 0;
-        }
+        section { padding: 60px 0; } 
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 15px; /* Espaço abaixo da linha/título antes do parágrafo descritivo */
         }
-
         .section-title h2 {
-            font-size: 2rem;
+            font-size: 2.2rem; 
             color: var(--cor-primaria);
             position: relative;
             display: inline-block;
-            padding-bottom: 15px;
+            padding-bottom: 8px; /* Espaço entre o texto do título e a linha */
+            margin-bottom: 0; 
         }
-
         .section-title h2::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--cor-destaque);
+            width: 60px;  /* Largura da linha mais curta e elegante */
+            height: 2px; /* Espessura da linha mais fina */
+            background-color: var(--cor-destaque); 
         }
 
-        /* Cards de doenças / notícias */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+        /* Parágrafo descritivo abaixo do título da seção */
+        #recursos-disponiveis .text-muted,
+        #noticias-destaque .text-muted,
+        #clipping-noticias .text-muted {
+            font-size: 1rem; 
+            margin-top: 0; /* Garante que não haja margem superior no parágrafo */
+            /* A classe mb-4 no HTML (margin-bottom: 1.5rem / 24px) controla o espaço para os cards abaixo */
         }
 
-        .card { 
-            background-color: var(--cor-texto-claro);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--sombra-suave);
-            transition: var(--transicao);
-            display: flex; 
-            flex-direction: column; 
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 25px; } 
+        .card { background-color: var(--cor-texto-claro); border-radius: 6px; overflow: hidden; box-shadow: var(--sombra-suave); transition: var(--transicao); display: flex; flex-direction: column; border: none; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); }
+        .card-img-top { height: 190px; overflow: hidden; object-fit: cover; } 
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; } 
+        .card-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--cor-primaria); font-weight: 600; } 
+        .card-text { margin-bottom: 15px; color: var(--cor-texto); font-size: 0.9rem; line-height: 1.5; } 
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-img-top { 
-            height: 200px;
-            overflow: hidden;
-            object-fit: cover;
-        }
-
-        .card-body { 
-            padding: 20px;
-            flex-grow: 1; 
-            display: flex; 
-            flex-direction: column; 
-        }
-
-        .card-title { 
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: var(--cor-primaria);
-        }
-
-        .card-text { 
-            margin-bottom: 15px;
-            color: var(--cor-texto);
-        }
-
-        /* Seção de recursos */
-        .recursos-disponiveis {
-            background-color: var(--cor-terciaria);
-        }
-
-        .recursos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .recurso-item {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: var(--cor-texto-claro);
-            border-radius: 8px;
-            box-shadow: var(--sombra-suave);
-            transition: var(--transicao);
-        }
-
-        .recurso-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .recurso-icon {
-            font-size: 2.5rem;
-            color: var(--cor-primaria);
-            margin-bottom: 15px;
-        }
-
-        .recurso-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--cor-primaria);
-        }
+        .recursos-disponiveis { background-color: var(--cor-terciaria); }
+        .recursos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; } 
+        .recurso-item { text-align: center; padding: 25px 20px; background-color: var(--cor-texto-claro); border-radius: 6px; box-shadow: var(--sombra-suave); transition: var(--transicao); }
+        .recurso-item:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .recurso-icon { font-size: 2.5rem; color: var(--cor-primaria); margin-bottom: 15px; } 
+        .recurso-item h3 { font-size: 1.15rem; margin-bottom: 10px; color: var(--cor-primaria); font-weight: 600; } 
+        .recurso-item p { font-size: 0.85rem; line-height: 1.45; } 
         
-        /* Estilos específicos para os cards de Notícias em Destaque (blog) */
-        #noticias-destaque .card-title {
-            font-size: 1.1rem;
-            line-height: 1.4em;
-            max-height: 4.2em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        #noticias-destaque .card-text {
-            font-size: 0.85rem;
-            line-height: 1.4em;
-            max-height: 4.2em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        #noticias-destaque .card-img-top {
-            height: 160px;
-        }
+        #noticias-destaque .card-title { font-size: 1.1rem; line-height: 1.35em; max-height: 4.05em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.5rem; }
+        #noticias-destaque .card-text { font-size: 0.85rem; line-height: 1.45em; max-height: 4.35em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.75rem; }
+        #noticias-destaque .card-img-top { height: 170px; } 
 
-        /* Estilos para cards de Clipping */
-        #clipping-noticias .card {
-            max-height: 360px;
-            overflow: hidden;
-        }
+        #clipping-noticias .card-title { font-size: 1rem; line-height: 1.3em; max-height: 3.9em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.4rem; }
+        #clipping-noticias .card-text { font-size: 0.8rem; line-height: 1.4em; max-height: 4.2em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+        #clipping-noticias .card-body .small.text-muted { font-size: 0.7rem; margin-bottom: 0.3rem !important; } 
+        #clipping-noticias .card-img-top { height: 125px; } 
+        #clipping-noticias .card-body .btn-primary { padding: 7px 14px; font-size: 0.8rem; } 
+        #clipping-noticias .badge { font-size: 0.65rem; padding: 0.2em 0.35em; } 
 
-        #clipping-noticias .card-title {
-            font-size: 1rem;
-            line-height: 1.3em;
-            max-height: 3.9em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
+        footer { background-color: var(--cor-primaria); color: var(--cor-texto-claro); padding: 60px 0 25px; }
+        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-bottom: 35px; }
+        .footer-col h3 { font-size: 1.2rem; margin-bottom: 18px; position: relative; padding-bottom: 10px; font-weight: 600; }
+        .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 45px; height: 2.5px; background-color: var(--cor-destaque); }
+        .footer-col p { margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; } 
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+        .footer-links li { margin-bottom: 10px; } 
+        .footer-links a { color: var(--cor-texto-claro); opacity: 0.8; font-size: 0.9rem; transition: var(--transicao); } 
+        .footer-links a:hover { opacity: 1; padding-left: 4px; }
+        .footer-links .icon { margin-right: 6px; }
 
-        #clipping-noticias .card-text {
-            font-size: 0.8rem;
-            line-height: 1.3em;
-            max-height: 3.9em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
+        .social-links { display: flex; gap: 15px; margin-top: 20px; } 
+        .social-links a { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; background-color: rgba(255, 255, 255, 0.08); border-radius: 50%; color: var(--cor-texto-claro); transition: var(--transicao); }
+        .social-links a svg { width: 18px; height: 18px; } 
+        .social-links a:hover { background-color: var(--cor-destaque); transform: translateY(-2px); }
+        .copyright { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 0.85rem; opacity: 0.75; }
 
-        #clipping-noticias .card-img-top {
-            height: 120px;
-        }
-
-        /* Rodapé */
-        footer {
-            background-color: var(--cor-primaria);
-            color: var(--cor-texto-claro);
-            padding: 60px 0 20px;
-        }
-
-        .footer-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--cor-destaque);
-        }
-
-        .footer-col p {
-            margin-bottom: 15px;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--cor-texto-claro);
-            opacity: 0.8;
-            transition: var(--transicao);
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--cor-texto-claro);
-            transition: var(--transicao);
-        }
-
-        .social-links a:hover {
-            background-color: var(--cor-destaque);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Responsividade */
         @media (max-width: 992px) {
-            .nav-toggle {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 80px);
-                background-color: var(--cor-texto-claro);
-                box-shadow: var(--sombra-suave);
-                transition: var(--transicao);
-                overflow-y: auto;
-            }
-
-            nav.active {
-                left: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            nav ul li {
-                margin: 0;
-                margin-bottom: 15px;
-            }
-
-            .dropdown-content {
-                position: static;
-                display: none;
-                box-shadow: none;
-                padding-left: 20px;
-            }
-
-            .dropdown.active .dropdown-content { 
-                display: block;
-            }
-
-            .banner-destaque h1 {
-                font-size: 2rem;
-            }
-
-            .banner-destaque p {
-                font-size: 1rem;
-            }
+            nav { max-width: 280px; }
+            nav ul { padding: 20px; }
+            nav ul li { margin-bottom: 15px; }
+            nav ul li a { font-size: 0.95rem; }
+            .dropdown-content a { padding: 9px 15px; font-size: 0.9rem; }
+            .banner-destaque h1 { font-size: 2rem; }
+            .banner-destaque p { font-size: 1rem; }
         }
 
         @media (max-width: 768px) {
-            .header-container {
-                padding: 10px 0; 
+            body { font-size: 15px; }
+            .header-container { padding: 10px 0; }
+            .logo img { height: 40px; }
+            .logo-text { font-size: 1.25rem; }
+            .logo-text span { font-size: 0.75rem; }
+            .banner-destaque { padding: 50px 0; }
+            .banner-destaque h1 { font-size: 1.8rem; }
+            section { padding: 45px 0; } 
+            
+            .section-title {
+                margin-bottom: 15px; /* Mantém o espaçamento reduzido também no mobile */
+            }
+            .section-title h2 {
+                font-size: 1.8rem; 
+                padding-bottom: 6px; /* Ajusta para tela menor */
+            }
+            .section-title h2::after {
+                width: 50px; /* Linha um pouco menor em telas pequenas */
+                height: 2px;
             }
             
-            nav { 
-                top: 60px; 
-                height: calc(100vh - 60px);
+            #recursos-disponiveis .text-muted,
+            #noticias-destaque .text-muted,
+            #clipping-noticias .text-muted {
+                font-size: 0.95rem;
+                /* mb-4 (do HTML) será 1.5 * 15px = 22.5px, o que deve ser adequado */
             }
 
-            .logo img {
-                height: 40px;
-            }
+            .cards-grid, .recursos-grid { gap: 20px; }
+            .card-body { padding: 15px; }
+            .card-title { font-size: 1.1rem; }
+            .card-text { font-size: 0.85rem; margin-bottom: 12px; }
 
-            .logo-text {
-                font-size: 1.2rem;
-            }
+            #noticias-destaque .card-img-top { height: 150px; }
+            #noticias-destaque .card-title { font-size: 1.05rem; margin-bottom: 0.4rem; }
+            #noticias-destaque .card-text { font-size: 0.8rem; margin-bottom: 0.6rem; }
 
-            .banner-destaque {
-                padding: 60px 0;
-            }
+            #clipping-noticias .card-img-top { height: 115px; }
+            #clipping-noticias .card-title { font-size: 0.95rem; margin-bottom: 0.3rem; }
+            #clipping-noticias .card-text { font-size: 0.75rem; }
+            #clipping-noticias .badge { font-size: 0.6rem; }
 
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            .cards-grid, .recursos-grid { 
-                grid-template-columns: 1fr;
-            }
+            .footer-col h3 { font-size: 1.15rem; }
+            .footer-col p, .footer-links a { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -549,11 +203,10 @@
     <header>
         <div class="container header-container">
             <div class="logo">
-                <img src="images/nova.png" alt="Logo INFOEPI">
-                <div class="logo-text">
-                    
-                    <span></span>
-                </div>
+<div class="container header-container">
+    <div class="logo">
+        <img src="images/nova.png" alt="Logo INFOEPI" style="width: 300px; height: auto;">
+</div>
             </div>
             <button class="nav-toggle" aria-label="Abrir menu">☰</button>
             <nav>
@@ -565,7 +218,7 @@
                             <a href="dengue.html">Dengue</a>
                             <a href="sifilis-adquirida.html">Sífilis Adquirida</a>
                             <a href="febre-maculosa.html">Febre Maculosa</a>
-                            <a href="candidiase.html">Candidiase</a>
+                            <a href="candidiase.html">Candidíase</a>
                             <a href="doencas-de-notificacao-compulsoria.html">Doenças de Notificação Compulsória</a>
                         </div>
                     </li>
@@ -586,32 +239,33 @@
     </header>
     <section class="banner-destaque">
         <div class="container">
-            <h1>InfoEpi: Vigilância Epidemiológica </h1>
+            <h1>InfoEpi: Vigilância Epidemiológica</h1>
             <p>Cursos, conteúdos técnicos e apoio para quem atua com vigilância epidemiológica, notificações compulsórias e concursos públicos. Aproveite os materiais e use o InfoEpi como referência em saúde pública.</p>
-            <a href="#noticias-destaque" class="btn">Conheça o projeto</a>
+            <a href="#recursos-disponiveis" class="btn">Conheça o projeto</a> 
         </div>
     </section>
+
     <section id="recursos-disponiveis" class="recursos-disponiveis">
         <div class="container">
             <div class="section-title">
                 <h2>Recursos Disponíveis</h2>
             </div>
-            <p class="text-center text-muted mb-5">Ferramentas e conteúdos essenciais para contribuir com seus conhecimentos na área.</p>
+            <p class="text-center text-muted mb-4">Ferramentas e conteúdos essenciais para contribuir com seus conhecimentos na área.</p> 
             <div class="recursos-grid">
                 <div class="recurso-item">
                     <div class="recurso-icon">📈</div>
-                    <h3>Epidemiologia na prática</h3>
+                    <h3>Epidemiologia na Prática</h3>
                     <p>Acesse informações e estatísticas sobre a situação epidemiológica atual.</p>
                 </div>
                 <div class="recurso-item">
                     <div class="recurso-icon">⭐</div>
                     <h3>Guia GAVE</h3>
-                    <p>Seleção de Agravos de notificação compulsória. Acesse e baixe as fichas de notificação para diferentes doenças e agravos.</p>
+                    <p>Seleção de Agravos de notificação compulsória. Acesse e baixe as fichas de notificação.</p>
                 </div>
                 <div class="recurso-item">
                     <div class="recurso-icon">📋</div>
-                    <h3>Documentos Técnicos Importantes</h3>
-                    <p>Consulte manuais e guias técnicos para profissionais de saúde.</p>
+                    <h3>Documentos Técnicos</h3>
+                    <p>Consulte manuais e guias técnicos para profissionais de saúde e concursos.</p>
                 </div>
                 <div class="recurso-item">
                     <div class="recurso-icon">🎓</div>
@@ -622,32 +276,27 @@
         </div>
     </section>
 
-
-
-
-
-
-    <section id="noticias-destaque" class="container my-5">
-        <div class="section-title">
-            <h2>Notícias em Destaque</h2>
-        </div>
-        <p class="text-center text-muted mb-5">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p>
-        <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <p class="text-center w-100">Carregando últimas notícias...</p>
+    <section id="noticias-destaque"> 
+        <div class="container">
+            <div class="section-title">
+                <h2>Notícias em Destaque</h2>
+            </div>
+            <p class="text-center text-muted mb-4">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p> 
+            <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                </div>
         </div>
     </section>
 
-    <section id="clipping-noticias" class="container my-5">
-        <div class="section-title">
-            <h2>Clipping de Notícias</h2>
-        </div>
-        <p class="text-center text-muted mb-5">Destaques da Mídia em Saúde e Vigilância</p>
-        <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
-            <p class="text-center w-100">Carregando clipping...</p>
+    <section id="clipping-noticias"> 
+         <div class="container">
+            <div class="section-title">
+                <h2>Clipping de Notícias</h2>
+            </div>
+            <p class="text-center text-muted mb-4">Destaques da Mídia em Saúde e Vigilância</p> 
+            <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
+                </div>
         </div>
     </section>
-
-
 
     <footer>
         <div class="container">
@@ -656,10 +305,10 @@
                     <h3>Sobre o InfoEpi</h3>
                     <p>O InfoEpi é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><span class="icon">f</span></a>
-                        <a href="#" aria-label="Twitter"><span class="icon">t</span></a>
-                        <a href="#" aria-label="Instagram"><span class="icon">i</span></a>
-                        <a href="#" aria-label="YouTube"><span class="icon">y</span></a>
+                        <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0 0 3.603 0 8.05C0 12.006 2.923 15.11 6.75 15.969V10.43H4.848V8.05h1.902V6.33c0-1.883 1.122-2.922 2.85-2.922.823 0 1.528.062 1.735.089v2.138h-1.265c-.912 0-1.088.434-1.088 1.068v1.4H10.4l-.274 2.38H8.688V15.97C13.077 15.11 16 12.006 16 8.049z"/></svg></a>
+                        <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.602.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></a>
+                        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.703.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372.527-.205.973-.478 1.417-.923.445-.444.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm0 1.442c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.598-.919c-.11-.282-.24-.705-.275-1.486-.038-.843-.046-1.095-.046-3.231s.008-2.389.046-3.232c.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.843-.039 1.096-.047 3.232-.047zM8 4.95A3.05 3.05 0 1 0 8 11.05a3.05 3.05 0 0 0 0-6.1zM8 9.6A1.6 1.6 0 1 1 8 6.4a1.6 1.6 0 0 1 0 3.2zm5.256-4.756a.96.96 0 1 0 0-1.92.96.96 0 0 0 0 1.92z"/></svg></a>
+                        <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999L7.422 1.333A.666.666 0 0 0 6.766.99H2.234A.667.667 0 0 0 1.566 1.333L.949 1.999c-.433.667-.433 2.667 0 3.334l.617.666a.667.667 0 0 0 .667.334h4.532A.667.667 0 0 0 8.05 5.999l.617-.666c.433-.667.433-2.667 0-3.334M1.928 3.333A.5.5 0 0 1 2.234 3H6.766a.5.5 0 0 1 .306.333L7.667 4H2.333L1.928 3.333M13.703 4.948a1.752 1.752 0 0 0-1.225-1.224C11.552 3.5 8 3.5 8 3.5s-3.552 0-4.478.224A1.752 1.752 0 0 0 2.297 4.948C2.072 5.873 2.072 7.127 2.072 8s0 2.127.225 3.052a1.752 1.752 0 0 0 1.225 1.224C4.448 12.5 8 12.5 8 12.5s3.552 0 4.478-.224a1.752 1.752 0 0 0 1.225-1.224C13.928 10.127 13.928 8.873 13.928 8s0-2.127-.225-3.052zM9.75 8.91l-2.5-1.555V10.5a.5.5 0 0 0 .75.433L10.5 9.343a.5.5 0 0 0 0-.866z"/></svg></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -687,13 +336,13 @@
                     <h3>Contato</h3>
                     <p>Entre em contato conosco para mais informações ou sugestões.</p>
                     <ul class="footer-links">
-                        <li><span class="icon">✉</span> infoepi@gmail.com</li>
-                        <li><span class="icon">☎</span> (21) 99889-8984</li>
+                         <li><span class="icon">✉️</span> infoepi@gmail.com</li> 
+                         <li><span class="icon">📞</span> (21) 99889-8984</li> 
                     </ul>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 InfoEpi - "Informação, Análise e Formação em Vigilância Epidemiológica. Todos os direitos reservados.</p>
+                <p>&copy; 2025 InfoEpi - "Informação, Análise e Formação em Vigilância Epidemiológica". Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -709,37 +358,51 @@
         if (navToggle && nav && header) {
             navToggle.addEventListener('click', () => {
                 nav.classList.toggle('active');
-                // Ajusta o 'top' do menu nav caso a altura do header mude
                 const headerHeight = header.offsetHeight;
                 nav.style.top = headerHeight + 'px';
                 nav.style.height = `calc(100vh - ${headerHeight}px)`;
             });
         }
         
-        // Dropdown mobile
         const dropdowns = document.querySelectorAll('.dropdown');
         
+        function handleDropdownClick(event) {
+            const link = event.currentTarget;
+            const dropdown = link.parentElement; 
+
+            if (link.getAttribute('href') === '#' || dropdown.classList.contains('dropdown')) {
+                event.preventDefault();
+            }
+            
+            const isActive = dropdown.classList.contains('active');
+            dropdowns.forEach(otherDropdown => { 
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove('active');
+                }
+            });
+            if (!isActive) { 
+                dropdown.classList.add('active');
+            } else { 
+                 dropdown.classList.remove('active');
+            }
+        }
+
         function setupDropdowns() {
             if (window.innerWidth < 992) {
                 dropdowns.forEach(dropdown => {
                     const link = dropdown.querySelector('a'); 
                     if (link) {
-                        link.addEventListener('click', function(event) {
-                            if (link.getAttribute('href') === '#' || !link.getAttribute('href') || link.parentElement.classList.contains('dropdown')) {
-                                event.preventDefault();
-                            }
-                            dropdowns.forEach(otherDropdown => {
-                                if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
-                                    otherDropdown.classList.remove('active');
-                                }
-                            });
-                            dropdown.classList.toggle('active');
-                        });
+                        link.removeEventListener('click', handleDropdownClick); 
+                        link.addEventListener('click', handleDropdownClick);
                     }
                 });
-            } else {
+            } else { 
                 dropdowns.forEach(dropdown => {
                     dropdown.classList.remove('active'); 
+                    const link = dropdown.querySelector('a');
+                    if (link) {
+                        link.removeEventListener('click', handleDropdownClick); 
+                    }
                 });
             }
         }
@@ -747,7 +410,6 @@
         setupDropdowns(); 
         window.addEventListener('resize', setupDropdowns); 
 
-        // Fechar menu ao clicar fora
         document.addEventListener('click', (e) => {
             if (nav && nav.classList.contains('active')) { 
                 if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
@@ -756,11 +418,13 @@
             }
         });
 
-// Funções auxiliares (mantidas do seu código original, coloque-as antes do listener abaixo ou garanta que já existem no seu <script>)
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const date = new Date(dateString);
-            return date.toLocaleDateString('pt-BR', options);
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) return 'Data Desconhecida';
+                return date.toLocaleDateString('pt-BR', options);
+            } catch (e) { return 'Data Inválida'; }
         }
 
         function extractFirstImage(htmlString) {
@@ -775,625 +439,162 @@
             if (!text) return '';
             let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
             if (cleanText.length <= maxLength) return cleanText;
-            return cleanText.substring(0, maxLength) + '...';
+            let truncated = cleanText.substr(0, maxLength);
+            truncated = truncated.substr(0, Math.min(truncated.length, truncated.lastIndexOf(" ")));
+            return truncated + '...';
         }
 
-        // NOVO: Lista de Tags para Atribuição e Função de Tagging (coloque estas definições antes do listener do clipping)
         const siteTagVocabulary = [
-            // Formato: { tagDisplay: '#TagBonita', matchTerms: ['termo1parabusca', 'termo2parabusca', ...] }
-            // Revise e ajuste os matchTerms para otimizar a precisão das tags!
             { tagDisplay: '#Imunização', matchTerms: ['imunização', 'imunizações', 'imunizar', 'programa nacional de imunizações', 'pni'] },
             { tagDisplay: '#Vacinação', matchTerms: ['vacinação', 'vacina', 'vacinas', 'vacinados', 'vacinada', 'calendário de vacinação'] },
             { tagDisplay: '#Notificação', matchTerms: ['notificação', 'notificações', 'notificar', 'notificado', 'notificada', 'notificação compulsória', 'sinan'] },
             { tagDisplay: '#Cobertura', matchTerms: ['cobertura vacinal', 'cobertura de vacinação', 'baixa cobertura'] },
-            { tagDisplay: '#Vigilância', matchTerms: ['vigilância em saúde', 'vigilância sanitária', 'vigilância ambiental', 'vigilância do trabalhador', 'farmacovigilância'] },
+            { tagDisplay: '#Vigilância', matchTerms: ['vigilância em saúde', 'vigilância sanitária', 'vigilância ambiental', 'vigilância do trabalhador', 'farmacovigilância', 'vigilância epidemiológica'] },
             { tagDisplay: '#Epidemiologia', matchTerms: ['epidemiologia', 'epidemiológico', 'epidemiológica', 'estudo epidemiológico', 'boletim epidemiológico'] },
-            { tagDisplay: '#Ambiente', matchTerms: ['ambiente', 'ambiental', 'meio ambiente', 'saúde ambiental'] },
-            { tagDisplay: '#Trabalhador', matchTerms: ['trabalhador', 'saúde do trabalhador', 'doenças ocupacionais'] },
             { tagDisplay: '#Síndromes', matchTerms: ['síndrome', 'síndromes', 'síndrome gripal', 'síndrome respiratória aguda grave', 'srag'] },
-            { tagDisplay: '#Farmacovigilância', matchTerms: ['farmacovigilância', 'eventos adversos pós-vacinação', 'eapv', 'reação adversa'] },
             { tagDisplay: '#Meningite', matchTerms: ['meningite'] }, { tagDisplay: '#Influenza', matchTerms: ['influenza', 'gripe', 'h1n1', 'h3n2'] },
-            { tagDisplay: '#Sarampo', matchTerms: ['sarampo'] }, { tagDisplay: '#Rubéola', matchTerms: ['rubéola'] },
-            { tagDisplay: '#Tétano', matchTerms: ['tétano', 'tétano acidental', 'tétano neonatal'] }, { tagDisplay: '#Poliomielite', matchTerms: ['poliomielite', 'pólio', 'paralisia infantil'] },
-            { tagDisplay: '#Caxumba', matchTerms: ['caxumba'] }, { tagDisplay: '#Coqueluche', matchTerms: ['coqueluche', 'pertussis'] },
-            { tagDisplay: '#Varicela', matchTerms: ['varicela', 'catapora'] }, { tagDisplay: '#Botulismo', matchTerms: ['botulismo'] },
-            { tagDisplay: '#Cólera', matchTerms: ['cólera'] }, { tagDisplay: '#Diarreia', matchTerms: ['diarreia', 'doenças diarreicas agudas', 'dda'] },
-            { tagDisplay: '#Rotavírus', matchTerms: ['rotavírus'] }, { tagDisplay: '#Toxoplasmose', matchTerms: ['toxoplasmose'] },
-            { tagDisplay: '#Eventos', matchTerms: ['eventos em saúde pública', 'eventos de importância em saúde pública', 'eisp'] },
-            { tagDisplay: '#Indicadores', matchTerms: ['indicadores de saúde', 'indicadores epidemiológicos', 'monitoramento de indicadores'] },
-            { tagDisplay: '#Sistema', matchTerms: ['sistema de informação em saúde', 'sistemas de informação'] },
+            { tagDisplay: '#Sarampo', matchTerms: ['sarampo'] }, { tagDisplay: '#Dengue', matchTerms: ['dengue'] },
+            { tagDisplay: '#Covid-19', matchTerms: ['covid-19', 'coronavirus', 'sars-cov-2'] }, { tagDisplay: '#Mpox', matchTerms: ['mpox', 'monkeypox'] },
+            { tagDisplay: '#Oropouche', matchTerms: ['oropouche'] },
+            { tagDisplay: '#Eventos', matchTerms: ['eventos em saúde pública', 'eisp', 'surto', 'epidemia', 'pandemia', 'alerta sanitário', 'alerta epidemiológico'] },
             { tagDisplay: '#Dados', matchTerms: ['dados de saúde', 'dados epidemiológicos', 'análise de dados', 'datasus', 'tabnet'] },
-            { tagDisplay: '#Análise', matchTerms: ['análise de situação de saúde', 'análise epidemiológica', 'análise de dados'] },
-            { tagDisplay: '#Capacitação', matchTerms: ['capacitação', 'treinamento', 'qualificação profissional', 'educação permanente'] },
-            { tagDisplay: '#Cursos', matchTerms: ['curso', 'cursos online', 'curso de atualização', 'formação'] },
-            { tagDisplay: '#Gestão', matchTerms: ['gestão em saúde', 'gestão de serviços de saúde', 'planejamento em saúde'] },
-            { tagDisplay: '#Concursos', matchTerms: ['concurso público', 'concursos na saúde', 'edital de concurso'] },
-            { tagDisplay: '#Formação', matchTerms: ['formação profissional', 'educação em saúde', 'residência médica', 'residência multiprofissional'] },
-            { tagDisplay: '#Saúde', matchTerms: ['saúde', 'saude'] }, // Pode ser muito frequente, use com cautela ou refine
+            { tagDisplay: '#Capacitação', matchTerms: ['capacitação', 'treinamento', 'qualificação', 'educação permanente', 'curso', 'formação'] },
+            { tagDisplay: '#SaúdePública', matchTerms: ['saúde pública', 'saude publica'] },
             { tagDisplay: '#SUS', matchTerms: ['sus', 'sistema único de saúde'] },
-            { tagDisplay: '#InfoEpi', matchTerms: ['infoepi'] },
-            { tagDisplay: '#PNI', matchTerms: ['pni', 'programa nacional de imunizações'] },
-            { tagDisplay: '#SINAN', matchTerms: ['sinan', 'agravos de notificação', 'fichas de notificação'] },
-            { tagDisplay: '#SIM', matchTerms: ['sim', 'mortalidade', 'declaração de óbito'] },
-            { tagDisplay: '#SINASC', matchTerms: ['sinasc', 'nascidos vivos', 'declaração de nascido vivo'] },
-            { tagDisplay: '#CadSUS', matchTerms: ['cadsus', 'cartão nacional de saúde', 'cartão sus'] },
-            { tagDisplay: '#RNDS', matchTerms: ['rnds', 'rede nacional de dados em saúde'] },
-            { tagDisplay: '#Tabnet', matchTerms: ['tabnet'] }, { tagDisplay: '#Datasus', matchTerms: ['datasus'] },
-            { tagDisplay: '#ConecteSUS', matchTerms: ['conectesua', 'conecte sus', 'meu sus digital'] }
+            { tagDisplay: '#MinistérioSaúde', matchTerms: ['ministério da saúde', 'ms'] }, { tagDisplay: '#Anvisa', matchTerms: ['anvisa'] },
+            { tagDisplay: '#Fiocruz', matchTerms: ['fiocruz'] }, { tagDisplay: '#OPAS', matchTerms: ['opas', 'organização pan-americana'] },
+            { tagDisplay: '#OMS', matchTerms: ['oms', 'organização mundial da saúde'] }
         ];
 
         function assignNewsTags(itemFullText, tagVocabulary) {
             const assignedTags = new Set();
+            if (!itemFullText) return [];
             const lowerItemText = itemFullText.toLowerCase();
             tagVocabulary.forEach(tagDef => {
                 if (tagDef.matchTerms.some(term => lowerItemText.includes(term.toLowerCase()))) {
                     assignedTags.add(tagDef.tagDisplay);
                 }
             });
-            // Opcional: Limitar o número de tags ou priorizar as mais específicas
-            // Por exemplo, se mais de 5 tags forem encontradas, talvez pegar as 5 primeiras ou as mais raras.
-            // Por enquanto, retorna todas as encontradas.
-            return Array.from(assignedTags);
+            return Array.from(assignedTags).slice(0, 3); 
         }
-
-// Carregar clipping de notícias
-document.addEventListener('DOMContentLoaded', async () => {
-    const relevantKeywordsClipping = [
-        'vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia',
-        'doença transmissível', 'doenças infecciosas', 'doença infecciosa', 'notificação compulsória',
-        'saúde pública', 'alerta sanitário', 'alerta epidemiológico', 'controle de doenças', 'prevenção de doenças',
-        'imunização', 'vacina', 'vacinação', 'Ministério da Saúde', 'secretaria de saúde', 'Anvisa', 'Fiocruz',
-        'OMS', 'OPAS', 'boletim epidemiológico', 'dados epidemiológicos', 'indicador de saúde',
-        'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'tuberculose',
-        'meningite', 'leptospirose', 'covid-19', 'mpox', 'oropouche', 'influenza', 'gripe',
-        // Adicione ou refine palavras-chave conforme necessário
-    ];
-
-    function isRelevant(item, keywords) {
-        const textToSearch = (
-            (item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')
-        ).toLowerCase();
-        return keywords.some(keyword => textToSearch.includes(keyword.toLowerCase()));
-    }
-
-    // --- AJUSTES NAS FONTES ---
-    const clippingSources = [
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://agencia.fiocruz.br/rss',
-            filterClientSide: true, // A Agência Fiocruz cobre muitos temas, filtrar é bom
-            sourceName: 'Agência Fiocruz de Notícias'
-        },
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/pt/bra/rss/feed',
-            filterClientSide: true, // Feed da OPAS Brasil, pode ter notícias variadas de saúde
-            sourceName: 'OPAS Brasil'
-        },
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=http://g1.globo.com/rss/g1/saude/',
-            filterClientSide: true, // G1 Saúde é amplo, filtrar ajuda
-            sourceName: 'G1 Saúde'
-        },
-        // Exemplo: Adicione um feed do Google Alertas
-        // 1. Vá em https://www.google.com.br/alerts
-        // 2. Crie um alerta para termos como "vigilância epidemiológica Brasil" OU "surto Brasil", etc.
-        // 3. Em "Entregar para:", escolha "Feed RSS".
-        // 4. Copie a URL do feed RSS gerado e cole abaixo.
-        /*
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_DO_SEU_FEED_RSS_DO_GOOGLE_ALERTAS_AQUI',
-            filterClientSide: false, // O Google Alertas já é filtrado por palavra-chave.
-                                     // Defina como 'true' se seu alerta for muito amplo e quiser refinar mais.
-            sourceName: 'Google Alertas (Epidemiologia BR)'
-        },
-        */
-        // Lembre-se de investigar e adicionar feeds do Ministério da Saúde e Anvisa se encontrar URLs estáveis.
-        // Exemplo hipotético (VERIFIQUE A URL REAL E FUNCIONALIDADE):
-        /*
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_RSS_MINISTERIO_SAUDE_NOTICIAS',
-            filterClientSide: true,
-            sourceName: 'Ministério da Saúde (Notícias)'
-        },
-        {
-            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_RSS_ANVISA_NOTICIAS',
-            filterClientSide: true,
-            sourceName: 'Anvisa (Notícias)'
-        }
-        */
-    ];
-    // --- FIM DOS AJUSTES NAS FONTES ---
-
-    const clippingContainer = document.getElementById('clipping-posts-container');
-
-    if (!clippingContainer) {
-        console.error("Contêiner de clipping não encontrado");
-        return;
-    }
-
-    try {
-        let allClippingPosts = [];
-
-        const fetchPromises = clippingSources.map(sourceInfo =>
-            fetch(sourceInfo.url)
-                .then(response => {
-                    if (!response.ok) {
-                        console.warn(`Erro ao carregar feed: ${sourceInfo.sourceName} (${sourceInfo.url}) - Status: ${response.status}`);
-                        return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'error', responseStatus: response.status };
-                    }
-                    return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'success' }));
-                })
-                .catch(error => {
-                    console.error(`Erro na requisição: ${sourceInfo.sourceName} (${sourceInfo.url})`, error);
-                    return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'fetch_error' };
-                })
-        );
-
-        const results = await Promise.all(fetchPromises);
-        console.log('--- Resultados Brutos das Fontes ---');
-        results.forEach(feedData => {
-            console.log(`Fonte: ${feedData.sourceName}, Status: ${feedData.status}, Itens Recebidos: ${feedData.items ? feedData.items.length : 0}`);
-            if (feedData.status === 'error') {
-                console.warn(`Detalhes do erro para ${feedData.sourceName}: Status HTTP ${feedData.responseStatus}`);
-            }
-        });
-        console.log('-----------------------------------');
-
-        results.forEach(feedData => {
-            if (feedData.items && feedData.items.length > 0) {
-                let itemsAddedFromThisSource = 0;
-                feedData.items.forEach(item => {
-                    item.processedSourceName = feedData.sourceName;
-                    if (feedData.filterClientSide) {
-                        if (isRelevant(item, relevantKeywordsClipping)) {
-                            allClippingPosts.push(item);
-                            itemsAddedFromThisSource++;
-                        }
-                    } else {
-                        allClippingPosts.push(item);
-                        itemsAddedFromThisSource++;
-                    }
+        
+        async function loadBlogFeed() {
+            const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://infovepi.substack.com/feed';
+            const newsContainer = document.getElementById('blog-posts-container');
+            if (!newsContainer) { console.error("Contêiner de notícias do blog não encontrado"); return; }
+            newsContainer.innerHTML = '<p class="text-center w-100">Carregando últimas notícias...</p>';
+            try {
+                const response = await fetch(rssFeedUrl);
+                if (!response.ok) { throw new Error(`Erro feed blog: ${response.status}`); }
+                const data = await response.json();
+                if (data.status !== 'ok' || !data.items || data.items.length === 0) {
+                    newsContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>'; return;
+                }
+                newsContainer.innerHTML = ''; 
+                data.items.slice(0, 3).forEach(post => {
+                    const title = post.title || 'Sem Título';
+                    const link = post.link || '#';
+                    const pubDate = post.pubDate ? formatDate(post.pubDate) : 'Data Desconhecida';
+                    let imageUrl = post.thumbnail || extractFirstImage(post.description || post.content) || 'https://via.placeholder.com/400x170?text=InfoEpi';
+                    const description = truncateText(post.content || post.description, 110); 
+                    const cardHtml = `
+                        <div class="col"><div class="card h-100">
+                            <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x170?text=InfoEpi';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text small text-muted mb-2">${pubDate}</p>
+                                <p class="card-text">${description}</p>
+                                <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler mais</a>
+                            </div>
+                        </div></div>`;
+                    newsContainer.innerHTML += cardHtml;
                 });
-                console.log(`Fonte: ${feedData.sourceName}, Itens adicionados a allClippingPosts (após filtro cliente, se aplicável): ${itemsAddedFromThisSource} de ${feedData.items.length}`);
-            } else if (feedData.items && feedData.items.length === 0 && feedData.status === 'success') {
-                 console.log(`Fonte: ${feedData.sourceName} retornou 0 itens.`);
+            } catch (error) {
+                console.error("Erro ao carregar feed do blog:", error);
+                newsContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar notícias. Tente mais tarde.</p>';
             }
-        });
-
-        console.log(`Total de itens em allClippingPosts ANTES da deduplicação: ${allClippingPosts.length}`);
-
-        const uniquePosts = Array.from(new Set(allClippingPosts.map(item => item.link)))
-            .map(link => {
-                return allClippingPosts.find(item => item.link === link);
-            });
-
-        console.log(`Total de itens em uniquePosts APÓS a deduplicação: ${uniquePosts.length}`);
-
-        uniquePosts.sort((a, b) => {
-            const dateA = new Date(a.pubDate || a.published || 0);
-            const dateB = new Date(b.pubDate || b.published || 0);
-            return dateB - dateA;
-        });
-
-        clippingContainer.innerHTML = '';
-
-        if (uniquePosts.length === 0) {
-            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada no momento.</p>';
-            return;
         }
 
-        const MAX_POSTS_TO_SHOW = 8; // Defina quantos posts você quer mostrar no máximo
-        console.log(`Exibindo os primeiros ${Math.min(uniquePosts.length, MAX_POSTS_TO_SHOW)} posts de ${uniquePosts.length} notícias únicas encontradas.`);
-
-        uniquePosts.slice(0, MAX_POSTS_TO_SHOW).forEach(post => {
-            const title = post.title || 'Sem Título';
-            const link = post.link || '#';
-            const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
-            const sourceNameDisplay = post.processedSourceName || (post.source && post.source.title ? post.source.title : 'Fonte Desconhecida');
-            const sourceDate = `Fonte: ${sourceNameDisplay} - ${date}`;
-
-            let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia'; // Imagem padrão
-            if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
-                imageUrl = post.enclosure.link;
-            } else if (post.thumbnail) {
-                imageUrl = post.thumbnail;
-            } else if (post.image && typeof post.image === 'string') {
-                imageUrl = post.image;
-            } else {
-                const extractedImg = extractFirstImage(post.description || post.content || '');
-                if (extractedImg) { imageUrl = extractedImg; }
-            }
-
-            const truncatedDescription = truncateText(post.description || post.content || '', 100);
-
-            // Se você reativar as tags, certifique-se que as funções assignNewsTags e siteTagVocabulary estão definidas
-            // const itemFullTextForTagging = (post.title || '') + ' ' + (post.description || '') + ' ' + (post.content || '');
-            // const assignedPostTags = assignNewsTags(itemFullTextForTagging, siteTagVocabulary);
-            // const tagsHtml = assignedPostTags.length > 0 ?
-            //     assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
-
-            const cardHtml = `
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${title}</h5>
-                            <p class="card-text small text-muted">${sourceDate}</p>
-                            <p class="card-text">${truncatedDescription}</p>
-                            <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            clippingContainer.innerHTML += cardHtml;
-        });
-
-    } catch (error) {
-        console.error("Erro geral ao carregar e processar o clipping:", error);
-        clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
-    }
-
-    // --- Funções Utilitárias (mantenha-as ou certifique-se de que estão acessíveis) ---
-    function formatDate(dateString) {
-        const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-        try {
-            const date = new Date(dateString);
-            if (isNaN(date.getTime())) return 'Data Desconhecida';
-            return date.toLocaleDateString('pt-BR', options);
-        } catch (e) {
-            return 'Data Inválida';
-        }
-    }
-
-    function truncateText(text, maxLength) {
-        if (!text) return '';
-        if (text.length <= maxLength) return text;
-        // Tenta truncar na última palavra completa antes do limite
-        let truncated = text.substr(0, maxLength);
-        truncated = truncated.substr(0, Math.min(truncated.length, truncated.lastIndexOf(" ")));
-        return truncated + '...';
-    }
-
-    function extractFirstImage(htmlString) {
-        if (!htmlString) return null;
-        // Regex simples para extrair a primeira tag <img>. Pode não cobrir todos os casos.
-        const imgRegex = /<img.*?src=["'](.*?)["'].*?>/i;
-        const match = htmlString.match(imgRegex);
-        return match ? match[1] : null;
-    }
-});
-
-
-        // O listener para carregar o feed do BLOG continua o mesmo,
-        // certifique-se de que ele também esteja no seu <script>
-        // (geralmente antes ou depois deste bloco do clipping).
-        // Exemplo:
-        /*
-        document.addEventListener('DOMContentLoaded', async () => {
-            // ... seu código para carregar o feed do blog (#blog-posts-container) ...
-        });
-        */
-
-        // Carregar clipping de notícias (código da resposta anterior com adição do tagging)
-        document.addEventListener('DOMContentLoaded', async () => {
-            const relevantKeywordsClipping = [ // Mantém os filtros de relevância para a seleção inicial
-                'vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia', 
-                'doença transmissível', 'doenças infecciosas', 'doença infecciosa', 'notificação compulsória', 
-                'saúde pública', 'alerta sanitário', 'alerta epidemiológico', 'controle de doenças', 'prevenção de doenças',
-                'imunização', 'vacina', 'vacinação', 'Ministério da Saúde', 'secretaria de saúde', 'Anvisa', 'Fiocruz', 
-                'OMS', 'OPAS', 'boletim epidemiológico', 'dados epidemiológicos', 'indicador de saúde',
-                'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'tuberculose', 
-                'meningite', 'leptospirose', 'covid-19', 'mpox', 'oropouche', 'influenza', 'gripe'
-            ];
-
+        async function loadClippingFeed() {
+            const relevantKeywordsClipping = ['vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia', 'doença transmissível', 'notificação compulsória', 'saúde pública', 'alerta sanitário', 'imunização', 'vacina', 'ministério da saúde', 'anvisa', 'fiocruz', 'oms', 'opas', 'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'covid-19', 'mpox', 'oropouche', 'influenza'];
             function isRelevant(item, keywords) {
-                const textToSearch = (
-                    (item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')
-                ).toLowerCase();
+                const textToSearch = ((item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')).toLowerCase();
                 return keywords.some(keyword => textToSearch.includes(keyword.toLowerCase()));
             }
-
             const clippingSources = [
-                { 
-                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+OU+surto+OU+alerta+sanitario+Brasil+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt-BR',
-                    filterClientSide: false, 
-                    sourceName: 'Google Notícias (Vigilância/Alerta BR)' 
-                },
-                { 
-                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=saude+publica+doencas+transmissiveis+Brasil+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt-BR',
-                    filterClientSide: false, 
-                    sourceName: 'Google Notícias (Saúde Pública BR)'
-                },
-                { 
-                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/',
-                    filterClientSide: true, 
-                    sourceName: 'G1 Saúde'
-                },
-                { 
-                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/pt/rss/feed',
-                    filterClientSide: true, 
-                    sourceName: 'OPAS (Português)' 
-                },
-                { 
-                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/pt/news-room.xml',
-                    filterClientSide: true, 
-                    sourceName: 'OMS' 
-                }
+                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dvigilancia%2Bepidemiologica%2BOU%2Bsurto%2BOU%2Balerta%2Bsanitario%2BBrasil%26hl%3Dpt-BR%26gl%3DBR%26ceid%3DBR%3Apt-BR', filterClientSide: false, sourceName: 'Google (Vigilância BR)' },
+                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dsaude%2Bpublica%2Bdoencas%2Btransmissiveis%2Bministerio%2Bda%2Bsaude%2BBrasil%26hl%3Dpt-BR%26gl%3DBR%26ceid%3DBR%3Apt-BR', filterClientSide: false, sourceName: 'Google (Saúde Pública BR)'},
+                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fg1.globo.com%2Frss%2Fg1%2Fsaude%2F', filterClientSide: true, sourceName: 'G1 Saúde'},
+                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fagencia.fiocruz.br%2Frss', filterClientSide: true, sourceName: 'Ag. Fiocruz'},
+                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.paho.org%2Fpt%2Fbra%2Frss%2Ffeed', filterClientSide: true, sourceName: 'OPAS Brasil'}
             ];
-            
             const clippingContainer = document.getElementById('clipping-posts-container');
-
-            if (!clippingContainer) {
-                console.error("Contêiner de clipping não encontrado");
-                return;
-            }
-
+            if (!clippingContainer) { console.error("Contêiner de clipping não encontrado"); return; }
+            clippingContainer.innerHTML = '<p class="text-center w-100">Carregando clipping...</p>';
             try {
                 let allClippingPosts = [];
-                
                 const fetchPromises = clippingSources.map(sourceInfo => 
                     fetch(sourceInfo.url)
                         .then(response => {
-                            if (!response.ok) {
-                                console.warn(`Erro ao carregar feed: ${sourceInfo.sourceName} (${sourceInfo.url}) - Status: ${response.status}`);
-                                return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide };
-                            }
-                            return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide }));
-                        })
-                        .catch(error => {
-                            console.error(`Erro na requisição: ${sourceInfo.sourceName} (${sourceInfo.url})`, error);
-                            return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide };
-                        })
+                            if (!response.ok) { console.warn(`Erro feed: ${sourceInfo.sourceName} (${response.status})`); return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'error' }; }
+                            return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: data.status }));
+                        }).catch(error => { console.error(`Erro req: ${sourceInfo.sourceName}`, error); return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'fetch_error' }; })
                 );
-
                 const results = await Promise.all(fetchPromises);
-                
                 results.forEach(feedData => {
-                    if (feedData.items) {
+                    if (feedData.status === 'ok' && feedData.items && feedData.items.length > 0) {
                         feedData.items.forEach(item => {
                             item.processedSourceName = feedData.sourceName; 
-                            if (feedData.filterClientSide) {
-                                if (isRelevant(item, relevantKeywordsClipping)) {
-                                    allClippingPosts.push(item);
-                                }
-                            } else {
+                            if (feedData.filterClientSide ? isRelevant(item, relevantKeywordsClipping) : true) {
                                 allClippingPosts.push(item);
                             }
                         });
-                    }
+                    } else if (feedData.status !== 'ok' && feedData.status !== 'fetch_error') { console.warn(`Feed ${feedData.sourceName} status: ${feedData.status}`);}
                 });
-
-                const uniquePosts = Array.from(new Set(allClippingPosts.map(item => item.link)))
-                                      .map(link => {
-                                          return allClippingPosts.find(item => item.link === link);
-                                      });
-
-                uniquePosts.sort((a, b) => {
-                    const dateA = new Date(a.pubDate || a.published || 0);
-                    const dateB = new Date(b.pubDate || b.published || 0);
-                    return dateB - dateA;
-                });
-
+                const uniquePosts = Array.from(new Map(allClippingPosts.map(item => [item.link || item.guid || item.title, item])).values());
+                uniquePosts.sort((a, b) => new Date(b.pubDate || b.published || 0) - new Date(a.pubDate || a.published || 0));
                 clippingContainer.innerHTML = '';
-
-                if (uniquePosts.length === 0) {
-                    clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada no momento.</p>';
-                    return;
-                }
-
-                uniquePosts.slice(0, 10).forEach(post => {
+                if (uniquePosts.length === 0) { clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada.</p>'; return; }
+                
+                const MAX_CLIPPING_POSTS = 8;
+                uniquePosts.slice(0, MAX_CLIPPING_POSTS).forEach(post => {
                     const title = post.title || 'Sem Título';
                     const link = post.link || '#';
                     const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
-                    const sourceNameDisplay = post.processedSourceName || (post.source && post.source.title ? post.source.title : 'Fonte Desconhecida');
+                    const sourceNameDisplay = post.processedSourceName || 'Fonte Desc.';
                     const sourceDate = `Fonte: ${sourceNameDisplay} - ${date}`;
-                    
-                    let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia';
-                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
-                        imageUrl = post.enclosure.link;
-                    } else if (post.thumbnail) {
-                        imageUrl = post.thumbnail;
-                    } else if (post.image && typeof post.image === 'string') {
-                        imageUrl = post.image;
-                    } else {
-                        const extractedImg = extractFirstImage(post.description || post.content || '');
-                        if (extractedImg) { imageUrl = extractedImg; }
-                    }
-
-                    const truncatedDescription = truncateText(post.description || post.content || '', 100); // Reduzi um pouco para dar espaço às tags
-
-                    // NOVO: Gerar tags para o post
+                    let imageUrl = 'https://via.placeholder.com/400x125?text=Noticia'; 
+                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) { imageUrl = post.enclosure.link;
+                    } else if (post.thumbnail) { imageUrl = post.thumbnail;
+                    } else { const extractedImg = extractFirstImage(post.description || post.content || ''); if (extractedImg) { imageUrl = extractedImg; } }
+                    const truncatedDescription = truncateText(post.description || post.content || '', 70); 
                     const itemFullTextForTagging = (post.title || '') + ' ' + (post.description || '') + ' ' + (post.content || '');
                     const assignedPostTags = assignNewsTags(itemFullTextForTagging, siteTagVocabulary);
-                    const tagsHtml = assignedPostTags.length > 0 ? 
-                        assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
-
+                    const tagsHtml = assignedPostTags.length > 0 ? assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
                     const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text small text-muted">${sourceDate}</p>
-                                    <p class="card-text">${truncatedDescription}</p>
-                                    <div class="mt-2 mb-2">${tagsHtml}</div> {/* Tags inseridas aqui */}
-                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
+                        <div class="col"><div class="card h-100">
+                            <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x125?text=Noticia';">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text small text-muted mb-1">${sourceDate}</p>
+                                <p class="card-text mb-2">${truncatedDescription}</p>
+                                <div class="mt-auto">
+                                    <div class="mb-2">${tagsHtml}</div>
+                                    <a href="${link}" class="btn btn-primary" target="_blank" rel="noopener">Ler Notícia</a>
                                 </div>
                             </div>
-                        </div>
-                    `;
+                        </div></div>`;
                     clippingContainer.innerHTML += cardHtml;
                 });
-
             } catch (error) {
                 console.error("Erro ao carregar clipping:", error);
-                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
+                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Tente mais tarde.</p>';
             }
-        });
+        }
 
-        // Carregar feed do blog
-        document.addEventListener('DOMContentLoaded', async () => {
-            const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://infovepi.substack.com/feed';
-            const newsContainer = document.getElementById('blog-posts-container');
-
-            if (!newsContainer) {
-                console.error("Contêiner de notícias não encontrado");
-                return;
-            }
-
-            try {
-                const response = await fetch(rssFeedUrl);
-                if (!response.ok) {
-                    throw new Error(`Erro ao carregar feed: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (!data.items || data.items.length === 0) {
-                    newsContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>';
-                    return;
-                }
-                
-                newsContainer.innerHTML = '';
-                
-                // Exibir os 3 posts mais recentes
-                data.items.slice(0, 3).forEach(post => {
-                    const title = post.title;
-                    const link = post.link;
-                    const pubDate = formatDate(post.pubDate);
-                    
-                    // Extrair imagem ou usar placeholder
-                    let imageUrl = post.thumbnail || extractFirstImage(post.content) || 'https://via.placeholder.com/400x200?text=infoepi';
-                    
-                    // Extrair e limitar descrição
-                    const description = truncateText(post.description, 140);
-                    
-                    const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="${imageUrl}" class="card-img-top" alt="${title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x200?text=InfoEpi';">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text small text-muted">${pubDate}</p>
-                                    <p class="card-text">${description}</p>
-                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler mais</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    newsContainer.innerHTML += cardHtml;
-                });
-                
-            } catch (error) {
-                console.error("Erro ao carregar feed do blog:", error);
-                newsContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar notícias. Por favor, tente novamente mais tarde.</p>';
-            }
-        });
-
-        // Carregar clipping de notícias
-        document.addEventListener('DOMContentLoaded', async () => {
-            const clippingRSSUrls = [
-                'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+saude+publica+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/news.xml',
-                'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/en/rss/news'
-            ];
-            
-            const clippingContainer = document.getElementById('clipping-posts-container');
-
-            if (!clippingContainer) {
-                console.error("Contêiner de clipping não encontrado");
-                return;
-            }
-
-            try {
-                let allClippingPosts = [];
-                
-                const fetchPromises = clippingRSSUrls.map(url => 
-                    fetch(url)
-                        .then(response => {
-                            if (!response.ok) {
-                                console.warn(`Erro ao carregar feed: ${url}`);
-                                return { items: [] };
-                            }
-                            return response.json();
-                        })
-                        .catch(error => {
-                            console.error(`Erro na requisição: ${url}`, error);
-                            return { items: [] };
-                        })
-                );
-
-                const results = await Promise.all(fetchPromises);
-                
-                results.forEach(feedData => {
-                    if (feedData.items) {
-                        allClippingPosts = allClippingPosts.concat(feedData.items);
-                    }
-                });
-
-                // Ordenar por data (mais recentes primeiro)
-                allClippingPosts.sort((a, b) => {
-                    const dateA = new Date(a.pubDate || a.published);
-                    const dateB = new Date(b.pubDate || b.published);
-                    return dateB - dateA;
-                });
-
-                clippingContainer.innerHTML = '';
-
-                if (allClippingPosts.length === 0) {
-                    clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>';
-                    return;
-                }
-
-                // Exibir os 8 posts mais recentes
-                allClippingPosts.slice(0, 8).forEach(post => {
-                    const title = post.title || 'Sem Título';
-                    const link = post.link || '#';
-                    const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
-                    const source = post.source && post.source.title ? post.source.title : 'Fonte Desconhecida';
-                    const sourceDate = `Fonte: ${source} - ${date}`;
-                    
-                    // Extrair imagem ou usar placeholder
-                    let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia';
-                    
-                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
-                        imageUrl = post.enclosure.link;
-                    } else if (post.thumbnail) {
-                        imageUrl = post.thumbnail;
-                    } else if (post.image) {
-                        imageUrl = post.image;
-                    } else {
-                        const extractedImg = extractFirstImage(post.description || post.content || '');
-                        if (extractedImg) {
-                            imageUrl = extractedImg;
-                        }
-                    }
-
-                    // Extrair e limitar descrição
-                    const truncatedDescription = truncateText(post.description || post.content || '', 120);
-
-                    const cardHtml = `
-                        <div class="col">
-                            <div class="card h-100">
-                                <img src="${imageUrl}" class="card-img-top" alt="${title}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title">${title}</h5>
-                                    <p class="card-text small text-muted">${sourceDate}</p>
-                                    <p class="card-text">${truncatedDescription}</p>
-                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    clippingContainer.innerHTML += cardHtml;
-                });
-
-            } catch (error) {
-                console.error("Erro ao carregar clipping:", error);
-                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            loadBlogFeed();
+            loadClippingFeed();
         });
     </script>
 </body>
