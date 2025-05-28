@@ -584,7 +584,6 @@
             </nav>
         </div>
     </header>
-
     <section class="banner-destaque">
         <div class="container">
             <h1>InfoEpi: Vigilância Epidemiológica </h1>
@@ -595,7 +594,6 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
             <a href="#noticias-destaque" class="btn">Conheça o projeto</a>
         </div>
     </section>
-
     <section id="recursos-disponiveis" class="recursos-disponiveis">
         <div class="container">
             <div class="section-title">
@@ -627,6 +625,11 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
         </div>
     </section>
 
+
+
+
+
+
     <section id="noticias-destaque" class="container my-5">
         <div class="section-title">
             <h2>Notícias em Destaque</h2>
@@ -646,6 +649,8 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
     </section>
+
+
 
     <footer>
         <div class="container">
@@ -754,7 +759,7 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
             }
         });
 
-        // Funções para carregar feeds RSS
+// Funções auxiliares (mantidas do seu código original, coloque-as antes do listener abaixo ou garanta que já existem no seu <script>)
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const date = new Date(dateString);
@@ -762,6 +767,7 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
         }
 
         function extractFirstImage(htmlString) {
+            if (!htmlString) return null;
             const div = document.createElement('div');
             div.innerHTML = htmlString;
             const img = div.querySelector('img');
@@ -774,6 +780,458 @@ Aproveite os cursos, acesse materiais de apoio e utilize o InfoEpi como fonte de
             if (cleanText.length <= maxLength) return cleanText;
             return cleanText.substring(0, maxLength) + '...';
         }
+
+        // NOVO: Lista de Tags para Atribuição e Função de Tagging (coloque estas definições antes do listener do clipping)
+        const siteTagVocabulary = [
+            // Formato: { tagDisplay: '#TagBonita', matchTerms: ['termo1parabusca', 'termo2parabusca', ...] }
+            // Revise e ajuste os matchTerms para otimizar a precisão das tags!
+            { tagDisplay: '#Imunização', matchTerms: ['imunização', 'imunizações', 'imunizar', 'programa nacional de imunizações', 'pni'] },
+            { tagDisplay: '#Vacinação', matchTerms: ['vacinação', 'vacina', 'vacinas', 'vacinados', 'vacinada', 'calendário de vacinação'] },
+            { tagDisplay: '#Notificação', matchTerms: ['notificação', 'notificações', 'notificar', 'notificado', 'notificada', 'notificação compulsória', 'sinan'] },
+            { tagDisplay: '#Cobertura', matchTerms: ['cobertura vacinal', 'cobertura de vacinação', 'baixa cobertura'] },
+            { tagDisplay: '#Vigilância', matchTerms: ['vigilância em saúde', 'vigilância sanitária', 'vigilância ambiental', 'vigilância do trabalhador', 'farmacovigilância'] },
+            { tagDisplay: '#Epidemiologia', matchTerms: ['epidemiologia', 'epidemiológico', 'epidemiológica', 'estudo epidemiológico', 'boletim epidemiológico'] },
+            { tagDisplay: '#Ambiente', matchTerms: ['ambiente', 'ambiental', 'meio ambiente', 'saúde ambiental'] },
+            { tagDisplay: '#Trabalhador', matchTerms: ['trabalhador', 'saúde do trabalhador', 'doenças ocupacionais'] },
+            { tagDisplay: '#Síndromes', matchTerms: ['síndrome', 'síndromes', 'síndrome gripal', 'síndrome respiratória aguda grave', 'srag'] },
+            { tagDisplay: '#Farmacovigilância', matchTerms: ['farmacovigilância', 'eventos adversos pós-vacinação', 'eapv', 'reação adversa'] },
+            { tagDisplay: '#Meningite', matchTerms: ['meningite'] }, { tagDisplay: '#Influenza', matchTerms: ['influenza', 'gripe', 'h1n1', 'h3n2'] },
+            { tagDisplay: '#Sarampo', matchTerms: ['sarampo'] }, { tagDisplay: '#Rubéola', matchTerms: ['rubéola'] },
+            { tagDisplay: '#Tétano', matchTerms: ['tétano', 'tétano acidental', 'tétano neonatal'] }, { tagDisplay: '#Poliomielite', matchTerms: ['poliomielite', 'pólio', 'paralisia infantil'] },
+            { tagDisplay: '#Caxumba', matchTerms: ['caxumba'] }, { tagDisplay: '#Coqueluche', matchTerms: ['coqueluche', 'pertussis'] },
+            { tagDisplay: '#Varicela', matchTerms: ['varicela', 'catapora'] }, { tagDisplay: '#Botulismo', matchTerms: ['botulismo'] },
+            { tagDisplay: '#Cólera', matchTerms: ['cólera'] }, { tagDisplay: '#Diarreia', matchTerms: ['diarreia', 'doenças diarreicas agudas', 'dda'] },
+            { tagDisplay: '#Rotavírus', matchTerms: ['rotavírus'] }, { tagDisplay: '#Toxoplasmose', matchTerms: ['toxoplasmose'] },
+            { tagDisplay: '#Eventos', matchTerms: ['eventos em saúde pública', 'eventos de importância em saúde pública', 'eisp'] },
+            { tagDisplay: '#Indicadores', matchTerms: ['indicadores de saúde', 'indicadores epidemiológicos', 'monitoramento de indicadores'] },
+            { tagDisplay: '#Sistema', matchTerms: ['sistema de informação em saúde', 'sistemas de informação'] },
+            { tagDisplay: '#Dados', matchTerms: ['dados de saúde', 'dados epidemiológicos', 'análise de dados', 'datasus', 'tabnet'] },
+            { tagDisplay: '#Análise', matchTerms: ['análise de situação de saúde', 'análise epidemiológica', 'análise de dados'] },
+            { tagDisplay: '#Capacitação', matchTerms: ['capacitação', 'treinamento', 'qualificação profissional', 'educação permanente'] },
+            { tagDisplay: '#Cursos', matchTerms: ['curso', 'cursos online', 'curso de atualização', 'formação'] },
+            { tagDisplay: '#Gestão', matchTerms: ['gestão em saúde', 'gestão de serviços de saúde', 'planejamento em saúde'] },
+            { tagDisplay: '#Concursos', matchTerms: ['concurso público', 'concursos na saúde', 'edital de concurso'] },
+            { tagDisplay: '#Formação', matchTerms: ['formação profissional', 'educação em saúde', 'residência médica', 'residência multiprofissional'] },
+            { tagDisplay: '#Saúde', matchTerms: ['saúde', 'saude'] }, // Pode ser muito frequente, use com cautela ou refine
+            { tagDisplay: '#SUS', matchTerms: ['sus', 'sistema único de saúde'] },
+            { tagDisplay: '#InfoEpi', matchTerms: ['infoepi'] },
+            { tagDisplay: '#PNI', matchTerms: ['pni', 'programa nacional de imunizações'] },
+            { tagDisplay: '#SINAN', matchTerms: ['sinan', 'agravos de notificação', 'fichas de notificação'] },
+            { tagDisplay: '#SIM', matchTerms: ['sim', 'mortalidade', 'declaração de óbito'] },
+            { tagDisplay: '#SINASC', matchTerms: ['sinasc', 'nascidos vivos', 'declaração de nascido vivo'] },
+            { tagDisplay: '#CadSUS', matchTerms: ['cadsus', 'cartão nacional de saúde', 'cartão sus'] },
+            { tagDisplay: '#RNDS', matchTerms: ['rnds', 'rede nacional de dados em saúde'] },
+            { tagDisplay: '#Tabnet', matchTerms: ['tabnet'] }, { tagDisplay: '#Datasus', matchTerms: ['datasus'] },
+            { tagDisplay: '#ConecteSUS', matchTerms: ['conectesua', 'conecte sus', 'meu sus digital'] }
+        ];
+
+        function assignNewsTags(itemFullText, tagVocabulary) {
+            const assignedTags = new Set();
+            const lowerItemText = itemFullText.toLowerCase();
+            tagVocabulary.forEach(tagDef => {
+                if (tagDef.matchTerms.some(term => lowerItemText.includes(term.toLowerCase()))) {
+                    assignedTags.add(tagDef.tagDisplay);
+                }
+            });
+            // Opcional: Limitar o número de tags ou priorizar as mais específicas
+            // Por exemplo, se mais de 5 tags forem encontradas, talvez pegar as 5 primeiras ou as mais raras.
+            // Por enquanto, retorna todas as encontradas.
+            return Array.from(assignedTags);
+        }
+
+// Carregar clipping de notícias
+document.addEventListener('DOMContentLoaded', async () => {
+    const relevantKeywordsClipping = [
+        'vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia',
+        'doença transmissível', 'doenças infecciosas', 'doença infecciosa', 'notificação compulsória',
+        'saúde pública', 'alerta sanitário', 'alerta epidemiológico', 'controle de doenças', 'prevenção de doenças',
+        'imunização', 'vacina', 'vacinação', 'Ministério da Saúde', 'secretaria de saúde', 'Anvisa', 'Fiocruz',
+        'OMS', 'OPAS', 'boletim epidemiológico', 'dados epidemiológicos', 'indicador de saúde',
+        'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'tuberculose',
+        'meningite', 'leptospirose', 'covid-19', 'mpox', 'oropouche', 'influenza', 'gripe',
+        // Adicione ou refine palavras-chave conforme necessário
+    ];
+
+    function isRelevant(item, keywords) {
+        const textToSearch = (
+            (item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')
+        ).toLowerCase();
+        return keywords.some(keyword => textToSearch.includes(keyword.toLowerCase()));
+    }
+
+    // --- AJUSTES NAS FONTES ---
+    const clippingSources = [
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://agencia.fiocruz.br/rss',
+            filterClientSide: true, // A Agência Fiocruz cobre muitos temas, filtrar é bom
+            sourceName: 'Agência Fiocruz de Notícias'
+        },
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/pt/bra/rss/feed',
+            filterClientSide: true, // Feed da OPAS Brasil, pode ter notícias variadas de saúde
+            sourceName: 'OPAS Brasil'
+        },
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=http://g1.globo.com/rss/g1/saude/',
+            filterClientSide: true, // G1 Saúde é amplo, filtrar ajuda
+            sourceName: 'G1 Saúde'
+        },
+        // Exemplo: Adicione um feed do Google Alertas
+        // 1. Vá em https://www.google.com.br/alerts
+        // 2. Crie um alerta para termos como "vigilância epidemiológica Brasil" OU "surto Brasil", etc.
+        // 3. Em "Entregar para:", escolha "Feed RSS".
+        // 4. Copie a URL do feed RSS gerado e cole abaixo.
+        /*
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_DO_SEU_FEED_RSS_DO_GOOGLE_ALERTAS_AQUI',
+            filterClientSide: false, // O Google Alertas já é filtrado por palavra-chave.
+                                     // Defina como 'true' se seu alerta for muito amplo e quiser refinar mais.
+            sourceName: 'Google Alertas (Epidemiologia BR)'
+        },
+        */
+        // Lembre-se de investigar e adicionar feeds do Ministério da Saúde e Anvisa se encontrar URLs estáveis.
+        // Exemplo hipotético (VERIFIQUE A URL REAL E FUNCIONALIDADE):
+        /*
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_RSS_MINISTERIO_SAUDE_NOTICIAS',
+            filterClientSide: true,
+            sourceName: 'Ministério da Saúde (Notícias)'
+        },
+        {
+            url: 'https://api.rss2json.com/v1/api.json?rss_url=URL_RSS_ANVISA_NOTICIAS',
+            filterClientSide: true,
+            sourceName: 'Anvisa (Notícias)'
+        }
+        */
+    ];
+    // --- FIM DOS AJUSTES NAS FONTES ---
+
+    const clippingContainer = document.getElementById('clipping-posts-container');
+
+    if (!clippingContainer) {
+        console.error("Contêiner de clipping não encontrado");
+        return;
+    }
+
+    try {
+        let allClippingPosts = [];
+
+        const fetchPromises = clippingSources.map(sourceInfo =>
+            fetch(sourceInfo.url)
+                .then(response => {
+                    if (!response.ok) {
+                        console.warn(`Erro ao carregar feed: ${sourceInfo.sourceName} (${sourceInfo.url}) - Status: ${response.status}`);
+                        return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'error', responseStatus: response.status };
+                    }
+                    return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'success' }));
+                })
+                .catch(error => {
+                    console.error(`Erro na requisição: ${sourceInfo.sourceName} (${sourceInfo.url})`, error);
+                    return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'fetch_error' };
+                })
+        );
+
+        const results = await Promise.all(fetchPromises);
+        console.log('--- Resultados Brutos das Fontes ---');
+        results.forEach(feedData => {
+            console.log(`Fonte: ${feedData.sourceName}, Status: ${feedData.status}, Itens Recebidos: ${feedData.items ? feedData.items.length : 0}`);
+            if (feedData.status === 'error') {
+                console.warn(`Detalhes do erro para ${feedData.sourceName}: Status HTTP ${feedData.responseStatus}`);
+            }
+        });
+        console.log('-----------------------------------');
+
+        results.forEach(feedData => {
+            if (feedData.items && feedData.items.length > 0) {
+                let itemsAddedFromThisSource = 0;
+                feedData.items.forEach(item => {
+                    item.processedSourceName = feedData.sourceName;
+                    if (feedData.filterClientSide) {
+                        if (isRelevant(item, relevantKeywordsClipping)) {
+                            allClippingPosts.push(item);
+                            itemsAddedFromThisSource++;
+                        }
+                    } else {
+                        allClippingPosts.push(item);
+                        itemsAddedFromThisSource++;
+                    }
+                });
+                console.log(`Fonte: ${feedData.sourceName}, Itens adicionados a allClippingPosts (após filtro cliente, se aplicável): ${itemsAddedFromThisSource} de ${feedData.items.length}`);
+            } else if (feedData.items && feedData.items.length === 0 && feedData.status === 'success') {
+                 console.log(`Fonte: ${feedData.sourceName} retornou 0 itens.`);
+            }
+        });
+
+        console.log(`Total de itens em allClippingPosts ANTES da deduplicação: ${allClippingPosts.length}`);
+
+        const uniquePosts = Array.from(new Set(allClippingPosts.map(item => item.link)))
+            .map(link => {
+                return allClippingPosts.find(item => item.link === link);
+            });
+
+        console.log(`Total de itens em uniquePosts APÓS a deduplicação: ${uniquePosts.length}`);
+
+        uniquePosts.sort((a, b) => {
+            const dateA = new Date(a.pubDate || a.published || 0);
+            const dateB = new Date(b.pubDate || b.published || 0);
+            return dateB - dateA;
+        });
+
+        clippingContainer.innerHTML = '';
+
+        if (uniquePosts.length === 0) {
+            clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada no momento.</p>';
+            return;
+        }
+
+        const MAX_POSTS_TO_SHOW = 8; // Defina quantos posts você quer mostrar no máximo
+        console.log(`Exibindo os primeiros ${Math.min(uniquePosts.length, MAX_POSTS_TO_SHOW)} posts de ${uniquePosts.length} notícias únicas encontradas.`);
+
+        uniquePosts.slice(0, MAX_POSTS_TO_SHOW).forEach(post => {
+            const title = post.title || 'Sem Título';
+            const link = post.link || '#';
+            const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
+            const sourceNameDisplay = post.processedSourceName || (post.source && post.source.title ? post.source.title : 'Fonte Desconhecida');
+            const sourceDate = `Fonte: ${sourceNameDisplay} - ${date}`;
+
+            let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia'; // Imagem padrão
+            if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
+                imageUrl = post.enclosure.link;
+            } else if (post.thumbnail) {
+                imageUrl = post.thumbnail;
+            } else if (post.image && typeof post.image === 'string') {
+                imageUrl = post.image;
+            } else {
+                const extractedImg = extractFirstImage(post.description || post.content || '');
+                if (extractedImg) { imageUrl = extractedImg; }
+            }
+
+            const truncatedDescription = truncateText(post.description || post.content || '', 100);
+
+            // Se você reativar as tags, certifique-se que as funções assignNewsTags e siteTagVocabulary estão definidas
+            // const itemFullTextForTagging = (post.title || '') + ' ' + (post.description || '') + ' ' + (post.content || '');
+            // const assignedPostTags = assignNewsTags(itemFullTextForTagging, siteTagVocabulary);
+            // const tagsHtml = assignedPostTags.length > 0 ?
+            //     assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
+
+            const cardHtml = `
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">${title}</h5>
+                            <p class="card-text small text-muted">${sourceDate}</p>
+                            <p class="card-text">${truncatedDescription}</p>
+                            <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            clippingContainer.innerHTML += cardHtml;
+        });
+
+    } catch (error) {
+        console.error("Erro geral ao carregar e processar o clipping:", error);
+        clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
+    }
+
+    // --- Funções Utilitárias (mantenha-as ou certifique-se de que estão acessíveis) ---
+    function formatDate(dateString) {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return 'Data Desconhecida';
+            return date.toLocaleDateString('pt-BR', options);
+        } catch (e) {
+            return 'Data Inválida';
+        }
+    }
+
+    function truncateText(text, maxLength) {
+        if (!text) return '';
+        if (text.length <= maxLength) return text;
+        // Tenta truncar na última palavra completa antes do limite
+        let truncated = text.substr(0, maxLength);
+        truncated = truncated.substr(0, Math.min(truncated.length, truncated.lastIndexOf(" ")));
+        return truncated + '...';
+    }
+
+    function extractFirstImage(htmlString) {
+        if (!htmlString) return null;
+        // Regex simples para extrair a primeira tag <img>. Pode não cobrir todos os casos.
+        const imgRegex = /<img.*?src=["'](.*?)["'].*?>/i;
+        const match = htmlString.match(imgRegex);
+        return match ? match[1] : null;
+    }
+});
+
+
+        // O listener para carregar o feed do BLOG continua o mesmo,
+        // certifique-se de que ele também esteja no seu <script>
+        // (geralmente antes ou depois deste bloco do clipping).
+        // Exemplo:
+        /*
+        document.addEventListener('DOMContentLoaded', async () => {
+            // ... seu código para carregar o feed do blog (#blog-posts-container) ...
+        });
+        */
+
+        // Carregar clipping de notícias (código da resposta anterior com adição do tagging)
+        document.addEventListener('DOMContentLoaded', async () => {
+            const relevantKeywordsClipping = [ // Mantém os filtros de relevância para a seleção inicial
+                'vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia', 
+                'doença transmissível', 'doenças infecciosas', 'doença infecciosa', 'notificação compulsória', 
+                'saúde pública', 'alerta sanitário', 'alerta epidemiológico', 'controle de doenças', 'prevenção de doenças',
+                'imunização', 'vacina', 'vacinação', 'Ministério da Saúde', 'secretaria de saúde', 'Anvisa', 'Fiocruz', 
+                'OMS', 'OPAS', 'boletim epidemiológico', 'dados epidemiológicos', 'indicador de saúde',
+                'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'tuberculose', 
+                'meningite', 'leptospirose', 'covid-19', 'mpox', 'oropouche', 'influenza', 'gripe'
+            ];
+
+            function isRelevant(item, keywords) {
+                const textToSearch = (
+                    (item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')
+                ).toLowerCase();
+                return keywords.some(keyword => textToSearch.includes(keyword.toLowerCase()));
+            }
+
+            const clippingSources = [
+                { 
+                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=vigilancia+epidemiologica+OU+surto+OU+alerta+sanitario+Brasil+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt-BR',
+                    filterClientSide: false, 
+                    sourceName: 'Google Notícias (Vigilância/Alerta BR)' 
+                },
+                { 
+                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=saude+publica+doencas+transmissiveis+Brasil+lang:pt&hl=pt-BR&gl=BR&ceid=BR:pt-BR',
+                    filterClientSide: false, 
+                    sourceName: 'Google Notícias (Saúde Pública BR)'
+                },
+                { 
+                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/saude/',
+                    filterClientSide: true, 
+                    sourceName: 'G1 Saúde'
+                },
+                { 
+                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.paho.org/pt/rss/feed',
+                    filterClientSide: true, 
+                    sourceName: 'OPAS (Português)' 
+                },
+                { 
+                    url: 'https://api.rss2json.com/v1/api.json?rss_url=https://www.who.int/rss-feeds/pt/news-room.xml',
+                    filterClientSide: true, 
+                    sourceName: 'OMS' 
+                }
+            ];
+            
+            const clippingContainer = document.getElementById('clipping-posts-container');
+
+            if (!clippingContainer) {
+                console.error("Contêiner de clipping não encontrado");
+                return;
+            }
+
+            try {
+                let allClippingPosts = [];
+                
+                const fetchPromises = clippingSources.map(sourceInfo => 
+                    fetch(sourceInfo.url)
+                        .then(response => {
+                            if (!response.ok) {
+                                console.warn(`Erro ao carregar feed: ${sourceInfo.sourceName} (${sourceInfo.url}) - Status: ${response.status}`);
+                                return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide };
+                            }
+                            return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide }));
+                        })
+                        .catch(error => {
+                            console.error(`Erro na requisição: ${sourceInfo.sourceName} (${sourceInfo.url})`, error);
+                            return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide };
+                        })
+                );
+
+                const results = await Promise.all(fetchPromises);
+                
+                results.forEach(feedData => {
+                    if (feedData.items) {
+                        feedData.items.forEach(item => {
+                            item.processedSourceName = feedData.sourceName; 
+                            if (feedData.filterClientSide) {
+                                if (isRelevant(item, relevantKeywordsClipping)) {
+                                    allClippingPosts.push(item);
+                                }
+                            } else {
+                                allClippingPosts.push(item);
+                            }
+                        });
+                    }
+                });
+
+                const uniquePosts = Array.from(new Set(allClippingPosts.map(item => item.link)))
+                                      .map(link => {
+                                          return allClippingPosts.find(item => item.link === link);
+                                      });
+
+                uniquePosts.sort((a, b) => {
+                    const dateA = new Date(a.pubDate || a.published || 0);
+                    const dateB = new Date(b.pubDate || b.published || 0);
+                    return dateB - dateA;
+                });
+
+                clippingContainer.innerHTML = '';
+
+                if (uniquePosts.length === 0) {
+                    clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada no momento.</p>';
+                    return;
+                }
+
+                uniquePosts.slice(0, 10).forEach(post => {
+                    const title = post.title || 'Sem Título';
+                    const link = post.link || '#';
+                    const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
+                    const sourceNameDisplay = post.processedSourceName || (post.source && post.source.title ? post.source.title : 'Fonte Desconhecida');
+                    const sourceDate = `Fonte: ${sourceNameDisplay} - ${date}`;
+                    
+                    let imageUrl = 'https://via.placeholder.com/400x120?text=Noticia';
+                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) {
+                        imageUrl = post.enclosure.link;
+                    } else if (post.thumbnail) {
+                        imageUrl = post.thumbnail;
+                    } else if (post.image && typeof post.image === 'string') {
+                        imageUrl = post.image;
+                    } else {
+                        const extractedImg = extractFirstImage(post.description || post.content || '');
+                        if (extractedImg) { imageUrl = extractedImg; }
+                    }
+
+                    const truncatedDescription = truncateText(post.description || post.content || '', 100); // Reduzi um pouco para dar espaço às tags
+
+                    // NOVO: Gerar tags para o post
+                    const itemFullTextForTagging = (post.title || '') + ' ' + (post.description || '') + ' ' + (post.content || '');
+                    const assignedPostTags = assignNewsTags(itemFullTextForTagging, siteTagVocabulary);
+                    const tagsHtml = assignedPostTags.length > 0 ? 
+                        assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
+
+                    const cardHtml = `
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x120?text=Noticia';">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${title}</h5>
+                                    <p class="card-text small text-muted">${sourceDate}</p>
+                                    <p class="card-text">${truncatedDescription}</p>
+                                    <div class="mt-2 mb-2">${tagsHtml}</div> {/* Tags inseridas aqui */}
+                                    <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler Notícia</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    clippingContainer.innerHTML += cardHtml;
+                });
+
+            } catch (error) {
+                console.error("Erro ao carregar clipping:", error);
+                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Por favor, tente novamente mais tarde.</p>';
+            }
+        });
 
         // Carregar feed do blog
         document.addEventListener('DOMContentLoaded', async () => {
