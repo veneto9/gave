@@ -3,596 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="InfoEpi: Vigilância Epidemiológica, cursos, conteúdos técnicos e apoio.">
+    <meta name="description" content="InfoEpi: Portal de referência em Vigilância Epidemiológica com cursos, conteúdos técnicos e apoio profissional">
+    <meta name="keywords" content="vigilância epidemiológica, epidemiologia, saúde pública, doenças transmissíveis, notificação compulsória">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://infoepi.com.br/">
+    <meta property="og:title" content="InfoEpi - Vigilância Epidemiológica">
+    <meta property="og:description" content="Portal de referência em Vigilância Epidemiológica com cursos, conteúdos técnicos e apoio profissional">
+    <meta property="og:image" content="https://infoepi.com.br/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://infoepi.com.br/">
+    <meta property="twitter:title" content="InfoEpi - Vigilância Epidemiológica">
+    <meta property="twitter:description" content="Portal de referência em Vigilância Epidemiológica com cursos, conteúdos técnicos e apoio profissional">
+    <meta property="twitter:image" content="https://infoepi.com.br/images/og-image.jpg">
+
     <title>InfoEpi - Vigilância Epidemiológica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Resto do seu CSS atual permanece o mesmo -->
     <style>
-        :root {
-            --cor-primaria: #1d4d46;
-            --cor-secundaria: #8a9e64;
-            --cor-terciaria: #f5f0e1;
-            --cor-destaque: #b05c3b;
-            --cor-texto: #333333;
-            --cor-texto-claro: #ffffff;
-            --cor-fundo: #f5f0e1;
-            --cor-borda: #d9d0c3;
-            --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.08); 
-            --transicao: all 0.3s ease;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.55; 
-            color: var(--cor-texto);
-            background-color: var(--cor-fundo);
-            font-size: 16px; 
-        }
-
-        a { text-decoration: none; color: var(--cor-primaria); transition: var(--transicao); }
-        a:hover { color: var(--cor-destaque); }
-        img { max-width: 100%; height: auto; }
-
-        header { background-color: var(--cor-texto-claro); box-shadow: var(--sombra-suave); position: sticky; top: 0; z-index: 1000; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; } 
-        .logo { display: flex; align-items: center; }
-        .logo img { height: 45px; margin-right: 8px; } 
-        .logo-text { font-size: 1.4rem; font-weight: 700; color: var(--cor-primaria); line-height: 1.2; }
-        .logo-text span { display: block; font-size: 0.8rem; font-weight: 400; color: var(--cor-texto); }
-
-        .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--cor-primaria); cursor: pointer; }
-        nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
-        nav ul li { margin-left: 20px; position: relative; } 
-        nav ul li a { color: var(--cor-texto); font-weight: 500; padding: 8px 0; font-size: 0.9rem; position: relative; } 
-        nav ul li a:hover { color: var(--cor-primaria); }
-        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--cor-primaria); transition: var(--transicao); }
-        nav ul li a:hover::after { width: 100%; }
-
-        .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background-color: var(--cor-texto-claro); min-width: 210px; box-shadow: var(--sombra-suave); z-index: 1; border-radius: 4px; overflow: hidden; }
-        .dropdown-content a { display: block; padding: 10px 15px; color: var(--cor-texto); border-bottom: 1px solid var(--cor-borda); font-size: 0.85rem; } 
-        .dropdown-content a:last-child { border-bottom: none; }
-        .dropdown-content a:hover { background-color: var(--cor-terciaria); }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        .banner-destaque { background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria)); color: var(--cor-texto-claro); padding: 70px 0; text-align: center; }
-        .banner-destaque h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; } 
-        .banner-destaque p { font-size: 1.05rem; max-width: 750px; margin: 0 auto 25px; } 
-        .btn { display: inline-block; background-color: var(--cor-destaque); color: var(--cor-texto-claro); padding: 10px 25px; border-radius: 4px; font-weight: 600; transition: var(--transicao); font-size: 0.95rem; }
-        .btn:hover { background-color: #9a4e32; color: var(--cor-texto-claro); transform: translateY(-2px); }
-        
-        .card .btn-primary { background-color: var(--cor-destaque); border-color: var(--cor-destaque); color: var(--cor-texto-claro); padding: 8px 18px; font-size: 0.85rem; } 
-        .card .btn-primary:hover { background-color: #9a4e32; border-color: #9a4e32; }
-
-        section { padding: 60px 0; } 
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 15px; /* Espaço abaixo da linha/título antes do parágrafo descritivo */
-        }
-        .section-title h2 {
-            font-size: 2.2rem; 
-            color: var(--cor-primaria);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 8px; /* Espaço entre o texto do título e a linha */
-            margin-bottom: 0; 
-        }
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0px;  /* Largura da linha mais curta e elegante */
-            height: 0px; /* Espessura da linha mais fina */
-            background-color: var(--cor-destaque); 
-        }
-
-        /* Parágrafo descritivo abaixo do título da seção */
-        #recursos-disponiveis .text-muted,
-        #noticias-destaque .text-muted,
-        #clipping-noticias .text-muted {
-            font-size: 1rem; 
-            margin-top: 0; /* Garante que não haja margem superior no parágrafo */
-            /* A classe mb-4 no HTML (margin-bottom: 1.5rem / 24px) controla o espaço para os cards abaixo */
-        }
-
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 25px; } 
-        .card { background-color: var(--cor-texto-claro); border-radius: 6px; overflow: hidden; box-shadow: var(--sombra-suave); transition: var(--transicao); display: flex; flex-direction: column; border: none; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); }
-        .card-img-top { height: 190px; overflow: hidden; object-fit: cover; } 
-        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; } 
-        .card-title { font-size: 1.2rem; margin-bottom: 8px; color: var(--cor-primaria); font-weight: 600; } 
-        .card-text { margin-bottom: 15px; color: var(--cor-texto); font-size: 0.9rem; line-height: 1.5; } 
-
-        .recursos-disponiveis { background-color: var(--cor-terciaria); }
-        .recursos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; } 
-        .recurso-item { text-align: center; padding: 25px 20px; background-color: var(--cor-texto-claro); border-radius: 6px; box-shadow: var(--sombra-suave); transition: var(--transicao); }
-        .recurso-item:hover { transform: translateY(-4px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        .recurso-icon { font-size: 2.5rem; color: var(--cor-primaria); margin-bottom: 15px; } 
-        .recurso-item h3 { font-size: 1.15rem; margin-bottom: 10px; color: var(--cor-primaria); font-weight: 600; } 
-        .recurso-item p { font-size: 0.85rem; line-height: 1.45; } 
-        
-        #noticias-destaque .card-title { font-size: 1.1rem; line-height: 1.35em; max-height: 4.05em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.5rem; }
-        #noticias-destaque .card-text { font-size: 0.85rem; line-height: 1.45em; max-height: 4.35em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.75rem; }
-        #noticias-destaque .card-img-top { height: 170px; } 
-
-        #clipping-noticias .card-title { font-size: 1rem; line-height: 1.3em; max-height: 3.9em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; margin-bottom: 0.4rem; }
-        #clipping-noticias .card-text { font-size: 0.8rem; line-height: 1.4em; max-height: 4.2em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
-        #clipping-noticias .card-body .small.text-muted { font-size: 0.7rem; margin-bottom: 0.3rem !important; } 
-        #clipping-noticias .card-img-top { height: 125px; } 
-        #clipping-noticias .card-body .btn-primary { padding: 7px 14px; font-size: 0.8rem; } 
-        #clipping-noticias .badge { font-size: 0.65rem; padding: 0.2em 0.35em; } 
-
-        footer { background-color: var(--cor-primaria); color: var(--cor-texto-claro); padding: 60px 0 25px; }
-        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; margin-bottom: 35px; }
-        .footer-col h3 { font-size: 1.2rem; margin-bottom: 18px; position: relative; padding-bottom: 10px; font-weight: 600; }
-        .footer-col h3::after { content: ''; position: absolute; bottom: 0; left: 0; width: 45px; height: 2.5px; background-color: var(--cor-destaque); }
-        .footer-col p { margin-bottom: 15px; font-size: 0.9rem; line-height: 1.6; } 
-        .footer-links { list-style: none; padding: 0; margin: 0; }
-        .footer-links li { margin-bottom: 10px; } 
-        .footer-links a { color: var(--cor-texto-claro); opacity: 0.8; font-size: 0.9rem; transition: var(--transicao); } 
-        .footer-links a:hover { opacity: 1; padding-left: 4px; }
-        .footer-links .icon { margin-right: 6px; }
-
-        .social-links { display: flex; gap: 15px; margin-top: 20px; } 
-        .social-links a { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; background-color: rgba(255, 255, 255, 0.08); border-radius: 50%; color: var(--cor-texto-claro); transition: var(--transicao); }
-        .social-links a svg { width: 18px; height: 18px; } 
-        .social-links a:hover { background-color: var(--cor-destaque); transform: translateY(-2px); }
-        .copyright { text-align: center; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 0.85rem; opacity: 0.75; }
-
-        @media (max-width: 992px) {
-            nav { max-width: 280px; }
-            nav ul { padding: 20px; }
-            nav ul li { margin-bottom: 15px; }
-            nav ul li a { font-size: 0.95rem; }
-            .dropdown-content a { padding: 9px 15px; font-size: 0.9rem; }
-            .banner-destaque h1 { font-size: 2rem; }
-            .banner-destaque p { font-size: 1rem; }
-        }
-
-        @media (max-width: 768px) {
-            body { font-size: 15px; }
-            .header-container { padding: 10px 0; }
-            .logo img { height: 40px; }
-            .logo-text { font-size: 1.25rem; }
-            .logo-text span { font-size: 0.75rem; }
-            .banner-destaque { padding: 50px 0; }
-            .banner-destaque h1 { font-size: 1.8rem; }
-            section { padding: 45px 0; } 
-            
-            .section-title {
-                margin-bottom: 15px; /* Mantém o espaçamento reduzido também no mobile */
-            }
-            .section-title h2 {
-                font-size: 1.8rem; 
-                padding-bottom: 6px; /* Ajusta para tela menor */
-            }
-            .section-title h2::after {
-                width: 50px; /* Linha um pouco menor em telas pequenas */
-                height: 2px;
-            }
-            
-            #recursos-disponiveis .text-muted,
-            #noticias-destaque .text-muted,
-            #clipping-noticias .text-muted {
-                font-size: 0.95rem;
-                /* mb-4 (do HTML) será 1.5 * 15px = 22.5px, o que deve ser adequado */
-            }
-
-            .cards-grid, .recursos-grid { gap: 20px; }
-            .card-body { padding: 15px; }
-            .card-title { font-size: 1.1rem; }
-            .card-text { font-size: 0.85rem; margin-bottom: 12px; }
-
-            #noticias-destaque .card-img-top { height: 150px; }
-            #noticias-destaque .card-title { font-size: 1.05rem; margin-bottom: 0.4rem; }
-            #noticias-destaque .card-text { font-size: 0.8rem; margin-bottom: 0.6rem; }
-
-            #clipping-noticias .card-img-top { height: 115px; }
-            #clipping-noticias .card-title { font-size: 0.95rem; margin-bottom: 0.3rem; }
-            #clipping-noticias .card-text { font-size: 0.75rem; }
-            #clipping-noticias .badge { font-size: 0.6rem; }
-
-            .footer-col h3 { font-size: 1.15rem; }
-            .footer-col p, .footer-links a { font-size: 0.85rem; }
-        }
+        /* Seu CSS atual */
     </style>
 </head>
 <body>
-<header>
-  <div class="container header-container">
-    <div class="logo">
-      <img src="images/nova.png" alt="Logo INFOEPI" style="width: 250px; height: auto;">
+    <!-- Seu HTML atual -->
+    
+    <!-- Newsletter Modal -->
+    <div class="modal fade" id="newsletterModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Assine nossa Newsletter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Receba atualizações semanais sobre vigilância epidemiológica!</p>
+                    <form id="newsletterForm">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Seu e-mail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Assinar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-            <button class="nav-toggle" aria-label="Abrir menu">☰</button>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li class="dropdown">
-                           <a href="#">Agravos</a>
-                        <div class="dropdown-content">
-                            <a href="guia.html">Guia VE simplificado</a>
-                            <a href="sifilis-adquirida.html">Legislação</a>
-                            <a href="febre-maculosa.html">Notificação de agravos</a>
-                            <a href="candidiase.html">Perguntas e respostas</a>
-                            <a href="doencas-de-notificacao-compulsoria.html">mais</a>
-                        </div>
-                        </li>
-                    <li><a href="formacao.html">Cursos</a></li>
-                    <li class="dropdown">
-                        <a href="#">Publicações</a>
-                        <div class="dropdown-content">
-                            <a href="manuais.html">Manuais</a>
-                            <a href="informes-tecnicos.html">Informes Técnicos</a>
-                            <a href="fichas-de-notificacao.html">Fichas de Notificação</a>
-                        </div>
-                    </li>
-                    <li><a href="https://substack.com/@infovepi" target="_blank" rel="noopener">Blog</a></li>
-                    <li><a href="sobre-o-site.html">Sobre</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <section class="banner-destaque">
-        <div class="container">
-            <h1>InfoEpi: Vigilância Epidemiológica</h1>
-            <p>Cursos, conteúdos técnicos e apoio para quem atua com vigilância epidemiológica, notificações compulsórias e concursos públicos. Aproveite os materiais e use o InfoEpi como referência em saúde pública.</p>
-            <a href="#recursos-disponiveis" class="btn">Conheça o projeto</a> 
-        </div>
-    </section>
 
-    <section id="recursos-disponiveis" class="recursos-disponiveis">
-        <div class="container">
-            <div class="section-title">
-                <h2>Recursos Disponíveis</h2>
-            </div>
-            <p class="text-center text-muted mb-4">Ferramentas e conteúdos essenciais para contribuir com seus conhecimentos na área.</p> 
-            <div class="recursos-grid">
-                <div class="recurso-item">
-                    <div class="recurso-icon">📈</div>
-                    <h3>Epidemiologia na Prática</h3>
-                    <p>Acesse informações e estatísticas sobre a situação epidemiológica atual.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">⭐</div>
-                    <h3>Guia GAVE</h3>
-                    <p>Seleção de Agravos de notificação compulsória. Acesse e baixe as fichas de notificação.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">📋</div>
-                    <h3>Documentos Técnicos</h3>
-                    <p>Consulte manuais e guias técnicos para profissionais de saúde e concursos.</p>
-                </div>
-                <div class="recurso-item">
-                    <div class="recurso-icon">🎓</div>
-                    <h3>Aprenda com o InfoEpi</h3>
-                    <p>Materiais educativos e cursos para capacitação em vigilância epidemiológica.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Botão Copiar Link -->
+    <button id="copyLinkBtn" class="btn btn-sm btn-secondary position-fixed bottom-0 end-0 m-3">
+        Copiar Link
+    </button>
 
-    <section id="noticias-destaque"> 
-        <div class="container">
-            <div class="section-title">
-                <h2>Notícias em Destaque</h2>
-            </div>
-            <p class="text-center text-muted mb-4">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p> 
-            <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                </div>
-        </div>
-    </section>
-
-    <section id="clipping-noticias"> 
-         <div class="container">
-            <div class="section-title">
-                <h2>Clipping de Notícias</h2>
-            </div>
-            <p class="text-center text-muted mb-4">Destaques da Mídia em Saúde e Vigilância</p> 
-            <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
-                </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h3>Sobre o InfoEpi</h3>
-                    <p>O InfoEpi é dedicado a fornecer informações e recursos sobre doenças de notificação compulsória e vigilância epidemiológica para profissionais de saúde e população em geral.</p>
-                    <div class="social-links">
-                        <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0 0 3.603 0 8.05C0 12.006 2.923 15.11 6.75 15.969V10.43H4.848V8.05h1.902V6.33c0-1.883 1.122-2.922 2.85-2.922.823 0 1.528.062 1.735.089v2.138h-1.265c-.912 0-1.088.434-1.088 1.068v1.4H10.4l-.274 2.38H8.688V15.97C13.077 15.11 16 12.006 16 8.049z"/></svg></a>
-                        <a href="#" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.602.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg></a>
-                        <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.703.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372.527-.205.973-.478 1.417-.923.445-.444.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm0 1.442c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.598-.919c-.11-.282-.24-.705-.275-1.486-.038-.843-.046-1.095-.046-3.231s.008-2.389.046-3.232c.036-.78.166-1.204.275-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.843-.039 1.096-.047 3.232-.047zM8 4.95A3.05 3.05 0 1 0 8 11.05a3.05 3.05 0 0 0 0-6.1zM8 9.6A1.6 1.6 0 1 1 8 6.4a1.6 1.6 0 0 1 0 3.2zm5.256-4.756a.96.96 0 1 0 0-1.92.96.96 0 0 0 0 1.92z"/></svg></a>
-                        <a href="#" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16"><path d="M8.051 1.999L7.422 1.333A.666.666 0 0 0 6.766.99H2.234A.667.667 0 0 0 1.566 1.333L.949 1.999c-.433.667-.433 2.667 0 3.334l.617.666a.667.667 0 0 0 .667.334h4.532A.667.667 0 0 0 8.05 5.999l.617-.666c.433-.667.433-2.667 0-3.334M1.928 3.333A.5.5 0 0 1 2.234 3H6.766a.5.5 0 0 1 .306.333L7.667 4H2.333L1.928 3.333M13.703 4.948a1.752 1.752 0 0 0-1.225-1.224C11.552 3.5 8 3.5 8 3.5s-3.552 0-4.478.224A1.752 1.752 0 0 0 2.297 4.948C2.072 5.873 2.072 7.127 2.072 8s0 2.127.225 3.052a1.752 1.752 0 0 0 1.225 1.224C4.448 12.5 8 12.5 8 12.5s3.552 0 4.478-.224a1.752 1.752 0 0 0 1.225-1.224C13.928 10.127 13.928 8.873 13.928 8s0-2.127-.225-3.052zM9.75 8.91l-2.5-1.555V10.5a.5.5 0 0 0 .75.433L10.5 9.343a.5.5 0 0 0 0-.866z"/></svg></a>
-                    </div>
-                </div>
-                <div class="footer-col">
-                    <h3>Links Rápidos</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Início</a></li>
-                        <li><a href="doencas-de-notificacao-compulsoria.html">Doenças</a></li>
-                        <li><a href="formacao.html">Formação</a></li>
-                        <li><a href="manuais.html">Publicações</a></li>
-                        <li><a href="https://substack.com/@infovepi" target="_blank" rel="noopener">Blog</a></li>
-                        <li><a href="sobre-o-site.html">Sobre</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Recursos</h3>
-                    <ul class="footer-links">
-                        <li><a href="fichas-de-notificacao.html">Fichas de Notificação</a></li>
-                        <li><a href="manuais.html">Manuais Técnicos</a></li>
-                        <li><a href="informes-tecnicos.html">Informes Epidemiológicos</a></li>
-                        <li><a href="glossario.html">Glossário</a></li>
-                        <li><a href="perguntas-frequentes.html">Perguntas Frequentes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contato</h3>
-                    <p>Entre em contato conosco para mais informações ou sugestões.</p>
-                    <ul class="footer-links">
-                         <li><span class="icon">✉️</span> contato.infoepi@gmail.com</li> 
-                         <li><span class="icon">📞</span> (21) 99889-8984</li> 
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 InfoEpi - "Informação, Análise e Formação em Vigilância Epidemiológica". Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
     <script>
-        // Menu mobile toggle
-        const navToggle = document.querySelector('.nav-toggle');
-        const nav = document.querySelector('nav');
-        const header = document.querySelector('header');
+        // Inicializa AOS (Animate On Scroll)
+        AOS.init();
 
-        if (navToggle && nav && header) {
-            navToggle.addEventListener('click', () => {
-                nav.classList.toggle('active');
-                const headerHeight = header.offsetHeight;
-                nav.style.top = headerHeight + 'px';
-                nav.style.height = `calc(100vh - ${headerHeight}px)`;
-            });
-        }
-        
-        const dropdowns = document.querySelectorAll('.dropdown');
-        
-        function handleDropdownClick(event) {
-            const link = event.currentTarget;
-            const dropdown = link.parentElement; 
+        // Newsletter Modal
+        setTimeout(() => {
+            new bootstrap.Modal(document.getElementById('newsletterModal')).show();
+        }, 30000);
 
-            if (link.getAttribute('href') === '#' || dropdown.classList.contains('dropdown')) {
-                event.preventDefault();
-            }
-            
-            const isActive = dropdown.classList.contains('active');
-            dropdowns.forEach(otherDropdown => { 
-                if (otherDropdown !== dropdown) {
-                    otherDropdown.classList.remove('active');
-                }
-            });
-            if (!isActive) { 
-                dropdown.classList.add('active');
-            } else { 
-                 dropdown.classList.remove('active');
-            }
-        }
-
-        function setupDropdowns() {
-            if (window.innerWidth < 992) {
-                dropdowns.forEach(dropdown => {
-                    const link = dropdown.querySelector('a'); 
-                    if (link) {
-                        link.removeEventListener('click', handleDropdownClick); 
-                        link.addEventListener('click', handleDropdownClick);
-                    }
-                });
-            } else { 
-                dropdowns.forEach(dropdown => {
-                    dropdown.classList.remove('active'); 
-                    const link = dropdown.querySelector('a');
-                    if (link) {
-                        link.removeEventListener('click', handleDropdownClick); 
-                    }
-                });
-            }
-        }
-
-        setupDropdowns(); 
-        window.addEventListener('resize', setupDropdowns); 
-
-        document.addEventListener('click', (e) => {
-            if (nav && nav.classList.contains('active')) { 
-                if (!e.target.closest('nav') && !e.target.closest('.nav-toggle')) {
-                    nav.classList.remove('active');
-                }
-            }
+        // Copiar Link
+        new ClipboardJS('#copyLinkBtn', {
+            text: () => window.location.href
         });
 
-        function formatDate(dateString) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            try {
-                const date = new Date(dateString);
-                if (isNaN(date.getTime())) return 'Data Desconhecida';
-                return date.toLocaleDateString('pt-BR', options);
-            } catch (e) { return 'Data Inválida'; }
-        }
-
-        function extractFirstImage(htmlString) {
-            if (!htmlString) return null;
-            const div = document.createElement('div');
-            div.innerHTML = htmlString;
-            const img = div.querySelector('img');
-            return img ? img.src : null;
-        }
-
-        function truncateText(text, maxLength) {
-            if (!text) return '';
-            let cleanText = text.replace(/<[^>]*>?/gm, '').replace(/\n/g, ' ').trim();
-            if (cleanText.length <= maxLength) return cleanText;
-            let truncated = cleanText.substr(0, maxLength);
-            truncated = truncated.substr(0, Math.min(truncated.length, truncated.lastIndexOf(" ")));
-            return truncated + '...';
-        }
-
-        const siteTagVocabulary = [
-            { tagDisplay: '#Imunização', matchTerms: ['imunização', 'imunizações', 'imunizar', 'programa nacional de imunizações', 'pni'] },
-            { tagDisplay: '#Vacinação', matchTerms: ['vacinação', 'vacina', 'vacinas', 'vacinados', 'vacinada', 'calendário de vacinação'] },
-            { tagDisplay: '#Notificação', matchTerms: ['notificação', 'notificações', 'notificar', 'notificado', 'notificada', 'notificação compulsória', 'sinan'] },
-            { tagDisplay: '#Cobertura', matchTerms: ['cobertura vacinal', 'cobertura de vacinação', 'baixa cobertura'] },
-            { tagDisplay: '#Vigilância', matchTerms: ['vigilância em saúde', 'vigilância sanitária', 'vigilância ambiental', 'vigilância do trabalhador', 'farmacovigilância', 'vigilância epidemiológica'] },
-            { tagDisplay: '#Epidemiologia', matchTerms: ['epidemiologia', 'epidemiológico', 'epidemiológica', 'estudo epidemiológico', 'boletim epidemiológico'] },
-            { tagDisplay: '#Síndromes', matchTerms: ['síndrome', 'síndromes', 'síndrome gripal', 'síndrome respiratória aguda grave', 'srag'] },
-            { tagDisplay: '#Meningite', matchTerms: ['meningite'] }, { tagDisplay: '#Influenza', matchTerms: ['influenza', 'gripe', 'h1n1', 'h3n2'] },
-            { tagDisplay: '#Sarampo', matchTerms: ['sarampo'] }, { tagDisplay: '#Dengue', matchTerms: ['dengue'] },
-            { tagDisplay: '#Covid-19', matchTerms: ['covid-19', 'coronavirus', 'sars-cov-2'] }, { tagDisplay: '#Mpox', matchTerms: ['mpox', 'monkeypox'] },
-            { tagDisplay: '#Oropouche', matchTerms: ['oropouche'] },
-            { tagDisplay: '#Eventos', matchTerms: ['eventos em saúde pública', 'eisp', 'surto', 'epidemia', 'pandemia', 'alerta sanitário', 'alerta epidemiológico'] },
-            { tagDisplay: '#Dados', matchTerms: ['dados de saúde', 'dados epidemiológicos', 'análise de dados', 'datasus', 'tabnet'] },
-            { tagDisplay: '#Capacitação', matchTerms: ['capacitação', 'treinamento', 'qualificação', 'educação permanente', 'curso', 'formação'] },
-            { tagDisplay: '#SaúdePública', matchTerms: ['saúde pública', 'saude publica'] },
-            { tagDisplay: '#SUS', matchTerms: ['sus', 'sistema único de saúde'] },
-            { tagDisplay: '#MinistérioSaúde', matchTerms: ['ministério da saúde', 'ms'] }, { tagDisplay: '#Anvisa', matchTerms: ['anvisa'] },
-            { tagDisplay: '#Fiocruz', matchTerms: ['fiocruz'] }, { tagDisplay: '#OPAS', matchTerms: ['opas', 'organização pan-americana'] },
-            { tagDisplay: '#OMS', matchTerms: ['oms', 'organização mundial da saúde'] }
-        ];
-
-        function assignNewsTags(itemFullText, tagVocabulary) {
-            const assignedTags = new Set();
-            if (!itemFullText) return [];
-            const lowerItemText = itemFullText.toLowerCase();
-            tagVocabulary.forEach(tagDef => {
-                if (tagDef.matchTerms.some(term => lowerItemText.includes(term.toLowerCase()))) {
-                    assignedTags.add(tagDef.tagDisplay);
-                }
-            });
-            return Array.from(assignedTags).slice(0, 3); 
-        }
-        
-        async function loadBlogFeed() {
-            const rssFeedUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://infovepi.substack.com/feed';
-            const newsContainer = document.getElementById('blog-posts-container');
-            if (!newsContainer) { console.error("Contêiner de notícias do blog não encontrado"); return; }
-            newsContainer.innerHTML = '<p class="text-center w-100">Carregando últimas notícias...</p>';
-            try {
-                const response = await fetch(rssFeedUrl);
-                if (!response.ok) { throw new Error(`Erro feed blog: ${response.status}`); }
-                const data = await response.json();
-                if (data.status !== 'ok' || !data.items || data.items.length === 0) {
-                    newsContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia disponível no momento.</p>'; return;
-                }
-                newsContainer.innerHTML = ''; 
-                data.items.slice(0, 3).forEach(post => {
-                    const title = post.title || 'Sem Título';
-                    const link = post.link || '#';
-                    const pubDate = post.pubDate ? formatDate(post.pubDate) : 'Data Desconhecida';
-                    let imageUrl = post.thumbnail || extractFirstImage(post.description || post.content) || 'https://via.placeholder.com/400x170?text=InfoEpi';
-                    const description = truncateText(post.content || post.description, 110); 
-                    const cardHtml = `
-                        <div class="col"><div class="card h-100">
-                            <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x170?text=InfoEpi';">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${title}</h5>
-                                <p class="card-text small text-muted mb-2">${pubDate}</p>
-                                <p class="card-text">${description}</p>
-                                <a href="${link}" class="btn btn-primary mt-auto" target="_blank" rel="noopener">Ler mais</a>
-                            </div>
-                        </div></div>`;
-                    newsContainer.innerHTML += cardHtml;
-                });
-            } catch (error) {
-                console.error("Erro ao carregar feed do blog:", error);
-                newsContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar notícias. Tente mais tarde.</p>';
-            }
-        }
-
-        async function loadClippingFeed() {
-            const relevantKeywordsClipping = ['vigilância epidemiológica', 'epidemiologia', 'surto', 'epidemia', 'pandemia', 'doença transmissível', 'notificação compulsória', 'saúde pública', 'alerta sanitário', 'imunização', 'vacina', 'ministério da saúde', 'anvisa', 'fiocruz', 'oms', 'opas', 'dengue', 'zika', 'chikungunya', 'febre amarela', 'sarampo', 'covid-19', 'mpox', 'oropouche', 'influenza'];
-            function isRelevant(item, keywords) {
-                const textToSearch = ((item.title || '') + ' ' + (item.description || '') + ' ' + (item.content || '')).toLowerCase();
-                return keywords.some(keyword => textToSearch.includes(keyword.toLowerCase()));
-            }
-            const clippingSources = [
-                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dvigilancia%2Bepidemiologica%2BOU%2Bsurto%2BOU%2Balerta%2Bsanitario%2BBrasil%26hl%3Dpt-BR%26gl%3DBR%26ceid%3DBR%3Apt-BR', filterClientSide: false, sourceName: 'Google (Vigilância BR)' },
-                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dsaude%2Bpublica%2Bdoencas%2Btransmissiveis%2Bministerio%2Bda%2Bsaude%2BBrasil%26hl%3Dpt-BR%26gl%3DBR%26ceid%3DBR%3Apt-BR', filterClientSide: false, sourceName: 'Google (Saúde Pública BR)'},
-                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fg1.globo.com%2Frss%2Fg1%2Fsaude%2F', filterClientSide: true, sourceName: 'G1 Saúde'},
-                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fagencia.fiocruz.br%2Frss', filterClientSide: true, sourceName: 'Ag. Fiocruz'},
-                { url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.paho.org%2Fpt%2Fbra%2Frss%2Ffeed', filterClientSide: true, sourceName: 'OPAS Brasil'}
-            ];
-            const clippingContainer = document.getElementById('clipping-posts-container');
-            if (!clippingContainer) { console.error("Contêiner de clipping não encontrado"); return; }
-            clippingContainer.innerHTML = '<p class="text-center w-100">Carregando clipping...</p>';
-            try {
-                let allClippingPosts = [];
-                const fetchPromises = clippingSources.map(sourceInfo => 
-                    fetch(sourceInfo.url)
-                        .then(response => {
-                            if (!response.ok) { console.warn(`Erro feed: ${sourceInfo.sourceName} (${response.status})`); return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'error' }; }
-                            return response.json().then(data => ({ ...data, sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: data.status }));
-                        }).catch(error => { console.error(`Erro req: ${sourceInfo.sourceName}`, error); return { items: [], sourceName: sourceInfo.sourceName, filterClientSide: sourceInfo.filterClientSide, status: 'fetch_error' }; })
-                );
-                const results = await Promise.all(fetchPromises);
-                results.forEach(feedData => {
-                    if (feedData.status === 'ok' && feedData.items && feedData.items.length > 0) {
-                        feedData.items.forEach(item => {
-                            item.processedSourceName = feedData.sourceName; 
-                            if (feedData.filterClientSide ? isRelevant(item, relevantKeywordsClipping) : true) {
-                                allClippingPosts.push(item);
-                            }
-                        });
-                    } else if (feedData.status !== 'ok' && feedData.status !== 'fetch_error') { console.warn(`Feed ${feedData.sourceName} status: ${feedData.status}`);}
-                });
-                const uniquePosts = Array.from(new Map(allClippingPosts.map(item => [item.link || item.guid || item.title, item])).values());
-                uniquePosts.sort((a, b) => new Date(b.pubDate || b.published || 0) - new Date(a.pubDate || a.published || 0));
-                clippingContainer.innerHTML = '';
-                if (uniquePosts.length === 0) { clippingContainer.innerHTML = '<p class="text-center w-100">Nenhuma notícia relevante encontrada.</p>'; return; }
-                
-                const MAX_CLIPPING_POSTS = 8;
-                uniquePosts.slice(0, MAX_CLIPPING_POSTS).forEach(post => {
-                    const title = post.title || 'Sem Título';
-                    const link = post.link || '#';
-                    const date = post.pubDate ? formatDate(post.pubDate) : (post.published ? formatDate(post.published) : 'Data Desconhecida');
-                    const sourceNameDisplay = post.processedSourceName || 'Fonte Desc.';
-                    const sourceDate = `Fonte: ${sourceNameDisplay} - ${date}`;
-                    let imageUrl = 'https://via.placeholder.com/400x125?text=Noticia'; 
-                    if (post.enclosure && post.enclosure.link && post.enclosure.type && post.enclosure.type.startsWith('image')) { imageUrl = post.enclosure.link;
-                    } else if (post.thumbnail) { imageUrl = post.thumbnail;
-                    } else { const extractedImg = extractFirstImage(post.description || post.content || ''); if (extractedImg) { imageUrl = extractedImg; } }
-                    const truncatedDescription = truncateText(post.description || post.content || '', 70); 
-                    const itemFullTextForTagging = (post.title || '') + ' ' + (post.description || '') + ' ' + (post.content || '');
-                    const assignedPostTags = assignNewsTags(itemFullTextForTagging, siteTagVocabulary);
-                    const tagsHtml = assignedPostTags.length > 0 ? assignedPostTags.map(tag => `<span class="badge bg-secondary me-1 mb-1">${tag}</span>`).join('') : '';
-                    const cardHtml = `
-                        <div class="col"><div class="card h-100">
-                            <img src="${imageUrl}" class="card-img-top" alt="${title.replace(/"/g, '&quot;')}" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x125?text=Noticia';">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">${title}</h5>
-                                <p class="card-text small text-muted mb-1">${sourceDate}</p>
-                                <p class="card-text mb-2">${truncatedDescription}</p>
-                                <div class="mt-auto">
-                                    <div class="mb-2">${tagsHtml}</div>
-                                    <a href="${link}" class="btn btn-primary" target="_blank" rel="noopener">Ler Notícia</a>
-                                </div>
-                            </div>
-                        </div></div>`;
-                    clippingContainer.innerHTML += cardHtml;
-                });
-            } catch (error) {
-                console.error("Erro ao carregar clipping:", error);
-                clippingContainer.innerHTML = '<p class="text-center w-100 text-danger">Erro ao carregar clipping. Tente mais tarde.</p>';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadBlogFeed();
-            loadClippingFeed();
-        });
+        // Seu JavaScript atual permanece aqui
     </script>
 </body>
 </html>
