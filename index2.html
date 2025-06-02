@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel InfoEpi</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-900 p-6">
+  <img src="/logo-infoepi.png" alt="Logo InfoEpi" class="w-48 mb-4" />
+  <div class="tabs">
+    <div class="flex space-x-4 mb-4">
+      <button onclick="showTab('visao-geral')" class="tab-btn">Visão Geral</button>
+      <button onclick="showTab('fluxo')" class="tab-btn">Fluxo Editorial</button>
+      <button onclick="showTab('calendario')" class="tab-btn">Calendário Estratégico</button>
+      <button onclick="showTab('equipe')" class="tab-btn">Equipe</button>
+      <button onclick="showTab('ferramentas')" class="tab-btn">IA & Ferramentas</button>
+    </div>
+
+    <div id="visao-geral" class="tab-content">
+      <h2 class="text-xl font-bold mb-2">Pautas em Andamento</h2>
+      <p><a href="https://drive.google.com/drive/folders/12c5Ikiq1Yoc87DkxezsEVc2SG8SB8Vdv?usp=drive_link" class="text-blue-600 underline" target="_blank">Abrir Pasta de Pautas</a></p>
+    </div>
+
+    <div id="fluxo" class="tab-content hidden">
+      <h2 class="text-xl font-bold mb-2">Fluxo Editorial</h2>
+      <img src="/fluxo-editorial.png" alt="Fluxo Editorial Visual" class="mt-4 rounded shadow" />
+    </div>
+
+    <div id="calendario" class="tab-content hidden">
+      <h2 class="text-xl font-bold mb-2">Calendário Estratégico</h2>
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=contato.infoepi%40gmail.com&ctz=America%2FSao_Paulo"
+        style="border: 0" width="100%" height="600" frameborder="0" scrolling="no">
+      </iframe>
+    </div>
+
+    <div id="equipe" class="tab-content hidden">
+      <h2 class="text-xl font-bold mb-2">Equipe InfoEpi</h2>
+      <ul class="space-y-2">
+        <li><a href="https://chatgpt.com/g/g-683d55101418819186c0465ee53b56c6-veneto-infoepi" target="_blank" class="text-blue-600 underline">Veneto (GPT Híbrido)</a></li>
+        <li><a href="https://chatgpt.com/g/g-683d493df7408191959eb0d6b2b6d411-ruda-infoepi" target="_blank" class="text-blue-600 underline">Rudá (Revisão Editorial)</a></li>
+        <li><a href="https://chatgpt.com/g/g-683d4e59737c8191a14dd67a940a2df9-cecilia-infoepi" target="_blank" class="text-blue-600 underline">Cecília (Pesquisa Científica)</a></li>
+        <li><a href="https://chatgpt.com/g/g-683d4f4fc07c81918b2d2a18f61a55fa-david-infoepi" target="_blank" class="text-blue-600 underline">David (Design Visual)</a></li>
+        <li><a href="https://chatgpt.com/g/g-683d5085455481918f6b9f099d8ad4fd-nisia-infoepi" target="_blank" class="text-blue-600 underline">Nísia (Visibilidade e Estratégia)</a></li>
+      </ul>
+    </div>
+
+    <div id="ferramentas" class="tab-content hidden">
+      <h2 class="text-xl font-bold mb-2">Ferramentas e IAs</h2>
+      <ul class="space-y-1 list-disc list-inside">
+        <li><a href="https://onecompiler.com/" class="text-blue-600 underline" target="_blank">OneCompiler</a>: Testes e protótipos</li>
+        <li><a href="https://manus.im/" class="text-blue-600 underline" target="_blank">Manus</a>: Texto acadêmico</li>
+        <li><a href="https://chat.deepseek.com/" class="text-blue-600 underline" target="_blank">DeepSeek Chat</a>: IA avançada</li>
+        <li><a href="https://github.com/veneto9/gave/blob/main/index.html" class="text-blue-600 underline" target="_blank">GAVE GitHub</a>: Projetos autorais</li>
+        <li><a href="https://docs.google.com/" class="text-blue-600 underline" target="_blank">Google Docs</a>: Documentação colaborativa</li>
+        <li><a href="https://infoepi.com.br/" class="text-blue-600 underline" target="_blank">InfoEpi</a>: Portal oficial</li>
+        <li><a href="https://epidemio.wixsite.com/gave" class="text-blue-600 underline" target="_blank">Site Antigo GAVE</a>: Arquivo histórico</li>
+        <li><a href="https://gemini.google.com/app?hl=pt-BR" class="text-blue-600 underline" target="_blank">Gemini</a>: IA do Google</li>
+        <li><a href="https://notebooklm.google.com/?pli=1" class="text-blue-600 underline" target="_blank">NotebookLM</a>: Organização de PDFs</li>
+        <li><a href="https://chat.qwen.ai/" class="text-blue-600 underline" target="_blank">Qwen AI</a>: IA de revisão</li>
+        <li><a href="https://substack.com/home?utm_source=user-menu" class="text-blue-600 underline" target="_blank">Substack Home</a>: Gestão de boletins</li>
+        <li><a href="https://substack.com/@infovepi?utm_source=user-menu" class="text-blue-600 underline" target="_blank">Substack InfoEpi</a>: Página oficial</li>
+        <li><a href="https://calendar.google.com/calendar/u/0/r/day/2024/10/14?pli=1" class="text-blue-600 underline" target="_blank">Google Agenda</a>: Planejamento</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(tabId).classList.remove('hidden');
+    }
+    showTab('visao-geral');
+  </script>
+</body>
+</html>
