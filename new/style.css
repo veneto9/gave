@@ -1,0 +1,17 @@
+body {
+  background-color: #f5f0e1;
+  font-family: 'Segoe UI', Verdana, sans-serif;
+  color: #1d4d46;
+  margin: 0;
+  padding: 2rem;
+}
+
+.painel-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.logo {
+  width: 180px;
+  margin-bottom: 1rem;
+}

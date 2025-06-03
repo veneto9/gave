@@ -1,0 +1,1 @@
+/* O componente React completo entrará aqui (não cabe todo neste espaço, você poderá colar manualmente depois) */
