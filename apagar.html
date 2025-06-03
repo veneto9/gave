@@ -468,80 +468,116 @@
         }
 
         /* Responsividade */
+/* 🌐 Tablet (até 992px) */
+@media (max-width: 992px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  nav {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 80%;
+    height: calc(100vh - 70px);
+    background-color: var(--cor-texto-claro);
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicao);
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  nav.active {
+    left: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  nav ul li {
+    margin: 0;
+    margin-bottom: 15px;
+  }
+
+  .dropdown-content {
+    position: static;
+    display: none;
+    box-shadow: none;
+    padding-left: 20px;
+  }
+
+  .dropdown.active .dropdown-content {
+    display: block;
+  }
+
+  .cards-grid,
+  .recursos-grid {
+    grid-template-columns: 1fr; /* Fica 1 coluna apenas */
+  }
+}
+
+/* 📱 Celulares (até 768px) */
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
-    }
+  .header-container {
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    nav {
-        position: fixed;
-        top: 60px;
-        left: -100%;
-        width: 80%;
-        height: calc(100vh - 60px);
-        background-color: var(--cor-texto-claro);
-        box-shadow: var(--sombra-suave);
-        transition: var(--transicao);
-        overflow-y: auto;
-    }
+  .logo img {
+    height: 40px;
+  }
 
-    nav.active {
-        left: 0;
-    }
+  .logo-text {
+    font-size: 1.2rem;
+  }
 
-    nav ul {
-        flex-direction: column;
-        padding: 20px;
-    }
+  .banner-destaque {
+    padding: 25px 0;
+    text-align: center;
+  }
 
-    nav ul li {
-        margin: 0;
-        margin-bottom: 15px;
-    }
+  .banner-destaque h1 {
+    font-size: 1.8rem;
+  }
 
-    .dropdown-content {
-        position: static;
-        display: none;
-        box-shadow: none;
-        padding-left: 20px;
-    }
+  .banner-destaque p {
+    font-size: 1rem;
+  }
 
-    .dropdown.active .dropdown-content { 
-        display: block;
-    }
+  .section-title h2 {
+    font-size: 1.6rem;
+  }
+}
 
-    .header-container {
-        padding: 10px 0; 
-    }
+/* 📲 Celulares muito pequenos (até 480px) */
+@media (max-width: 480px) {
+  .banner-destaque h1 {
+    font-size: 1.5rem;
+  }
 
-    .logo img {
-        height: 40px;
-    }
+  .banner-destaque p {
+    font-size: 0.9rem;
+  }
 
-    .logo-text {
-        font-size: 1.2rem;
-    }
+  .btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
 
-    .banner-destaque {
-        padding: 25px 0;
-    }
+  .card-body {
+    padding: 20px;
+  }
 
-    .banner-destaque h1 {
-        font-size: 2rem;
-    }
+  .card-title {
+    font-size: 1.1rem;
+  }
 
-    .banner-destaque p {
-        font-size: 1rem;
-    }
-
-    .section-title h2 {
-        font-size: 1.8rem;
-    }
-
-    .cards-grid,
-    .recursos-grid {
-        grid-template-columns: 1fr;
-    }
+  .section-title h2 {
+    font-size: 1.4rem;
+  }
 }
 
     </style>
