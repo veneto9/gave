@@ -174,7 +174,7 @@
         .banner-destaque {
             background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
             color: var(--cor-texto-claro);
-            padding: 80px 0;
+            padding: 85px 0;
             text-align: center;
         }
 
@@ -186,8 +186,8 @@
 
         .banner-destaque p {
             font-size: 1rem;
-            max-width: 800px;
-            margin: 0 auto 20px;
+            max-width: 700px;
+            margin: 0 auto 10px;
         }
 
         .btn { 
@@ -220,12 +220,12 @@
 
         /* Seções de conteúdo */
         section {
-            padding: 60px 0;
+            padding: 30px 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
         }
 
         .section-title h2 {
@@ -233,7 +233,7 @@
             color: var(--cor-primaria);
             position: relative;
             display: inline-block;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
         }
 
         .section-title h2::after {
@@ -242,9 +242,9 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--cor-destaque);
+            width: 400px;
+            height: 2.5px;
+            background-color: var(--cor-secundaria);
         }
 
         /* Cards de doenças / notícias */
@@ -276,7 +276,7 @@
         }
 
         .card-body { 
-            padding: 20px;
+            padding: 30px;
             flex-grow: 1; 
             display: flex; 
             flex-direction: column; 
@@ -330,17 +330,11 @@
         }
         
         /* Estilos específicos para os cards de Notícias em Destaque (blog) */
-        #noticias-destaque .card-title {
-            font-size: 1.1rem;
-            line-height: 1.4em;
-            max-height: 4.2em;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
+
         
         #noticias-destaque .card-text {
             font-size: 0.85rem;
-            line-height: 1.4em;
+            line-height: 1.2em;
             max-height: 4.2em;
             overflow: hidden;
             margin-bottom: 0.5rem;
@@ -639,7 +633,7 @@
         <div class="section-title">
             <h2>Clipping de Notícias</h2>
         </div>
-        <p class="text-center text-muted mb-5">Acompanhe notícias em destaques</p>
+        <p class="text-center text-muted mb-10">Acompanhe notícias em destaques</p>
         <div id="clipping-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
