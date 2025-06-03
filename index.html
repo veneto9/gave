@@ -3,11 +3,6 @@
 <head>
   <!-- Favicon para navegadores clássicos (máxima compatibilidade) -->
   <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-  <meta property="og:title" content="InfoEpi - Vigilância em Saúde">
-<meta property="og:description" content="Notícias em Vigilância em Saúde no SUS">
-<meta property="og:image" content="/images/infoepi_og.png">
-<meta name="theme-color" content="#f5f0e1">
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="INFOEPI - Informações e Vigilância no SUS">
@@ -31,6 +26,7 @@
 
 /* Corrige largura geral do conteúdo */
 .container {
+  width: 80%;
   max-width: 1140px;
   margin: 0 auto;
   padding: 0 15px;
@@ -391,15 +387,7 @@
             padding: 50px 0 20px;
         }
 
-.footer-full {
-  background-color: var(--cor-primaria);
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding-inline: 15px;
-}
-
         .footer-container {
-            background-color: transparent; /* Garante que o fundo verde seja do footer */
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
@@ -479,116 +467,83 @@
             opacity: 0.8;
         }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  height: 100%;
-}
-
-body {
-  background-color: white;
-  transform: scale(0.60);
-  transform-origin: top center;
-  display: flex;
-  flex-direction: column;
-  min-height: 200vh;
-}
-
-main {
-  background-color: #f5f0e1;
-  flex: 1 0 auto;
-}
-
-footer {
-  background-color: ##8a9e64;
-  flex-shrink: 0;
-}
-
-
-
         /* Responsividade */
-        @media (max-width: 992px) {
-            .nav-toggle {
-                display: block;
-            }
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
 
-            nav {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 80%;
-                height: calc(100vh - 80px);
-                background-color: var(--cor-texto-claro);
-                box-shadow: var(--sombra-suave);
-                transition: var(--transicao);
-                overflow-y: auto;
-            }
+    nav {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 80%;
+        height: calc(100vh - 60px);
+        background-color: var(--cor-texto-claro);
+        box-shadow: var(--sombra-suave);
+        transition: var(--transicao);
+        overflow-y: auto;
+    }
 
-            nav.active {
-                left: 0;
-            }
+    nav.active {
+        left: 0;
+    }
 
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-            }
+    nav ul {
+        flex-direction: column;
+        padding: 20px;
+    }
 
-            nav ul li {
-                margin: 0;
-                margin-bottom: 15px;
-            }
+    nav ul li {
+        margin: 0;
+        margin-bottom: 15px;
+    }
 
-            .dropdown-content {
-                position: static;
-                display: none;
-                box-shadow: none;
-                padding-left: 20px;
-            }
+    .dropdown-content {
+        position: static;
+        display: none;
+        box-shadow: none;
+        padding-left: 20px;
+    }
 
-            .dropdown.active .dropdown-content { 
-                display: block;
-            }
+    .dropdown.active .dropdown-content { 
+        display: block;
+    }
 
-            .banner-destaque h1 {
-                font-size: 2rem;
-            }
+    .header-container {
+        padding: 10px 0; 
+    }
 
-            .banner-destaque p {
-                font-size: 1rem;
-            }
-        }
+    .logo img {
+        height: 40px;
+    }
 
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 10px 0; 
-            }
-            
-            nav { 
-                top: 60px; 
-                height: calc(100vh - 60px);
-            }
+    .logo-text {
+        font-size: 1.2rem;
+    }
 
-            .logo img {
-                height: 40px;
-            }
+    .banner-destaque {
+        padding: 25px 0;
+    }
 
-            .logo-text {
-                font-size: 1.2rem;
-            }
+    .banner-destaque h1 {
+        font-size: 2rem;
+    }
 
-            .banner-destaque {
-                padding: 25px 0;
-            }
+    .banner-destaque p {
+        font-size: 1rem;
+    }
 
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
 
-            .cards-grid, .recursos-grid { 
-                grid-template-columns: 1fr;
-            }
-                          }
+    .cards-grid,
+    .recursos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -603,7 +558,7 @@ footer {
             <button class="nav-toggle" aria-label="Abrir menu">☰</button>
             <nav>
                 <ul>
-                    <li><a href="index.html"aria-current="page">Início</a></li>
+                    <li><a href="index.html">Início</a></li>
                     <li class="dropdown">
                         <a href="#">Doenças</a>
                         <div class="dropdown-content">
@@ -628,9 +583,8 @@ footer {
                 </ul>
             </nav>
         </div>
-        
     </header>
-<main>
+
     <section class="banner-destaque">
         <div class="container">
             <h1>Seu feed sobre Vigilância em Saúde</h1>
@@ -639,16 +593,6 @@ footer {
         </div>
     </section>
 
-    <section id="noticias-destaque" class="container my-5">
-        <div class="section-title">
-            <h2>Últimas notícias</h2>
-        </div>
-        <p class="text-center text-muted mb-5">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p>
-        <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <p class="text-center w-100">Carregando últimas notícias...</p>
-        </div>
-    </section>
-    
     <section id="recursos-disponiveis" class="recursos-disponiveis">
         <div class="container">
             <div class="section-title">
@@ -680,6 +624,16 @@ footer {
         </div>
     </section>
 
+    <section id="noticias-destaque" class="container my-5">
+        <div class="section-title">
+            <h2>Notícias em Destaque</h2>
+        </div>
+        <p class="text-center text-muted mb-5">As notícias, comentários, análises, percepções e publicações sobre saúde pública e epidemiologia.</p>
+        <div id="blog-posts-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <p class="text-center w-100">Carregando últimas notícias...</p>
+        </div>
+    </section>
+
     <section id="clipping-noticias" class="container my-5">
         <div class="section-title">
             <h2>Clipping de Notícias</h2>
@@ -689,8 +643,7 @@ footer {
             <p class="text-center w-100">Carregando clipping...</p>
         </div>
     </section>
-</main>
-<div class="footer-full">
+
     <footer>
         <div class="container">
             <div class="footer-container">
@@ -712,7 +665,7 @@ footer {
                         <li><a href="/pages/formacao/formacao.html">Cursos gratuitos</a></li>
                         <li><a href="/pages/formacao/formacao.html">Outros cursos</a></li>
                         <li><a href="/materiais/materiais/manuais.html">Publicações</a></li>
-                        <li><a href="https://substack.com/@infovepi" target="_blank" rel="noopener">Nosso Blog</a></li>
+                        <li><a href="https://substack.com/@infovepi" target="_blank" rel="noopener">Noso Blog</a></li>
                         <li><a href="/pages/sobre-o-site.html">Sobre</a></li>
                     </ul>
                 </div>
@@ -738,9 +691,9 @@ footer {
             <div class="copyright">
                 <p>&copy; 2025 INFOEPI - Todos os direitos reservados.</p>
             </div>
+        </div>
     </footer>
 
-        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <script>
