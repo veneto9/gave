@@ -521,9 +521,41 @@
 /* 📱 Celulares (até 768px) */
 @media (max-width: 768px) {
   .header-container {
-    padding: 10px 0;
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;  /* Isso separa logo à esquerda e botão à direita */
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  .logo {
+    flex-shrink: 0; /* evita que a logo fique espremida */
+  }
+
+  .nav-toggle {
+    display: block;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    margin-left: auto; /* Isso força o botão ir pro fim do flex container */
+  }
+
+  nav {
+    /* menu móvel colapsado */
+    position: fixed;
+    top: 60px;
+    left: -100%;
+    width: 80%;
+    height: calc(100vh - 60px);
+    background-color: var(--cor-texto-claro);
+    transition: all 0.3s ease;
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  nav.active {
+    left: 0;
   }
 
   .logo img {
@@ -550,6 +582,7 @@
   .section-title h2 {
     font-size: 1.6rem;
   }
+  
 }
 
 /* 📲 Celulares muito pequenos (até 480px) */
